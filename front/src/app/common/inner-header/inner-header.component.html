@@ -1,0 +1,63 @@
+<nav class="navbar navbar-expand-lg fixed-top header">
+  <a class="navbar-brand" [routerLink]="'/'"><img src="assets/images/logo.png" class="img-fluid"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon">
+      <img src="assets/images/toggler-icon2.png" class="img-fluid">
+    </span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+      <li *ngIf="dataService.metaDeatails?.accountShort" class="nav-item"><a class="nav-link" [routerLink]="'/dashboard'">Dashboard </a></li>
+      <li class="nav-item active"><a class="nav-link" [routerLink]="'/market'">Market <span class="sr-only">(current)</span></a></li>
+      <li class="nav-item"><a class="nav-link" [routerLink]="'/activity'">Activity</a></li>
+      <li class="nav-item"><a class="nav-link" [routerLink]="'/features'">Features</a></li>
+      <li class="nav-item"><a class="nav-link" [routerLink]="'/search'">Search</a></li>
+      <li *ngIf="dataService.metaDeatails?.balance" class="nav-item"><a class="nav-link" [routerLink]="">Bal {{ dataService.metaDeatails?.balance | number : '1.4-4' }} </a></li>
+      <li *ngIf="dataService.metaDeatails?.accountShort" class="nav-item"><a class="nav-link" [routerLink]=""> {{ dataService.metaDeatails?.accountShort }} </a></li>
+      <li *ngIf="dataService.metaDeatails?.accountShort" class="nav-item"><a class="nav-link" (click)="logout()" [routerLink]=""> Logout </a></li>
+    </ul>
+  </div>
+</nav>
+
+
+
+<div class="modal fade mymodal" bsModal #connectModal="bs-modal" role="dialog" aria-labelledby="dialog-static-name">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Connect Wallet</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="connectModal.hide()">
+          <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="">
+          <div class="middle-section">
+            <div class="container d-flex justify-content-center align-items-center">
+              <div class="row justify-content-center align-items-start">
+                <div class="col-dm-12 col-sm-12 col-lg-12 text-center mt-4 col-xl-12">
+                  <img src="assets/images/symbol-logo.png">
+                  <h3 class="font-41 font-weight-bold text-color mt-3 " (click)="connectModal.hide()">Create a Account</h3>
+                </div>
+
+
+                <div  class="col-md-6 col-lg-6 col-sm-6 col-xl-6 text-center d-flex justify-content-center align-items-center">
+                  <a (click)="connctEwallet('metamask')" class="border radius15 p-4 mb-3 w-100">
+                    <img src="assets/images/login1.png" class="mb-4">
+                    <h5 class="text-color font-weight-bold font-16 mb-0">MetaMask</h5>
+                  </a>
+                </div>
+                <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6 text-center d-flex justify-content-center align-items-center">
+                  <a (click)="connctEwallet('binanceconnect')" class="border radius15 p-4 w-100">
+                    <img src="assets/images/login2.png" class="mb-4">
+                    <h5 class="text-color font-weight-bold font-16 mb-0">BNB</h5>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

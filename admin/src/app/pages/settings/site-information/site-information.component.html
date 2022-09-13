@@ -1,0 +1,172 @@
+<mat-card class="table-container" *ngIf="isShowSiteObj">
+
+    <div class="d-flex align-items-center mb-4 page-header">
+
+        <span>
+            Site Information
+        </span>
+
+        <div class="spacer"></div>
+
+        <div class="group-button">
+            <button type="submit" [disabled]="isDataPassing" mat-button color="accent" (click)="formSubmit()">
+                <mat-icon *ngIf="!isDataPassing">
+                    fact_check
+                </mat-icon>
+
+                <ng-container *ngIf="!isDataPassing">
+                    Update Information
+                </ng-container>
+
+                <ng-container *ngIf="isDataPassing">
+                    Please Wait <span> ... </span>
+                </ng-container>
+            </button>
+        </div>
+    </div>
+
+
+    <ng-container>
+        <form #siteObjForm="ngForm">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Address</mat-label>
+                        <input matInput placeholder="Address" name="address" autocomplete="off"
+                            [(ngModel)]="siteObj.address" #address="ngModel" required
+                            (keypress)="general.removingSpaceFirst($event, siteObj.address)" />
+
+                        <mat-error *ngIf="address.errors">
+                            {{ general.checkError(address, "Address") }}
+                        </mat-error>
+                    </mat-form-field>
+                    <!-- <mat-form-field appearance="outline">
+                        <mat-label>Admin Name</mat-label>
+                        <input matInput placeholder="Site Name" name="admin_name" autocomplete="off"
+                            [(ngModel)]="siteObj.admin_name" #admin_name="ngModel" required
+                            (keypress)="general.removingSpaceFirst($event, siteObj.admin_name)" />
+
+                        <mat-error *ngIf="admin_name.errors">
+                            {{ general.checkError(admin_name, "Site Name") }}
+                        </mat-error>
+                    </mat-form-field> -->
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email Address</mat-label>
+                        <input matInput type="email" email="true" placeholder="Email Address" name="mail"
+                            autocomplete="off" [(ngModel)]="siteObj.mail" #mail="ngModel" required
+                            (keypress)="general.removingSpaceFirst($event, siteObj.mail)" />
+
+                        <mat-error *ngIf="mail.errors">
+                            {{ general.checkError(mail, "Email Address") }}
+                        </mat-error>
+                    </mat-form-field>
+
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Skype</mat-label>
+                        <input matInput placeholder="Skype" name="skype" autocomplete="off" [(ngModel)]="siteObj.skype"
+                            #skype="ngModel" required (keypress)="general.removingSpaceFirst($event, siteObj.skype)" />
+
+                        <mat-error *ngIf="skype.errors">
+                            {{ general.checkError(skype, "Skype") }}
+                        </mat-error>
+                    </mat-form-field>
+
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Phone</mat-label>
+                        <input matInput placeholder="Phone" name="phone" autocomplete="off" [(ngModel)]="siteObj.phone"
+                            #phone="ngModel" required (keypress)="general.removingSpaceFirst($event, siteObj.phone)" />
+
+                        <mat-error *ngIf="phone.errors">
+                            {{ general.checkError(phone, "Phone") }}
+                        </mat-error>
+                    </mat-form-field>
+
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>facebook</mat-label>
+                        <input matInput placeholder="Facebook" name="facebook" autocomplete="off"
+                            [(ngModel)]="siteObj.facebook" #facebook="ngModel" required
+                            (keypress)="general.removingSpaceFirst($event, siteObj.facebook)" />
+
+                        <mat-error *ngIf="facebook.errors">
+                            {{ general.checkError(facebook, "Facebook") }}
+                        </mat-error>
+                    </mat-form-field>
+
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Video Link</mat-label>
+                        <input matInput placeholder="Video Link" name="videolink" autocomplete="off"
+                            [(ngModel)]="siteObj.videolink" #videolink="ngModel" required
+                            (keypress)="general.removingSpaceFirst($event, siteObj.facebook)" />
+
+                        <mat-error *ngIf="videolink.errors">
+                            {{ general.checkError(videolink, "Video Link") }}
+                        </mat-error>
+                    </mat-form-field>
+
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Twitter</mat-label>
+                        <input matInput placeholder="Twitter" name="twitter" autocomplete="off"
+                            [(ngModel)]="siteObj.twitter" #twitter="ngModel" required
+                            (keypress)="general.removingSpaceFirst($event, siteObj.facebook)" />
+
+                        <mat-error *ngIf="twitter.errors">
+                            {{ general.checkError(twitter, "Twitter") }}
+                        </mat-error>
+                    </mat-form-field>
+
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Instagram</mat-label>
+                        <input matInput placeholder="Instagram" name="instagram" autocomplete="off"
+                            [(ngModel)]="siteObj.instagram" #instagram="ngModel" required
+                            (keypress)="general.removingSpaceFirst($event, siteObj.facebook)" />
+
+                        <mat-error *ngIf="instagram.errors">
+                            {{ general.checkError(instagram, "instagram") }}
+                        </mat-error>
+                    </mat-form-field>
+
+                </div>
+
+                <div class="col-md-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Vote Perceantage</mat-label>
+                        <input matInput placeholder="Vote Percentage" name="vote_percentage" autocomplete="off"
+                            [(ngModel)]="siteObj.vote_percentage" #vote_percentage="ngModel" required
+                            (keypress)="general.removingSpaceFirst($event, siteObj.facebook)" />
+
+                        <mat-error *ngIf="vote_percentage.errors">
+                            {{ general.checkError(vote_percentage, "vote percentage") }}
+                        </mat-error>
+                    </mat-form-field>
+
+                </div>
+
+
+            </div>
+
+
+        </form>
+    </ng-container>
+</mat-card>
+
+
+<ng-container *ngIf="isGetSingleDataLoading ">
+    <div class="d-flex justify-content-center padding">
+        <mat-spinner [diameter]="20" color="primary"></mat-spinner>
+    </div>
+</ng-container>

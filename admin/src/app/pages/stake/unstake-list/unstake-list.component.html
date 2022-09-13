@@ -1,0 +1,12 @@
+<div class="d-flex  mb-4 page-header">
+    <ul class="bread-crump_container">
+        <li>
+            <a [routerLink]="['dashboard' | appRouter]"> Home</a>
+        </li>
+        <li>Untake List</li>
+    </ul>
+
+</div>
+
+
+<app-list-table [tableData]="tableData"></app-list-table>

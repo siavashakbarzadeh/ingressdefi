@@ -1,0 +1,45 @@
+.flex-direction-column {
+  flex-direction: column !important;
+}
+
+.body-content {
+  padding: 10px 5px;
+}
+
+.poll-head {
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 5px;
+}
+.bgPull
+{
+  background-color: var(--subBG);
+  padding: 10px;
+  border-radius: 15px;
+  min-height: 91px;
+}
+.theme-card {  
+  margin-bottom: 15px;
+  
+
+  .cur-area {
+    padding: 2px;
+    flex: 1;
+    text-align: center;
+  }
+  .amount-cal {
+    font-size: 18px;
+    text-align: center;
+    color: var(--darkclr);
+    font-weight: 500;
+}
+  .br-right {
+    border-right: 1px solid #ddd;
+  }
+
+  .pairs {
+    font-size: 14px;
+    font-weight: 600;
+  }
+}

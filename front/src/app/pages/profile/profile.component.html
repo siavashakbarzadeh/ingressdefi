@@ -1,0 +1,406 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="section-title">Profileeee</h3>
+    </div>
+    <div class="col-md-12 col-lg-12">
+        <div class="card grey-cnt">
+            <div class="card-body ">
+                <div class="row align-items-center">
+                    <div class="col-md-6 col-sm-6 col-xl-3 col-lg-3 text-center">
+                        <img src="{{ profile.profilepicture ? profile.profilepicture: 'assets/images/user-icon.png'}}" style="height: 100px;width: 100px;">
+                        <p class="text-black font-20 my-2 font-weight-bold">{{ profile.username ? profile.username: ''}}</p>
+                        <button class="btn default-btn min-width-auto py-1" [routerLink]="['/edit-profile']">Edit Profile</button>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xl-3 col-lg-3 text-center">
+                        <p class="text-black font-30 my-2 font-weight-bold">0</p>
+                        <p><a href="" data-toggle="modal" data-target="#Createcollection"
+                            class="txt-btn font-weight-bold">Following</a></p>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xl-3 col-lg-3 text-center">
+                            <p class="text-black font-30 my-2 font-weight-bold">0</p>
+                            <p><a href="" data-toggle="modal" data-target="#Createcollection2"
+                                class="txt-btn font-weight-bold">Followers</a></p>
+                            </div>
+                            <div [routerLink]="['/user']" class="col-md-6 col-sm-6 col-xl-3 col-lg-3 text-center cursor">
+                                <p class="text-black font-30 my-2 font-weight-bold">{{profile.count}}</p>
+                                <p class="txt-btn font-weight-bold">Collected</p>
+                            </div>
+                            <!-- <div class="col-md-6 col-sm-6 col-xl-3 col-lg-3 text-center">
+                                <p class="text-black font-30 my-2 font-weight-bold">{{profile.count}}</p>
+                                <p>Sale for you</p>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row collection-block" *ngIf="favoriteslength > 0">
+            <div class="col-lg-12">
+                <h3 class="section-title text-left  my-5">Your Favorite</h3>
+            </div>
+            <div class="col-md-12 col-lg-6 col-sm-12 col-xl-4" *ngFor="let fav of favorites;">
+                <div class="act-cnt">
+                    <div class="act-head d-flex align-items-center justify-content-between px-2">
+                        <div class="d-flex">
+                            <img src="assets/images/heart.png" class="heart-icon">
+                            <div class="prof-pic-cnt mr-3"><img src="{{fav.creator_img}}"></div>
+                            <div>
+                                <h3 class="mb-0">{{fav.creator_name}}</h3>
+                                <p class="mb-0">Artist</p>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="mr-3">
+                                <h3 class="mb-0">{{fav.owner_name}}</h3>
+                                <p class="mb-0">Artist</p>
+                            </div>
+                            <div class="prof-pic-cnt "><img src="{{fav.owner_img}}"></div>
+                        </div>
+                    </div>
+                    <img src="{{fav.image}}" class="img-fluid w-100">
+                    <div class="act-head">
+                        <h3>Portrait Nr.6</h3>
+                       <!--  <div class="border-bottom"></div>
+                        <div class="row mt-2">
+                            <div class="col-sm-6 col-md-6 col-lg-6 text-center col-xl-6 border-right">
+                                <h3 class="mb-0">{{fav.price}}</h3>
+                                <p class="mb-2">List price</p>
+                            </div>
+                            <div class="col-sm-6 col-md-6 text-center col-lg-6 col-xl-6">
+                                <h3 class="mb-0">{{fav.price}}</h3>
+                                <p class="mb-2">List price</p>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col-md-12 col-lg-6 col-sm-12 col-xl-4">
+                <div class="act-cnt">
+                    <div class="act-head d-flex align-items-center justify-content-between px-2">
+                        <img src="assets/images/heart.png" class="heart-icon">
+                        <div class="d-flex">
+                            <div class="prof-pic-cnt mr-3"><img src="assets/images/prof.png"></div>
+                            <div>
+                                <h3 class="mb-0">Tilljanz</h3>
+                                <p class="mb-0">Artist</p>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="mr-3">
+                                <h3 class="mb-0">Tilljanz</h3>
+                                <p class="mb-0">Artist</p>
+                            </div>
+                            <div class="prof-pic-cnt "><img src="assets/images/prof1.png"></div>
+                        </div>
+                    </div>
+                    <img src="assets/images/collect2.png" class="img-fluid w-100">
+                    <div class="act-head">
+                        <h3>Portrait Nr.6</h3>
+                        <div class="border-bottom"></div>
+                        <div class="row mt-2">
+                            <div class="col-sm-6 col-md-6 col-lg-6 text-center col-xl-6 border-right">
+                                <h3 class="mb-0">0.004Ξ ($10)</h3>
+                                <p class="mb-2">List price</p>
+                            </div>
+                            <div class="col-sm-6 col-md-6 text-center col-lg-6 col-xl-6">
+                                <h3 class="mb-0">0.004Ξ ($10)</h3>
+                                <p class="mb-2">List price</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-6 col-sm-12 col-xl-4">
+                <div class="act-cnt">
+                    <div class="act-head d-flex align-items-center justify-content-between px-2">
+                        <img src="assets/images/heart.png" class="heart-icon">
+                        <div class="d-flex">
+                            <div class="prof-pic-cnt mr-3"><img src="assets/images/prof.png"></div>
+                            <div>
+                                <h3 class="mb-0">Tilljanz</h3>
+                                <p class="mb-0">Artist</p>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="mr-3">
+                                <h3 class="mb-0">Tilljanz</h3>
+                                <p class="mb-0">Artist</p>
+                            </div>
+                            <div class="prof-pic-cnt "><img src="assets/images/prof1.png"></div>
+                        </div>
+                    </div>
+                    <img src="assets/images/collect3.png" class="img-fluid w-100">
+                    <div class="act-head">
+                        <h3>Portrait Nr.6</h3>
+                        <div class="border-bottom"></div>
+                        <div class="row mt-2">
+                            <div class="col-sm-6 col-md-6 col-lg-6 text-center col-xl-6 border-right">
+                                <h3 class="mb-0">0.004Ξ ($10)</h3>
+                                <p class="mb-2">List price</p>
+                            </div>
+                            <div class="col-sm-6 col-md-6 text-center col-lg-6 col-xl-6">
+                                <h3 class="mb-0">0.004Ξ ($10)</h3>
+                                <p class="mb-2">List price</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+
+        <div class="modal fade modalPrimary md creat-collection-1" id="Createcollection">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header border-bottom-0 d-block">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title section-title mb-0 w-100 text-center"> Following </h3>
+                        <h5 class="font-14 text-center fontweight-400 text-black mt-3">You can change these values later,along
+                        with configuring external URL’s payment optionand trading fees</h5>
+                    </div>
+                    <div class="modal-body px-5">
+                        <div class="act-cnt act-cnt2">
+                            <div class="act-head align-items-center px-2">
+                                <div class="d-flex Followers-box">
+
+                                    <div class="prof-pic-cnt mr-3 width20"><img src="assets/images/prof.png"></div>
+                                    <div class="width100">
+                                        <h3 class="mb-0">Tilljanz</h3>
+                                        <p class="mb-0">Artist</p>
+
+                                    </div>
+                                    <div class="width100">
+                                        <h3 class="mb-0"><b>0</b></h3>
+                                        <p class="mb-0">Collection</p>
+                                    </div>
+                                    <div class="width100">
+                                        <h3 class="mb-0"><b>33</b></h3>
+                                        <p class="mb-0">Creation</p>
+                                    </div>
+                                    <div class="width100">
+                                        <button class="btn default-btn min-width-auto py-1">Follow</button>
+                                    </div>
+                                </div>
+                                <div class="d-flex Followers-box">
+
+                                    <div class="prof-pic-cnt mr-3 width20"><img src="assets/images/prof.png"></div>
+                                    <div class="width100">
+                                        <h3 class="mb-0">Tilljanz</h3>
+                                        <p class="mb-0">Artist</p>
+
+                                    </div>
+                                    <div class="width100">
+                                        <h3 class="mb-0"><b>0</b></h3>
+                                        <p class="mb-0">Collection</p>
+                                    </div>
+                                    <div class="width100">
+                                        <h3 class="mb-0"><b>33</b></h3>
+                                        <p class="mb-0">Creation</p>
+                                    </div>
+                                    <div class="width100 ">
+                                        <button class="btn default-btn min-width-auto py-1">Follow</button>
+                                    </div>
+                                </div>
+                                <div class="d-flex Followers-box">
+
+                                    <div class="prof-pic-cnt mr-3 width20"><img src="assets/images/prof.png"></div>
+                                    <div class="width100">
+                                        <h3 class="mb-0">Tilljanz</h3>
+                                        <p class="mb-0">Artist</p>
+
+                                    </div>
+                                    <div class="width100">
+                                        <h3 class="mb-0"><b>0</b></h3>
+                                        <p class="mb-0">Collection</p>
+                                    </div>
+                                    <div class="width100">
+                                        <h3 class="mb-0"><b>33</b></h3>
+                                        <p class="mb-0">Creation</p>
+                                    </div>
+                                    <div class="width100">
+                                        <button class="btn default-btn min-width-auto py-1">Follow</button>
+                                    </div>
+                                </div>
+                                <div class="d-flex Followers-box">
+
+                                    <div class="prof-pic-cnt mr-3 width20"><img src="assets/images/prof.png"></div>
+                                    <div class="width100">
+                                        <h3 class="mb-0">Tilljanz</h3>
+                                        <p class="mb-0">Artist</p>
+
+                                    </div>
+                                    <div class="width100">
+                                        <h3 class="mb-0"><b>0</b></h3>
+                                        <p class="mb-0">Collection</p>
+                                    </div>
+                                    <div class="width100">
+                                        <h3 class="mb-0"><b>33</b></h3>
+                                        <p class="mb-0">Creation</p>
+                                    </div>
+                                    <div class="width100">
+                                        <button class="btn default-btn min-width-auto py-1">Follow</button>
+                                    </div>
+                                </div>
+                                <div class="d-flex Followers-box">
+
+                                    <div class="prof-pic-cnt mr-3 width20"><img src="assets/images/prof.png"></div>
+                                    <div class="width100">
+                                        <h3 class="mb-0">Tilljanz</h3>
+                                        <p class="mb-0">Artist</p>
+
+                                    </div>
+                                    <div class="width100">
+                                        <h3 class="mb-0"><b>0</b></h3>
+                                        <p class="mb-0">Collection</p>
+                                    </div>
+                                    <div class="width100">
+                                        <h3 class="mb-0"><b>33</b></h3>
+                                        <p class="mb-0">Creation</p>
+                                    </div>
+                                    <div class="width100">
+                                        <button class="btn default-btn min-width-auto py-1">Follow</button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="text-center">
+                            <button class="btn default-btn" data-toggle="modal" data-target="#Createcollection">Load
+                            More</button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade modalPrimary md creat-collection-1" id="Createcollection2">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header border-bottom-0 d-block">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title section-title mb-0 w-100 text-center"> Followers </h3>
+                        <h5 class="font-14 text-center fontweight-400 text-black mt-3">You can change these values later,along
+                        with configuring external URL’s payment optionand trading fees</h5>
+                    </div>
+                    <div class="modal-body px-5">
+                        <div class="act-cnt act-cnt2">
+                            <div class="act-head align-items-center px-2">
+                                <div class="d-flex Followers-box">
+
+                                    <div class="prof-pic-cnt mr-3 width20"><img src="assets/images/prof.png"></div>
+                                    <div class="width100">
+                                        <h3 class="mb-0">Tilljanz</h3>
+                                        <p class="mb-0">Artist</p>
+
+                                    </div>
+                                    <div class="width100">
+                                        <h3 class="mb-0"><b>0</b></h3>
+                                        <p class="mb-0">Collection</p>
+                                    </div>
+                                    <div class="width100">
+                                        <h3 class="mb-0"><b>33</b></h3>
+                                        <p class="mb-0">Creation</p>
+                                    </div>
+                                    <div class="width100">
+                                        <button class="btn default-btn min-width-auto py-1">Follow</button>
+                                    </div>
+                                </div>
+                                <div class="d-flex Followers-box">
+
+                                    <div class="prof-pic-cnt mr-3 width20"><img src="assets/images/prof.png"></div>
+                                    <div class="width100">
+                                        <h3 class="mb-0">Tilljanz</h3>
+                                        <p class="mb-0">Artist</p>
+
+                                    </div>
+                                    <div class="width100">
+                                        <h3 class="mb-0"><b>0</b></h3>
+                                        <p class="mb-0">Collection</p>
+                                    </div>
+                                    <div class="width100">
+                                        <h3 class="mb-0"><b>33</b></h3>
+                                        <p class="mb-0">Creation</p>
+                                    </div>
+                                    <div class="width100 ">
+                                        <button class="btn default-btn min-width-auto py-1">Follow</button>
+                                    </div>
+                                </div>
+                                <div class="d-flex Followers-box">
+
+                                    <div class="prof-pic-cnt mr-3 width20"><img src="assets/images/prof.png"></div>
+                                    <div class="width100">
+                                        <h3 class="mb-0">Tilljanz</h3>
+                                        <p class="mb-0">Artist</p>
+
+                                    </div>
+                                    <div class="width100">
+                                        <h3 class="mb-0"><b>0</b></h3>
+                                        <p class="mb-0">Collection</p>
+                                    </div>
+                                    <div class="width100">
+                                        <h3 class="mb-0"><b>33</b></h3>
+                                        <p class="mb-0">Creation</p>
+                                    </div>
+                                    <div class="width100">
+                                        <button class="btn default-btn min-width-auto py-1">Follow</button>
+                                    </div>
+                                </div>
+                                <div class="d-flex Followers-box">
+
+                                    <div class="prof-pic-cnt mr-3 width20"><img src="assets/images/prof.png"></div>
+                                    <div class="width100">
+                                        <h3 class="mb-0">Tilljanz</h3>
+                                        <p class="mb-0">Artist</p>
+
+                                    </div>
+                                    <div class="width100">
+                                        <h3 class="mb-0"><b>0</b></h3>
+                                        <p class="mb-0">Collection</p>
+                                    </div>
+                                    <div class="width100">
+                                        <h3 class="mb-0"><b>33</b></h3>
+                                        <p class="mb-0">Creation</p>
+                                    </div>
+                                    <div class="width100">
+                                        <button class="btn default-btn min-width-auto py-1">Follow</button>
+                                    </div>
+                                </div>
+                                <div class="d-flex Followers-box">
+
+                                    <div class="prof-pic-cnt mr-3 width20"><img src="assets/images/prof.png"></div>
+                                    <div class="width100">
+                                        <h3 class="mb-0">Tilljanz</h3>
+                                        <p class="mb-0">Artist</p>
+
+                                    </div>
+                                    <div class="width100">
+                                        <h3 class="mb-0"><b>0</b></h3>
+                                        <p class="mb-0">Collection</p>
+                                    </div>
+                                    <div class="width100">
+                                        <h3 class="mb-0"><b>33</b></h3>
+                                        <p class="mb-0">Creation</p>
+                                    </div>
+                                    <div class="width100">
+                                        <button class="btn default-btn min-width-auto py-1">Follow</button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="text-center">
+                            <button class="btn default-btn" data-toggle="modal" data-target="#Createcollection">Load
+                            More</button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>

@@ -1,0 +1,76 @@
+<mat-drawer-container class="example-container" hasBackdrop="false" autosize>
+  <mat-drawer #drawer class="example-sidenav" [mode]="'side'" opened>
+
+    <app-sidenav></app-sidenav>
+
+
+  </mat-drawer>
+
+  <mat-drawer-content>
+    <div class="top-header ">
+      <div class="to-fix">
+        <div class="nav-bar-container">
+          <div class=" px-2">
+            <button *ngIf="!dataService.metaDetails.isMetaLogin" mat-icon-button mat-button (click)="loginMetaMask()">
+              <mat-icon>
+                input
+              </mat-icon>
+            </button>
+
+            <button class="text-white" *ngIf="dataService.metaDetails.isMetaLogin" mat-button (click)="goto()">
+              {{dataService.metaDetails.accountShort}}
+              <mat-icon>
+                north_east
+              </mat-icon>
+            </button>
+
+
+          </div>
+
+          <div class=" px-2">
+            <button mat-icon-button mat-button>
+              <mat-icon>
+                notifications
+              </mat-icon>
+            </button>
+          </div>
+
+          <div class="px-2">
+            <button mat-button class="small-profile" role="menubar" [matMenuTriggerFor]="menu">
+              <img src="assets/img/avatar.png" alt="" />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="padding">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
+
+
+<!-- MAT MENU -->
+<mat-menu #menu="matMenu" class="mat_menu">
+  <!-- <mat-nav-list class="heder-menu-list"> -->
+  <a mat-list-item [routerLink]="['settings/sbs/site_basic_settings']" routerLinkActive="router-link-active">
+    <mat-icon>Profile</mat-icon>
+    <span matLine>
+      Profile
+    </span>
+  </a>
+  <a mat-list-item [routerLink]="['settings/si/site_information']" routerLinkActive="router-link-active">
+    <mat-icon>settings</mat-icon>
+    <span matLine>
+      Settings
+    </span>
+  </a>
+  <a mat-list-item (click)="logout()" routerLinkActive="router-link-active">
+    <mat-icon class="transform">logout</mat-icon>
+    <span matLine>
+      Logout
+    </span>
+  </a>
+  <!-- </mat-nav-list> -->
+</mat-menu>

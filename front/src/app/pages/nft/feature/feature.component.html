@@ -1,0 +1,69 @@
+<app-inner-header></app-inner-header>
+<div class="digital-art-sec">
+    <div class="middle-section">
+        <div class="container   d-flex justify-content-center align-items-center">
+            <div class="row">
+                <div class="col-lg-12 mb-5">
+                    <h3 class="section-title text-center">Features</h3>
+                </div>
+            </div>
+            <div class="row justify-content-center align-items-start" *ngIf="features.length">
+                <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 text-center mt-4" *ngFor="let obj of features">
+                    <div class="blog-sec-cnt">
+                        <div class="d-lg-flex align-items-center">
+                            <img src="{{ obj.image ? obj.image : 'assets/images/feature1.png'}}" class="img-fluid mr-3">
+                            <div class="text-left">
+                                <h3 class="lg-txt font-24 mb-0">{{ obj.createddate | date: 'medium' }}</h3>
+                                <h3 class="lg-txt font-24 my-2">{{ obj.title }}</h3>
+                                <p class="font-16 fontweight-400 mt-2 mb-1" innerHTML="{{ obj.pagecontent }}"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 text-center mt-4 ">
+                    <div class="blog-sec-cnt">
+                        <div class="d-lg-flex align-items-center">
+                            <img src="assets/images/feature2.png" class="img-fluid mr-3">
+                            <div class="text-left">
+                                <h3 class="lg-txt font-24 mb-0">15 May</h3>
+                                <h3 class="lg-txt font-24 my-2">The Great Indoors Experience</h3>
+                                <p class="font-16 fontweight-400 mt-2 mb-1">Featured Artists</p>
+                                <p class="font-16 fontweight-400 mb-0">James Tralie, clams</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 text-center mt-4 ">
+                    <div class="blog-sec-cnt">
+                        <div class="d-lg-flex align-items-center">
+                            <img src="assets/images/feature3.png" class="img-fluid mr-3">
+                            <div class="text-left">
+                                <h3 class="lg-txt font-24 mb-0">25 May</h3>
+                                <h3 class="lg-txt font-24 my-2">The Great Indoors Experience</h3>
+                                <p class="font-16 fontweight-400 mt-2 mb-1">Featured Artists</p>
+                                <p class="font-16 fontweight-400 mb-0">James Tralie, clams</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 text-center mt-4 ">
+                    <div class="blog-sec-cnt">
+                        <div class="d-lg-flex align-items-center">
+                            <img src="assets/images/feature4.png" class="img-fluid mr-3">
+                            <div class="text-left">
+                                <h3 class="lg-txt font-24 mb-0">29 May</h3>
+                                <h3 class="lg-txt font-24 my-2">The Great Indoors Experience</h3>
+                                <p class="font-16 fontweight-400 mt-2 mb-1">Featured Artists</p>
+                                <p class="font-16 fontweight-400 mb-0">James Tralie, clams</p>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+            <div class="row" *ngIf="!features.length">
+                <div class="col-lg-12 col-xl-12 col-sm-12 text-center">No Datas to Display</div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-inner-footer></app-inner-footer>

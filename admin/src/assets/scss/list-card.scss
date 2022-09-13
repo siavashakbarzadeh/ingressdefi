@@ -1,0 +1,79 @@
+
+@import "theme-colors.scss";
+
+$all-color-border: $primary-dark;
+$all-color-background: $primary-light;
+
+$active-color-border: $accent-dark;
+$active-color-background: $accent-light;
+
+$in-active-color-border: #f44336;
+$in-active-color-background: #f4433645;
+
+
+
+
+.flex-all-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.row-dispaly-card {
+    .col-md-4 {
+        height: 150px;
+    }
+
+    .mat-card {
+        padding: 0;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        .dispaly-card-body {
+            @extend .flex-all-center;
+            flex: 100%;
+            height: 100%;
+        }
+
+        .left-body {
+            @extend .flex-all-center;
+            flex: 20%;
+            height: 100%;
+
+        }
+
+        .right-body {
+            @extend .flex-all-center;
+            height: 100%;
+            flex: 80%;
+            flex-direction: column;
+        }
+
+        h3 {
+            font-size: 40px;
+        }
+    }
+
+    .all {
+        .left-body {
+            background: $all-color-background;
+            border-left: 3px solid $all-color-border;
+        }
+    }
+
+    .active {
+        .left-body {
+            background: $active-color-background;
+            border-left: 3px solid $active-color-border;
+        }
+    }
+
+    .in-active {
+        .left-body {
+            background: $in-active-color-background;
+            border-left: 3px solid $in-active-color-border;
+        }
+    }
+}

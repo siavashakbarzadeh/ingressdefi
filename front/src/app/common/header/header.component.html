@@ -1,0 +1,143 @@
+<nav class="navbar navbar-expand-lg fixed-top home-header"> 
+  <a class="navbar-brand" [routerLink]="'/'"><img src="assets/images/logo.png" class="img-fluid"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation"> 
+    <img src="assets/images/toggler-icon.png" class="img-fluid">
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+      <li *ngIf="accountShort" class="nav-item"><a class="nav-link" [routerLink]="'/dashboard'">Dashboard </a></li>
+      <li class="nav-item active"> <a class="nav-link" [routerLink]="'/market'">Market <span class="sr-only">(current)</span></a></li>
+      <li class="nav-item"> <a class="nav-link" [routerLink]="'/activity'">Activity</a> </li>
+      <li class="nav-item"> <a class="nav-link" [routerLink]="'/features'">Features</a> </li>
+      <li class="nav-item"> <a class="nav-link" [routerLink]="'/search'">Search</a> </li>
+      <li *ngIf="balance" class="nav-item"><a class="nav-link" [routerLink]="">Bal {{ balance | number : '1.4-4' }} </a></li>
+      <li *ngIf="accountShort" class="nav-item"><a class="nav-link" [routerLink]=""> {{ accountShort }} </a></li>
+      <li *ngIf="isLogin" class="nav-item"><a class="nav-link" (click)="logout()" [routerLink]=""> Logout </a></li>
+      <li *ngIf="!isLogin" class="nav-item"> <a class="nav-link" href="#" data-toggle="modal" (click)="openModal(template)">Sign In</a> </li>
+    </ul>
+  </div>
+</nav>
+
+
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Connect Wallet</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="modal-body">
+      <div class="">
+        <div class="middle-section">
+          <div class="container d-flex justify-content-center align-items-center p-0">
+            <div class="row justify-content-center align-items-start">
+              <div class="col-dm-12 col-sm-12 col-lg-12 text-center mt-4 col-xl-12">
+                <img src="assets/images/symbol-logo.png">
+                <h3 class="font-41 font-weight-bold text-color mt-3 pb-4" (click)="modalRef.hide()">Login Your Account</h3>
+              </div>
+              <div  class="col-md-12 col-lg-12 col-sm-12 col-xl-12 p-0 text-center d-flex justify-content-center align-items-center">
+                <a (click)="connctEwallet('metamask', 'login')"  routerLink="" class="border radius15 p-4 mb-3 w-100">
+                  <img src="assets/images/login1.png" class="mb-3">
+                  <h5 class="text-color font-weight-bold font-16 mb-0">MetaMask</h5>
+                </a>
+
+                 <a (click)="connctEwallet('trustwallet', 'login')"  routerLink="" class="border radius15 p-4 mb-3 w-100">
+                  <img src="assets/images/img_2.png" class="mb-3">
+                  <h5 class="text-color font-weight-bold font-16 mb-0">Wallet Connect</h5>
+                </a>
+
+
+                 <a (click)="connctEwallet('binanceconnect', 'login')"  routerLink="" class="border radius15 p-4 mb-3 w-100">
+                  <img src="assets/images/img_2.png" class="mb-3">
+                  <h5 class="text-color font-weight-bold font-16 mb-0">Binance Wallet</h5>
+                </a>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <button type="button" (click)="modalRef?.hide();openModal(template1)" class="btn-close close pull-right" aria-label="Close">Create an Account?
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #template1>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Connect Wallet</h4>
+    <button (click)="modalRef.hide()" type="button" class="btn-close close pull-right" aria-label="Close">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="modal-body">
+      <div class="">
+        <div class="middle-section">
+          <div class="container d-flex justify-content-center align-items-center">
+            <div class="row justify-content-center align-items-start">
+              <div class="col-dm-12 col-sm-12 col-lg-12 text-center mt-4 col-xl-12">
+                <img src="assets/images/symbol-logo.png">
+                <h3 class="font-41 font-weight-bold text-color mt-3 ">Create an Account</h3>
+              </div>
+              <button class="border radius15 p-4 mb-3 w-100">
+                {{ dataService.metaDeatails?.account }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+          <div class="col-md-12">
+            <div class="edit-bar">
+              <div class="form-group text-left">
+                User Name <span>*</span>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control input-sec h-43 font-16 fontweight-400" on-focusout="checkUsername($event.target.value)" [(ngModel)]="username" #u="ngModel" [ngClass]="{'has-error': submitted && (ngForm.controls.username.errors)}" placeholder="" name="username" required>
+                <div *ngIf="submitted && f.bid.errors" class="invalid-feedback">
+                    <div *ngIf="f.username.errors.required">Name is required</div>
+                </div>
+                <div *ngIf="u.valid && !uname" class="text-danger">
+                    <div>Username Already Available</div>
+                </div>
+              </div>
+            </div>
+            <div class="edit-bar">
+              <div class="form-group text-left">
+                Email <span>*</span>
+              </div>
+              <div class="form-group">
+                <input type="text" #m="ngModel" class="form-control input-sec h-43 font-16 fontweight-400" placeholder="" on-focusout="checkUsermail($event.target.value)" [ngClass]="{'has-error': submitted && (ngForm.controls.auth.errors)}" [(ngModel)]="auth" name="auth" pattern="[A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+.[a-z]{2,3}" required>
+                <div *ngIf="submitted && f.auth.errors" class="invalid-feedback">
+                    <div *ngIf="f.auth.errors.required">Email is required</div>
+                </div>
+                <div *ngIf="m.valid && !mail" class="text-danger">
+                    <div>Mail Id Already Available</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="d-flex ">
+              <div class="form-group">
+                <button [disabled]="f.invalid || !cansubmit" *ngIf="!submitted" class="btn default-btn min-width-auto px-5 py-2 mt-1">Sign Up</button>
+                <label class="btn default-btn mt-4" *ngIf="submitted">Loading...</label>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div>
+        <button type="button" (click)="modalRef?.hide();openModal(template)" class="btn-close close pull-right" aria-label="Close">Login?
+        </button>
+      </div>
+    </div>
+  </div>
+  <ng-template>
+              

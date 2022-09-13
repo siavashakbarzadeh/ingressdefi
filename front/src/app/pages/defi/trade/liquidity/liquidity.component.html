@@ -1,0 +1,447 @@
+<div class="row justify-content-center align-items-center h-100" *ngIf="!isAddLiquidity && !isRemoveLiqudity">
+    <div class="col-lg-6 col-md-10 col-sm-12 col-12">
+        <div class="card mycard text-left">
+            <div class="card-header">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex">
+                        <div>
+                            <div class="cardTit">Liquidity</div>
+                            <div class="cardSubTit">Add Liquidity to receive LP Tokens</div>
+                        </div>
+                    </div>
+
+                    <div class="ml-auto" *ngIf="dataService.metaDeatails.isMetaLogin">
+                        <!-- <a [routerLink]="['/']" class="mr-3"><img src="assets/images/setting-lines.png"></a> -->
+                        <button type="button" class="bg-transparent border-0 p-0" (click)="getLiqudityList()"><img
+                                [ngClass]="{'fa-spin': isGetLiqudityListLoading}"
+                                src="assets/images/rotation.png"></button>
+                    </div>
+                </div>
+                <div class="mt-3 text-center">
+                    <button class="btn default-btn btn-block" type="button" (click)="toggleAddLiquidity()">Add
+                        Liquidity</button>
+                </div>
+            </div>
+            <div class="card-body formbg">
+                <div class="mb-3 d-flex align-items-center"><span class="txtliqu">Your
+                        Liquidity</span> <span class="ml-auto"><span class="fs-20"><i
+                                tooltip="When you add liquidity, you are given pool tokens that represent your share."
+                                placement="top" containerClass="customTooltipClass"
+                                class="bi bi-question-circle"></i></span></span></div>
+                <div class="connectTxt">
+                    <!--  -->
+
+                    <ng-container *ngIf="!dataService.metaDeatails.isMetaLogin">
+                        <div>Connect to a wallet to view your liquidity.</div>
+                        <div class="text-center mt-3"><button class="btn btn-primary" type="button"
+                                (click)="showLoginBox()">Connect</button>
+                        </div>
+                    </ng-container>
+
+
+                </div>
+                <div class="mb-3" *ngIf="liquidityList?.length > 0">
+                    <accordion [isAnimated]="true" [closeOthers]="true" class="myaccordion">
+                        <accordion-group *ngFor="let liquidityListObj of liquidityList;let i=index">
+                            <div class="d-flex liqu-head" accordion-heading role="button"
+                                (click)="managePairs(liquidityListObj, i)">
+                                <span>{{liquidityListObj.pair}}</span>
+                                <span class="ml-auto">
+                                    <i class="fas fa-angle-down text-primary"></i>
+                                </span>
+                            </div>
+                            <div class="mt-3" *ngIf="isShowAddAndRemove">
+                                <div class="text-center mb-3" *ngIf="isShowAddAndRemove">
+                                    <button class="btn btn-outline-primary btnmw mr-3" type="button"
+                                        (click)="showAddLiqudity(liquidityListObj)">Add</button>
+                                    <button class="btn btn-outline-primary btnmw" type="button"
+                                        *ngIf="poolDetails.userBalance > 0.000000"
+                                        (click)="showRemoveLiqudity(liquidityListObj)">Remove</button>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md col-12 mb-3">
+                                        <div class="liqTit">Your Total Pool Tokens</div>
+                                        <div class="liqNo">{{poolDetails.userBalance | number: dataService.fixNumber}}</div>
+                                    </div>
+                                    <div class="col-md col-12 text-md-right mb-3">
+                                        <div class="liqTit">Pooled {{liquidityListObj.fromCurrency}}</div>
+                                        <div class="liqNo">{{poolDetails.fromCurrency | number: dataService.fixNumber}}</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md col-12 mb-3">
+                                        <div class="liqTit">Pooled {{liquidityListObj.toCurrency}}</div>
+                                        <div class="liqNo">{{poolDetails.toCurrency | number: dataService.fixNumber}}</div>
+                                    </div>
+                                    <div class="col-md col-12 text-md-right mb-3">
+                                        <div class="liqTit">Your pool share</div>
+                                        <div class="liqNo">
+                                            {{poolDetails.totalShare ? (poolDetails.totalShare |number:'1.2-2') : 0.00}}%
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <ng-container *ngIf="!isShowAddAndRemove">
+                                <div class="padding text-center mh-30px mt-2">
+                                    <small>
+                                        <app-loader></app-loader>
+
+                                    </small>
+                                </div>
+                            </ng-container>
+
+                        </accordion-group>
+
+
+                    </accordion>
+                </div>
+
+                <div class="mb-3 text-center" *ngIf="liquidityList?.length == 0">
+                    <ng-container *ngIf="isGetLiqudityListLoading">Loading ...</ng-container>
+                    <ng-container *ngIf="!isGetLiqudityListLoading">No Liquidity you are created</ng-container>
+
+
+                </div>
+
+                <div class="textcontent">
+                    <div class="mb-4">Don't see a pool you joined? <button (click)="showImportPool.emit(true)"
+                            class="bg-transparent border-none text-primary no-padding fw-600 acircleLink">
+                            Import
+                            it</button>.</div>
+                    <div>Or, if you staked your LP tokens in a farm, unstake them
+                        to see them here</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row justify-content-center align-items-center h-100" *ngIf="isAddLiquidity">
+    <div class="col-lg-6 col-md-10 col-sm-12 col-12">
+        <div class="card mycard text-left">
+            <div class="card-header">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex">
+                        <div class="mr-2">
+                            <button type="button" (click)="toggleAddLiquidity()"
+                                class="text-decoration-none acircleLink"> <img src="assets/images/right-arrow.png"
+                                    style="transform: rotate(180deg);">
+                            </button>
+                        </div>
+                        <div>
+                            <div class="cardTit">Add Liquidity</div>
+                        </div>
+                    </div>
+                    <!-- <div>
+                        <div class="cardTit">Add Liquidity</div>
+                    </div> -->
+                    <!-- <div class="ml-auto">
+                        <a [routerLink]="['/']" class="fs-20"><i class="bi bi-question-circle"></i></a>
+                    </div> -->
+                </div>
+
+            </div>
+            <div class="card-body formbg">
+                <div class="form-group formBor">
+                    <div class="d-flex">
+                        <label class="col-form-label">From</label>
+                        <div class="spacer"></div>
+                        <label class="col-form-label font-weight-bold text-primary"
+                            *ngIf="fromCurrencyMainBalance">Balance :
+                            {{fromCurrencyMainBalance}}</label>
+
+                    </div>
+                    <div class="input-group">
+                        <input class="form-control" (paste)="$event.preventDefault()"
+                            [(ngModel)]="addLiquidityFromCurrency.amount" name="amountFrom" placeholder="0.0"
+                            (keyup)="amountCalculation('from')" type="number" [readonly]="isAddLiquidityProcessing">
+                        <div class="input-group-append ml-2">
+                            <div class="d-flex flex-wrap align-content-end">
+                                <button [disabled]="isAddLiquidityProcessing" class="btn btn-select" type="button"
+                                    (click)="selecttokenModal.show();selectionType('from')">
+
+                                    <ng-container *ngIf="!addLiquidityFromCurrency._id">
+                                        <span class="text-muted">
+                                            Select Token
+                                        </span>
+                                    </ng-container>
+
+                                    <ng-container *ngIf="addLiquidityFromCurrency._id">
+                                        <span class="w-18"><img class="w-18"
+                                                [src]="addLiquidityFromCurrency.currency_image"></span>
+
+                                        {{addLiquidityFromCurrency._id}}
+                                    </ng-container>
+
+                                    &nbsp;<i class="fas fa-angle-down"></i>
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="text-center mb-3">
+                    <a href="#" class="text-decoration-none acircleLink"> <img src="assets/images/right-arrow.png"
+                            style="transform: rotate(90deg);">
+                    </a>
+                </div> -->
+                <div class="form-group formBor">
+                    <div class="d-flex">
+                        <label class="col-form-label">To</label>
+                        <div class="spacer"></div>
+                        <label class="col-form-label font-weight-bold text-primary"
+                            *ngIf="toCurrencyMainBalance">Balance : {{toCurrencyMainBalance}}</label>
+                    </div>
+
+
+                    <div class="input-group">
+                        <input class="form-control" [(ngModel)]="addLiquidityToCurrency.amount" name="amountTo"
+                            placeholder="0.0" (keyup)="amountCalculation('to')" (paste)="$event.preventDefault()"
+                            type="number" [readonly]="isAddLiquidityProcessing">
+                        <div class="input-group-append ml-2">
+                            <div class="d-flex align-items-center flex-wrap align-content-end">
+                                <button [disabled]="!addLiquidityFromCurrency._id || isAddLiquidityProcessing"
+                                    type="button" class="btn btn-select"
+                                    (click)="selecttokenModal.show();selectionType('to')">
+
+                                    <ng-container *ngIf="!addLiquidityToCurrency._id">
+                                        <span class="text-muted">
+                                            Select Token
+                                        </span>
+                                    </ng-container>
+
+                                    <ng-container *ngIf="addLiquidityToCurrency._id">
+                                        <span><img class="w-18" [src]="addLiquidityToCurrency.currency_image"></span>
+                                        {{addLiquidityToCurrency._id}}
+                                    </ng-container>
+
+
+                                    &nbsp;<i class="fas fa-angle-down"></i>
+                                </button>
+                                <i class="bi bi-question-circle" *ngIf="!addLiquidityFromCurrency._id"
+                                    tooltip="You Need To Select From" placement="top"
+                                    containerClass="customTooltipClass"></i>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 py-2 ">
+                    <button [disabled]="!isFormValid && dataService.metaDeatails.isMetaLogin" (click)="addLiquidity()"
+                        class="btn default-btn btn-block" type="button">
+
+                        <ng-container *ngIf="!dataService.metaDeatails.isMetaLogin">
+                            Unlock Wallet
+                        </ng-container>
+
+                        <ng-container *ngIf="dataService.metaDeatails.isMetaLogin && !isApproved">
+                            Approve
+                        </ng-container>
+
+                        <ng-container *ngIf="dataService.metaDeatails.isMetaLogin && isApproved">
+                            Supply
+                        </ng-container>
+
+
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row justify-content-center align-items-center h-100" *ngIf="isRemoveLiqudity">
+    <div class="col-lg-6 col-md-10 col-sm-12 col-12">
+        <div class="card mycard text-left">
+            <div class="card-header">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex">
+                        <div class="mr-2">
+                            <button type="button" (click)="toggleRemoveLiquidity()"
+                                class="text-decoration-none acircleLink"> <img src="assets/images/right-arrow.png"
+                                    style="transform: rotate(180deg);">
+                            </button>
+                        </div>
+                        <div>
+                            <div class="cardTit">Remove Liquidity</div>
+                        </div>
+                    </div>
+                    <!-- <div>
+                        <div class="cardTit">Add Liquidity</div>
+                    </div> -->
+                    <div class="ml-auto">
+                        <a [routerLink]="['/']" class="fs-20"><i class="bi bi-question-circle"></i></a>
+                    </div>
+                </div>
+
+                <ng-container *ngIf="isRemoveTokenApproved">
+                    <div class="mt-3 mb-4">
+                        <div class="progress">
+                            <!-- [ariaValuenow]="progressValue" -->
+                            <div class="progress-bar bg-primary" role="progressbar" [style.width.%]="progressValue"
+                                aria-valuemin="0" aria-valuemax="100">{{progressValue}}%
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slidevalInput position-absolute mt-n1">
+                        <div class="d-flex flex-wrap justify-content-between mb-3">
+                            <button (click)="progressBar('25')" class="btn btncommon btnvalueselect">25%</button>
+                            <button (click)="progressBar('50')" class="btn btncommon btnvalueselect">50%</button>
+                            <button (click)="progressBar('75')" class="btn btncommon btnvalueselect">75%</button>
+                            <button (click)="progressBar('100')" class="btn btncommon btnvalueselect">Max</button>
+                        </div>
+                    </div>
+
+                </ng-container>
+
+
+            </div>
+
+            <div class="card-body formbg px-3">
+                <div class="borbottom px-1 pt-2 pb-1">
+                    <div class="d-flex mb-2">
+                        <div class="fs-16 fw-500">{{removePoolFormData.from_amount | number: dataService.fixNumber}}</div>
+                        <div class="ml-auto fs-16 fw-500">{{selectedLiqudityObj.fromCurrency}}</div>
+                    </div>
+                    <div class="d-flex mb-2">
+                        <div class="fs-16 fw-500">{{removePoolFormData.to_amount | number: dataService.fixNumber}}</div>
+                        <div class="ml-auto fs-16 fw-500">{{selectedLiqudityObj.toCurrency}}</div>
+                    </div>
+                </div>
+                <div class="borbottom px-1 pt-2 pb-1">
+                    <div class="d-flex flex-direction-column mb-2">
+                        <div class="fs-16 fw-500">
+                            <span> Price 1
+                                {{selectedLiqudityObj.fromCurrency}} =
+                                {{removePoolFormData.one_fromAmount | number: dataService.fixNumber}} {{selectedLiqudityObj.toCurrency}}
+                            </span>
+                            <div class=" fs-16 fw-500"> Price 1
+                                {{selectedLiqudityObj.toCurrency}} = {{removePoolFormData.one_toAmount | number: dataService.fixNumber}}
+                                {{selectedLiqudityObj.fromCurrency}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="borbottom px-1 pt-2 pb-1">
+                    <div class="d-flex mb-2">
+                        <div class="fs-16 fw-500">Your Position</div>
+                        <div class="ml-auto fs-16 fw-500">
+                            <div>{{selectedLiqudityObj.pair}} : {{poolDetails.userBalance | number: dataService.fixNumber}}</div>
+
+                        </div>
+                    </div>
+                    <div class="d-flex mb-2">
+                        <div class="fs-16 fw-500">Your Pool Share</div>
+                        <div class="ml-auto fs-16 fw-500">
+                            <div>{{poolDetails.totalShare | number: dataService.fixNumber}}%</div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <span></span>
+
+
+                <div class="borbottom px-1 pt-2 pb-1">
+                    <div class="d-flex mb-2">
+                        <div class="fs-16 fw-500">{{selectedLiqudityObj.fromCurrency}}</div>
+                        <div class="ml-auto fs-16 fw-500">{{poolDetails.fromCurrency | number: dataService.fixNumber}}</div>
+                    </div>
+                    <div class="d-flex mb-2">
+                        <div class="fs-16 fw-500">{{selectedLiqudityObj.toCurrency}}</div>
+                        <div class="ml-auto fs-16 fw-500">{{poolDetails.toCurrency | number: dataService.fixNumber}}</div>
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <button (click)="removeLiqudity()" class="btn btn-primary roundedbtn px-4 py-2" type="button">
+
+                        <ng-container *ngIf="!isRemoveTokenApproved"> Approve </ng-container>
+                        <ng-container *ngIf="isRemoveTokenApproved"> Remove Supply </ng-container>
+
+
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="modal fade mymodal" bsModal #selecttokenModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1"
+    role="dialog" aria-labelledby="dialog-static-name">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0 pb-0 pt-4 px-4">
+                <h4 id="dialog-static-name" class="modal-title pull-left mymodaltitle">Select a token</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="selecttokenModal.hide()">
+                    <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                </button>
+            </div>
+            <div class="modal-body px-4">
+                <div class="form-group myformstyle">
+                    <input class="form-control form-control-lg" [(ngModel)]="searchCtrl" name="searchCtrl" type="text"
+                        placeholder="Search name or paste address">
+                </div>
+
+                <!-- <ng-container>
+                    <div class="fs-18 fw-500 mb-3">Common bases</div>
+                    <div class="d-flex flex-wrap justify-content-between mb-3">
+
+                        <ng-container
+                            *ngFor="let addLiquidityFromCurrencyObj of addLiquidityCurrencies | slice : 0 : 4 ">
+                            <a (click)="selectToken(addLiquidityFromCurrencyObj);selecttokenModal.hide()" role="button"
+                                class="btn btncommon"
+                                [ngClass]="{'active': addLiquidityFromCurrencyObj._id == addLiquidityFromCurrency._id}"><img
+                                    src="assets/images/icon1.png">&nbsp;{{addLiquidityFromCurrencyObj._id}}</a>
+                        </ng-container>
+
+                    </div>
+                </ng-container> -->
+
+
+                <div class="CoinList scroller mb-3">
+
+                    <p class="text-center padding" *ngIf="isGetBaseCurrencyLoading">
+                        Loading ...
+                    </p>
+
+                    <ul class="list-unstyled mb-0 mr-3" *ngIf="!isGetBaseCurrencyLoading">
+
+
+                        <li *ngFor="let addLiquidityFromCurrencyObj of addLiquidityCurrencies | searchFilter: searchCtrl:filterData : '_id' : 'contract_address'"
+                            class="pointer" (click)="selectToken(addLiquidityFromCurrencyObj);selecttokenModal.hide()">
+                            <div class="d-flex"
+                                [ngClass]="{'active': addLiquidityFromCurrencyObj._id == addLiquidityFromCurrency._id}">
+                                <div class="mr-2 coinimg"><img [src]="addLiquidityFromCurrencyObj.currency_image">
+                                </div>
+                                <div class="">
+                                    <div class="coinname">{{addLiquidityFromCurrencyObj._id}}</div>
+                                    <!-- <div class="cointype">{{addLiquidityFromCurrencyObj._id}}</div> -->
+                                </div>
+                                <div class="ml-auto tickIcon">
+                                    <img src="assets/images/tick.png">
+                                </div>
+                            </div>
+                        </li>
+
+                        <p class="text-muted" *ngIf="filterData.isNot && searchCtrl">
+                            No data matching the filter "{{searchCtrl}}"
+                        </p>
+
+                    </ul>
+                </div>
+                <!-- <div class="text-center">
+                    <button class="btn btn-primary roundedbtn px-4 py-2" type="button">
+                        Manage
+                    </button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>

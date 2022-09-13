@@ -1,0 +1,294 @@
+<div class="d-flex mb-4 page-header">
+    <ul class="bread-crump_container">
+        <li>
+            <a [routerLink]="['dasboard' | appRouter]"> Home</a>
+        </li>
+        <li>
+            <a [routerLink]="['pairs_list' | appRouter]"> Pairs</a>
+        </li>
+
+        <li>
+            <ng-container [ngSwitch]="editObj.id">
+                <ng-container *ngSwitchCase="'new'">New Pair - </ng-container>
+                Token To {{ isPairTokenToToken ? 'Token' : 'Coin'}}
+                <!-- <ng-container *ngSwitchDefault>
+                    Title -
+                    {{ editObj.title }}
+                </ng-container> -->
+            </ng-container>
+        </li>
+    </ul>
+
+    <div class="group-button" *ngIf="!isGetSingleDataLoading">
+        <button type="submit" [disabled]="isDataPassing" mat-button [color]="editObj.id == 'new' ? 'primary' : 'accent'"
+            (click)="formSubmit()">
+            <mat-icon *ngIf="!isDataPassing">
+                {{ editObj.id == "new" ? "add" : "fact_check" }}
+            </mat-icon>
+
+            <ng-container *ngIf="!isDataPassing">
+                {{ editObj.id == "new" ? "Add" : "Update" }} Pair</ng-container>
+
+            <ng-container *ngIf="isDataPassing">
+                Please Wait <span> ... </span>
+            </ng-container>
+        </button>
+    </div>
+</div>
+
+<mat-card class="table-container" *ngIf="!isGetSingleDataLoading ">
+    <ng-container>
+        <form #editForm="ngForm" class="form-dark">
+            <div class="container-fluid">
+
+                <div class="d-flex all-center padding">
+
+                    <div class="spacer"></div>
+
+                    <div class="text-right">
+                        <mat-radio-group color="primary" [(ngModel)]="editObj.currencyType" name="currencyType"
+                            aria-label="Select an option" (ngModelChange)="currencyTypeChange()">
+                            <mat-radio-button class="px-2" [value]="'coin'"> Base Currency Coin</mat-radio-button>
+                            <mat-radio-button class="px-2" [value]="'token'">Base Currency Token</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </div>
+
+
+                <mat-divider></mat-divider>
+
+                <div class="row mt-2">
+                    <div class="col-md-4">
+                        <div class="padding mb-2  bg-light">
+                            <span>
+                                Currency Type - Token
+                            </span>
+                        </div>
+
+                        <div class="search-area">
+
+                            <mat-form-field appearance="outline">
+                                <mat-label>Search Currency</mat-label>
+                                <input matInput type="text" placeholder="Search Currency" [matAutocomplete]="auto"
+                                    [(ngModel)]="searchData" name="searchData"
+                                    (keypress)="general.removingSpaceFirst($event, searchData)" />
+
+
+                            </mat-form-field>
+
+
+                            <mat-autocomplete #auto="matAutocomplete">
+                                <ul class="ul-list">
+                                    <li *ngFor="
+                      let tokenListObj of tokensList  | filter: searchData : 'currencyName'
+                    " (click)="closePanel(tokenListObj , 'from')">
+                                        {{tokenListObj.currencyName}}
+                                    </li>
+
+                                </ul>
+
+                                <mat-option class="d-none"></mat-option>
+                            </mat-autocomplete>
+                        </div>
+
+
+
+
+
+                        <!-- <mat-form-field appearance="outline">
+                            <mat-label>From Currency Name</mat-label>
+                            <input matInput placeholder="From Currency Name" name="fromCurrencyname" autocomplete="off"
+                                [(ngModel)]="editObj.fromCurrencyname" name="fromCurrencyname"
+                                #fromCurrencyname="ngModel" required
+                                (keypress)="general.removingSpaceFirst($event, editObj.fromCurrencyname)" />
+
+                            <mat-error *ngIf="fromCurrencyname.errors">
+                                {{ general.checkError(fromCurrencyname, "From Currency Name") }}
+                            </mat-error>
+                        </mat-form-field> -->
+
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>From Currency Symbol</mat-label>
+                            <input matInput placeholder="From Currency Symbol" name="fromCurrency" autocomplete="off"
+                                [(ngModel)]="editObj.fromCurrency" name="fromCurrency"
+                                (ngModelChange)="editObj.fromCurrency = $event.toUpperCase()" #fromCurrency="ngModel"
+                                required (keypress)="general.removingSpaceFirst($event, editObj.fromCurrency)"
+                                readonly />
+
+                            <mat-error *ngIf="fromCurrency.errors">
+                                {{ general.checkError(fromCurrency, "From Currency Symbol") }}
+                            </mat-error>
+                        </mat-form-field>
+
+                        <!-- <mat-form-field appearance="outline">
+                            <mat-label>From Currency Type</mat-label>
+                            <input matInput placeholder="From Currency Type" name="fromCurrency_type" autocomplete="off"
+                                [(ngModel)]="editObj.fromCurrency_type" name="fromCurrency_type"
+                                #fromCurrency_type="ngModel" required 
+                                (keypress)="general.removingSpaceFirst($event, editObj.fromCurrency_type)" />
+
+                            <mat-error *ngIf="fromCurrency_type.errors">
+                                {{ general.checkError(fromCurrency_type, "From Currency Type") }}
+                            </mat-error>
+                        </mat-form-field> -->
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>From Currency Contract Address</mat-label>
+                            <input matInput placeholder="From Currency Contract Address" name="fromCurrency_address"
+                                autocomplete="off" [(ngModel)]="editObj.fromCurrency_address"
+                                (ngModelChange)="editObj.fromCurrency_address = $event.toLowerCase()"
+                                name="fromCurrency_address" #fromCurrency_address="ngModel" required readonly
+                                (keypress)="general.removingSpaceFirst($event, editObj.fromCurrency_address)" />
+
+                            <mat-error *ngIf="fromCurrency_address.errors">
+                                {{ general.checkError(fromCurrency_address, "From Currency Contract Address") }}
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>From Currency Decimal</mat-label>
+                            <input matInput placeholder="From Currency Decimal" name="fromCurrency_decimal"
+                                autocomplete="off" [(ngModel)]="editObj.fromCurrency_decimal"
+                                name="fromCurrency_decimal" #fromCurrency_decimal="ngModel" required type="number"
+                                (keypress)="general.removingSpaceFirst($event, editObj.fromCurrency_decimal)"
+                                readonly />
+
+                            <mat-error *ngIf="fromCurrency_decimal.errors">
+                                {{ general.checkError(fromCurrency_decimal, "From Currency Decimal") }}
+                            </mat-error>
+                        </mat-form-field>
+
+
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <div class="padding mb-2 text-capitalize  bg-light">
+                            <div class="d-flex all-center">
+                                <div class="flex-1">
+                                    Currency Type - {{editObj.currencyType}}
+
+                                </div>
+                                <div class="spacer"></div>
+                                <div class="flex-1" *ngIf="!isPairTokenToToken ">
+                                    <small>
+                                        <mat-icon class="text-muted" matTooltip="You Never Edit The Coin Details ">
+                                            help
+                                        </mat-icon>
+                                    </small>
+
+                                </div>
+                            </div>
+                            <span>
+                            </span>
+                        </div>
+
+                        <div class="search-area" *ngIf="isPairTokenToToken">
+
+                            <mat-form-field appearance="outline">
+                                <mat-label>Search Currency</mat-label>
+                                <input matInput type="text" placeholder="Search Currency" [matAutocomplete]="auto"
+                                    [(ngModel)]="searchDataTo" name="searchDataTo"
+                                    (keypress)="general.removingSpaceFirst($event, searchDataTo)" />
+
+
+                            </mat-form-field>
+
+
+                            <mat-autocomplete #auto="matAutocomplete">
+                                <ul class="ul-list">
+                                    <li *ngFor="
+                      let tokenListObj of tokensList  | filter: searchDataTo : 'currencyName'
+                    " (click)="closePanel(tokenListObj , 'to')">
+                                        {{tokenListObj.currencyName}}
+                                    </li>
+
+                                </ul>
+
+                                <mat-option class="d-none"></mat-option>
+                            </mat-autocomplete>
+                        </div>
+
+                        <mat-form-field appearance="outline" *ngIf="!isPairTokenToToken">
+                            <mat-label>To Currency Name</mat-label>
+                            <input matInput placeholder="To Currency Name" name="toCurrencyname" autocomplete="off"
+                                [(ngModel)]="editObj.toCurrencyname" name="toCurrencyname" #toCurrencyname="ngModel"
+                                required (keypress)="general.removingSpaceFirst($event, editObj.toCurrencyname)"
+                                [readonly]="!isPairTokenToToken ">
+
+                            <mat-error *ngIf="toCurrencyname.errors">
+                                {{ general.checkError(toCurrencyname, "To Currency Name") }}
+                            </mat-error>
+                        </mat-form-field>
+
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>To Currency Symbol</mat-label>
+                            <input matInput placeholder="To Currency Symbol" name="toCurrency" autocomplete="off"
+                                [(ngModel)]="editObj.toCurrency"
+                                (ngModelChange)="editObj.toCurrency = $event.toUpperCase()" name="toCurrency"
+                                #toCurrency="ngModel" required
+                                (keypress)="general.removingSpaceFirst($event, editObj.toCurrency)"
+                                [readonly]="!isPairTokenToToken " />
+
+                            <mat-error *ngIf="toCurrency.errors">
+                                {{ general.checkError(toCurrency, "To Currency Symbol") }}
+                            </mat-error>
+                        </mat-form-field>
+
+                        <!-- <mat-form-field appearance="outline">
+                            <mat-label>To Currency Type</mat-label>
+                            <input matInput placeholder="To Currency Type" name="toCurrency_type" autocomplete="off"
+                                [(ngModel)]="editObj.toCurrency_type" name="toCurrency_type"
+                                #toCurrency_type="ngModel" required
+                                (keypress)="general.removingSpaceFirst($event, editObj.toCurrency_type)" />
+
+                            <mat-error *ngIf="toCurrency_type.errors">
+                                {{ general.checkError(toCurrency_type, "To Currency Type") }}
+                            </mat-error>
+                        </mat-form-field> -->
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>To Currency Contract Address</mat-label>
+                            <input matInput placeholder="To Currency Contract Address" name="toCurrency_address"
+                                autocomplete="off" [(ngModel)]="editObj.toCurrency_address"
+                                (ngModelChange)="editObj.toCurrency_address = $event.toLowerCase()"
+                                name="toCurrency_address" #toCurrency_address="ngModel" required
+                                (keypress)="general.removingSpaceFirst($event, editObj.toCurrency_address)"
+                                [readonly]="!isPairTokenToToken " />
+
+                            <mat-error *ngIf="toCurrency_address.errors">
+                                {{ general.checkError(toCurrency_address, "To Currency Contract Address") }}
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>To Currency Decimal</mat-label>
+                            <input matInput placeholder="To Currency Decimal" name="toCurrency_decimal"
+                                autocomplete="off" [(ngModel)]="editObj.toCurrency_decimal" name="toCurrency_decimal"
+                                #toCurrency_decimal="ngModel" required type="number"
+                                (keypress)="general.removingSpaceFirst($event, editObj.toCurrency_decimal)"
+                                [readonly]="!isPairTokenToToken " />
+
+                            <mat-error *ngIf="toCurrency_decimal.errors">
+                                {{ general.checkError(toCurrency_decimal, "To Currency Decimal") }}
+                            </mat-error>
+                        </mat-form-field>
+
+
+
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </ng-container>
+</mat-card>
+
+<ng-container *ngIf="isGetSingleDataLoading ">
+    <div class="d-flex justify-content-center padding">
+        <mat-spinner [diameter]="20" color="primary"></mat-spinner>
+    </div>
+</ng-container>

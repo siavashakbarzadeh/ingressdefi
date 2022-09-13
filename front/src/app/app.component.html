@@ -1,0 +1,11 @@
+<div class="overlay overlayFull is-open" [ngClass]="{ 'is-open': dataService.isOverlay }" >
+	<div class="overlay-msg">
+		<div class="waviy">
+			<span>Please wait, your request is processing</span>
+		</div>
+	</div>
+</div>
+<ng-container *ngIf="isIpValid">
+	<router-outlet ></router-outlet>
+	<app-toaster-container></app-toaster-container>
+</ng-container>

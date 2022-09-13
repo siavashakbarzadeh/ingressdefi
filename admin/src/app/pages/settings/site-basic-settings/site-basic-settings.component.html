@@ -1,0 +1,79 @@
+<mat-card class="table-container" *ngIf="isShowSiteObj">
+
+    <div class="d-flex align-items-center mb-4 page-header">
+
+        <span>
+            Site Basic Settings
+        </span>
+
+        <div class="spacer"></div>
+
+        <div class="group-button">
+            <button type="submit" [disabled]="isDataPassing" mat-button color="accent" (click)="formSubmit()">
+                <mat-icon *ngIf="!isDataPassing">
+                    fact_check
+                </mat-icon>
+
+                <ng-container *ngIf="!isDataPassing">
+                    Update Settings
+                </ng-container>
+
+                <ng-container *ngIf="isDataPassing">
+                    Please Wait <span> ... </span>
+                </ng-container>
+            </button>
+        </div>
+    </div>
+
+
+    <ng-container>
+        <form #siteObjForm="ngForm">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Site Name</mat-label>
+                        <input matInput placeholder="Site Name" name="site_name" autocomplete="off"
+                            [(ngModel)]="siteObj.site_name" #site_name="ngModel" required
+                            (keypress)="general.removingSpaceFirst($event, siteObj.site_name)" />
+
+                        <mat-error *ngIf="site_name.errors">
+                            {{ general.checkError(site_name, "Site Name") }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <app-image-upload [in]="siteObj.site_logo" (allOut)="siteLogofile = $event"
+                        (out)="siteObj.site_logo = $event" name="site_logo">
+                    </app-image-upload>
+                </div>
+                <div class="col-md-6">
+                    <app-image-upload [in]="siteObj.site_favicon" (allOut)="siteFaviconFile = $event"
+                        (out)="siteObj.site_favicon = $event" name="site_favicon">
+                    </app-image-upload>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Copy Rights</mat-label>
+                        <input matInput placeholder="Copy Rights" name="copyrights" autocomplete="off"
+                            [(ngModel)]="siteObj.copyrights" #copyrights="ngModel" required
+                            (keypress)="general.removingSpaceFirst($event, siteObj.copyrights)" />
+
+                        <mat-error *ngIf="site_name.errors">
+                            {{ general.checkError(copyrights, "Copy Rights") }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+
+        </form>
+    </ng-container>
+</mat-card>
+
+
+<ng-container *ngIf="isGetSingleDataLoading ">
+    <div class="d-flex justify-content-center padding">
+        <mat-spinner [diameter]="20" color="primary"></mat-spinner>
+    </div>
+</ng-container>

@@ -1,0 +1,19 @@
+<app-header></app-header>
+<div class="digital-art-sec">
+	<section class="blog-detail-container">
+		<div class="container">
+			<h3 class="page-title">Blog Details</h3>
+			<div class="row">
+				<div class="col-12">
+					<div class="blog-details-cnt">
+						<img src="{{ page.image ? page.image : 'assets/images/blog-5.png'}}">
+						<h3>{{ page.title }}</h3>
+						<p>{{ page.date | date : 'medium' }}</p>
+						<p innerHTML="{{ page.pagecontent }}"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+<app-footer></app-footer>

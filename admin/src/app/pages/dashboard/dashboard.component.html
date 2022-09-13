@@ -1,0 +1,87 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-6 col-lg-4" [routerLink]="['/admin/referal/list']">
+      <div class="card text-white bg-primary">
+        <div class="card-body pb-0 cursor_pointer" >
+          <div class="btn-group float-right" dropdown>
+            <i class="fa fa-list-alt"></i>
+          </div>
+          <div class="text-value">{{referalCount}}</div>
+          <div>Total Referral</div>
+        </div>
+        
+      </div>
+    </div>
+    <div class="col-sm-6 col-lg-4" [routerLink]="['/admin/ip/ip_block_list']">
+      <div class="card text-white bg-dark">
+        <div class="card-body pb-0 cursor_pointer">
+          <div class="btn-group float-right" dropdown>
+            <i class="fa fa-list-alt"></i>
+          </div>
+          <div class="text-value">{{blockCount}}</div>
+          <div>Total IP Blocked</div>
+        </div>
+        
+      </div>
+    </div>
+    <div class="col-sm-6 col-lg-4" [routerLink]="['/admin/swap/list']">
+      <div class="card text-white bg-primary">
+        <div class="card-body pb-0 cursor_pointer">
+          <div class="btn-group float-right" dropdown>
+            <i class="fa fa-users"></i>
+          </div>
+          <div class="text-value">{{swapCount}}</div>
+          <div>Total Swap List</div>
+        </div>
+      </div>
+    </div>    
+  </div>
+  <div class="row mt-2">
+    <div class="col-sm-6 col-lg-4" [routerLink]="['/admin/pairs/list']">
+      <div class="card text-white bg-info">
+        <div class="card-body pb-0 cursor_pointer">
+          <div class="btn-group float-right" dropdown>
+            <i class="fa fa-list-alt"></i>
+          </div>
+          <div class="text-value">{{pairsCount}}</div>
+          <div>Total Pairs List</div>
+        </div>
+      </div>
+    </div>    
+    <div class="col-sm-6 col-lg-4" [routerLink]="['/admin/token/list']">
+      <div class="card text-white bg-warning">
+        <div class="card-body pb-0 cursor_pointer">
+          <div class="btn-group float-right" dropdown>
+            <i class="fa fa-list-alt"></i>
+          </div>
+          <div class="text-value">{{tokenCount}}</div>
+          <div>Total Token List</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-lg-4" [routerLink]="['/admin/stake/stake_list']">
+      <div class="card text-white bg-success">
+        <div class="card-body pb-0 cursor_pointer">
+          <div class="btn-group float-right" dropdown>
+            <i class="fa fa-list-alt"></i>
+          </div>
+          <div class="text-value">{{stakeCount}}</div>
+          <div>Total Stake List</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-sm-6 col-lg-4" [routerLink]="['/admin/subscribe/subscribe_list']">
+      <div class="card text-white bg-danger">
+        <div class="card-body pb-0 cursor_pointer">
+          <div class="btn-group float-right" dropdown>
+            <i class="fa fa-ban"></i>
+          </div>
+          <div class="text-value">{{subscribeCount}}</div>
+          <div>Total Subscribe List</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<nav class="navbar-expand-lg">
+    <div class="d-flex justify-content-start fixmenubutton">
+      <div class="collapse navbar-collapse menucontent" [class.collapse]="navbarCollapsed" id="navbarSupportedContent">
+        <ul class="pl-0">
+          <!-- <li><a [routerLink]="'/'"><img src="assets/images/sidebar-dsb-icon.png" class="img-fluid"><span>Home</span></a></li> -->
+          <li><a [routerLink]="'/dashboard'" [ngClass]="{'active':url=='dashboard'}" (click)="sideclick('dashboard')"><img src="assets/images/sidebar-dsb-icon.png" class="img-fluid"><span>Dashboard</span></a></li>
+          <li><a [routerLink]="'/trade'" [ngClass]="{'active':url=='trade'}" (click)="sideclick('trade')"><img src="assets/images/sidebar-trd-icon.png" class="img-fluid"><span>Trade</span></a></li>
+          <!-- <li><a [routerLink]="'/farm'" [ngClass]="{'active':url=='farm'}" (click)="sideclick('farm')"><img src="assets/images/sidebar-farm-icon.png" class="img-fluid"><span>Farms</span></a></li> -->
+          <li><a [routerLink]="'/staking'" [ngClass]="{'active':url=='staking'}" (click)="sideclick('staking')"><img src="assets/images/sidebar-stake-icon.png" class="img-fluid"><span>Staking</span></a></li>
+          <!-- <li><a [routerLink]="'/reference-links'" [ngClass]="{'active':url=='reference-links'}" (click)="sideclick('reference-links')"><img src="assets/images/sidebar-ref-icon.png" class="img-fluid"><span>Reference Links</span></a></li> -->
+          <li><a [routerLink]="'/collection'" [ngClass]="{'active':url=='collection'}" (click)="sideclick('collection')"><img src="assets/images/sidebar-collection-icon.png" class="img-fluid"><span>Collection</span></a></li>
+
+          <li><a [routerLink]="'/import'" [ngClass]="{'active':url=='import'}" (click)="sideclick('import')"><img src="assets/images/sidebar-collection-icon.png" class="img-fluid"><span>Import NFT</span></a></li>
+          <li><a [routerLink]="'/user'" [ngClass]="{'active':url=='user'}" (click)="sideclick('profile')"><img src="assets/images/sidebar-profile3-icon.png" class="img-fluid"><span>Profile</span></a></li>
+          <li><a [routerLink]="'/history'" [ngClass]="{'active':url=='history'}" (click)="sideclick('history')"><img src="assets/images/sidebar-history-icon.png" class="img-fluid"><span>History</span></a></li>
+          <li><a [routerLink]="'/settings'" [ngClass]="{'active':url=='settings'}" (click)="sideclick('settings')"><img src="assets/images/sidebar-settings-icon.png" class="img-fluid"><span>Settings</span></a></li>
+          <li *ngIf="dataService.metaDeatails?.accountShort"><a (click)="logout()" [ngClass]="{'active':url=='logout'}" (click)="sideclick('logout')"><img src="assets/images/sidebar-signout-icon.png" class="img-fluid"><span>Logout</span></a></li>
+        </ul>
+      </div>
+      <button class="navbar-toggler sidemenubar" type="button" data-toggle="collapse" (click)="toggleNavbarCollapsing()" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation"> <span class="navbar-toggler-icon side-icon"></span> </button>
+    </div>
+  </nav>
+  

@@ -1,0 +1,50 @@
+<ul class="side-menu_ul" (mouseenter)="menuHoverOpen()" (mouseleave)="menuHoverClose()">
+    <!-- menusObj.isShowFiller = !menusObj.isShowFiller; isOpenMenu = !isOpenMenu -->
+    <li role="button" class="cursor-hover" (click)="menuToggle()" [ngClass]="{'isOpenMenu': isOpenMenu}">
+        <a class="align-center d-flex">
+            <mat-icon *ngIf="!menusObj.isShowFiller">menu</mat-icon>
+            <mat-icon *ngIf="menusObj.isShowFiller">menu_open</mat-icon>
+            <span class="px-2" *ngIf="menusObj.isShowFiller">
+                {{dataService.projectDetails.name}}
+            </span>
+        </a>
+
+
+    </li>
+    <li *ngFor="let menuObj of menusList; let menuObjIndex = index" (click)="sideMenuIndex = menuObjIndex">
+        <a *ngIf="!menuObj.childs" [routerLink]="[menuObj.url]" class="main-a d-flex align-center text-decoration_none">
+            <mat-icon>{{menuObj.icon}}</mat-icon>
+            <!--  Here use Ngif It Be Loaded Json File More Time so Using ngClass -->
+            <span class="px-2" [ngClass]="{'d-none': !menusObj.isShowFiller}">
+                {{menuObj.display}}
+            </span>
+        </a>
+
+        <a *ngIf="menuObj.childs" class="main-a d-flex align-center text-decoration_none">
+            <mat-icon>{{menuObj.icon}}</mat-icon>
+            <!--  Here use Ngif It Be Loaded Json File More Time so Using ngClass -->
+            <span class="px-2" [ngClass]="{'d-none': !menusObj.isShowFiller}">
+                {{menuObj.display }}
+            </span>
+        </a>
+
+        <ul class="sub-menu-container" 
+            [ngClass]="{'isShow': menuObj.childs && menuObjIndex == sideMenuIndex && menusObj.isShowFiller}">
+            <li *ngFor="let menuChildObj of menuObj.childs">
+                <a [routerLink]="[menuChildObj.url]" 
+                routerLinkActive="router-link-active" class="d-flex align-center text-decoration_none">
+                    <!-- <mat-icon>home</mat-icon> -->
+                    <!--  Here use Ngif It Be Loaded Json File More Time so Using ngClass -->
+                    <span class="px-2" [ngClass]="{'d-none': !menusObj.isShowFiller}">
+                        {{menuChildObj.display}}
+
+                    </span>
+                </a>
+            </li>
+
+        </ul>
+
+
+    </li>
+
+</ul>

@@ -1,0 +1,20 @@
+mat-form-field {
+  width: 100% !important;
+  font-size: 13px;
+}
+
+.ul-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    display: flex;
+    padding: 10px;
+    cursor: pointer;
+
+    &:hover {
+      background: #8eb3f57d;
+    }
+  }
+}

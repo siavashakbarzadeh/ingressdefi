@@ -1,0 +1,41 @@
+.head-box {
+  padding: 0;
+  min-height: 70px;
+  span {
+    display: block;
+  }
+
+  .first-obj {
+    text-align: center;
+    background: #4481eb;
+    min-height: 70px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    color: white;
+  }
+
+  .box-content {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #ddd;
+    padding: 10px;
+    flex: 1;
+  }
+}
+
+small {
+  mat-icon {
+    font-size: 15px;
+  }
+}
+
+.bt-text {
+  position: absolute;
+  bottom: 7px;
+  color: #8e8b8b;
+}

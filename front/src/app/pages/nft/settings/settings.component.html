@@ -1,0 +1,71 @@
+<div class="tabpages-cnt settings-block">
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="section-title">Settings</h3>
+        </div>
+    </div>
+    <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+        <div class="row">
+            <div class="col-md-12">
+                <h6 class="font-16 font-weight-bold text-black mb-3"> Transaction-based notifications</h6>
+            </div>
+            <div class="col-md-12">
+                <div class="d-flex justify-content-between">
+                    <p class="text-black font-14 my-2 fontweight-400">Transaction-based notifications</p>
+                    <label class="switch">
+                        <input type="checkbox" name="transnotify" [(ngModel)]="settings.transnotify">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <p class="text-black font-14 my-2 fontweight-400">New follower notifications</p>
+                    <label class="switch">
+                        <input type="checkbox" name="followernotify" [(ngModel)]="settings.followernotify">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <p class="text-black font-14 my-2 fontweight-400">New artwork notifications</p>
+                    <label class="switch">
+                        <input type="checkbox" name="artnotify" [(ngModel)]="settings.artnotify">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-12">
+                <h6 class="font-16 font-weight-bold text-black mb-3"> Activity Feed</h6>
+            </div>
+            <div class="col-md-12">
+                <div class="d-flex justify-content-between">
+                    <p class="text-black font-14 my-2 fontweight-400">Noise filter</p>
+                    <label class="switch">
+                        <input type="checkbox" name="noisenotify" [(ngModel)]="settings.noisenotify">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="row mt-5">
+            <div class="col-md-12">
+                <h6 class="font-16 font-weight-bold text-black mb-3"> Minimum Bid</h6>
+            </div>
+            <div class="col-md-12">
+                <div class="d-flex align-items-center">
+                    <p class="text-black font-14 fontweight-400">Require incoming bids to be at least </p>
+                    <div class="form-group ml-2 ">
+                        <input type="text" #bid="ngModel" name="bid" [(ngModel)]="settings.bid" required class="form-control input-sec h-43 font-16 fontweight-400" placeholder="">
+                    </div>
+                    <p class="text-black pl-2 fontweight-400">BNB</p>
+                </div>
+                <div *ngIf="submitted && f.bid.errors" class="invalid-feedback">
+                    <div *ngIf="f.bid.errors.required">Bid is required</div>
+                </div>
+            </div>
+            <div class="text-center">
+                <button class="btn default-btn min-width-auto px-5  py-2 mt-1" [disabled]="f.invalid">Save</button>
+            </div>
+        </div> -->
+    </form>
+</div>

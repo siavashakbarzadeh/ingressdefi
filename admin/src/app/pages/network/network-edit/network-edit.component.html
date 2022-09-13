@@ -1,0 +1,95 @@
+<div class="d-flex mb-4 page-header container-fluid">
+    <ul class="bread-crump_container">
+        <li>
+            <a [routerLink]="['dasboard' | appRouter]"> Home</a>
+        </li>
+        <li>
+            <a [routerLink]="['network_list' | appRouter]"> Network List</a>
+        </li>
+
+       <!--  <li *ngIf="!isGetSingleDataLoading">
+            <ng-container [ngSwitch]="editObj._id">
+                <ng-container *ngSwitchCase="'new'">New Ip </ng-container>
+                <ng-container *ngSwitchDefault>
+                    Ip -
+                    {{ editObj.user_ip }}
+                </ng-container>
+            </ng-container>
+        </li> -->
+    </ul>
+
+    <div class="group-button" *ngIf="!isGetSingleDataLoading">
+        <button type="submit" [disabled]="isDataPassing" mat-button
+            [color]="editObj._id != 'new' ? 'primary' : 'accent'" (click)="formSubmit()">
+            <mat-icon *ngIf="!isDataPassing">
+                {{ editObj._id == "new" ? "add" : "fact_check" }}
+            </mat-icon>
+
+            <ng-container *ngIf="!isDataPassing">
+                {{   editObj._id == 'new' ? ' Add Network' :  'Update Network Details'  }}
+            </ng-container>
+
+            <ng-container *ngIf="isDataPassing">
+                Please Wait <span> ... </span>
+            </ng-container>
+        </button>
+    </div>
+</div>
+
+
+<mat-card class="table-container" *ngIf="!isGetSingleDataLoading">
+
+
+
+    <ng-container>
+        <form #editForm="ngForm">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Network Type</mat-label>
+                        <!-- [pattern]="general.ipPattern" -->
+                        <input matInput name="networkName" autocomplete="off"
+                            [(ngModel)]="editObj.networkName" #networkName="ngModel" readonly/>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Currency</mat-label>
+                        <!-- [pattern]="general.ipPattern" -->
+                        <input matInput name="currencySymbol" autocomplete="off"
+                            [(ngModel)]="editObj.currencySymbol" #currencySymbol="ngModel" readonly/>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Status - {{editObj.status}}</mat-label>
+                        <mat-select [(ngModel)]="editObj.status" name="status" required #blogtype="ngModel">
+                            <mat-option *ngFor="let statusObj of statuses;let statusObjIndex = index" [value]="statusObj">
+                                {{ statusObj }}
+                            </mat-option>
+                        </mat-select>
+
+                    </mat-form-field>
+
+                </div>
+                <!-- <div class="col-md-6">
+                        <app-image-upload [in]="editObj.file" (allOut)="editFile = $event"
+                            (out)="editObj.file = $event" name="file">
+                        </app-image-upload>
+                    </div> -->
+
+            </div>
+
+
+
+
+
+        </form>
+    </ng-container>
+</mat-card>
+
+
+<ng-container *ngIf="isGetSingleDataLoading ">
+    <div class="d-flex justify-content-center padding">
+        <mat-spinner [diameter]="20" color="primary"></mat-spinner>
+    </div>
+</ng-container>

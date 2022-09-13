@@ -1,0 +1,107 @@
+<div class="d-flex mb-4 page-header container-fluid">
+    <ul class="bread-crump_container">
+        <li>
+            <a [routerLink]="['dasboard' | appRouter]"> Home</a>
+        </li>
+        <li>
+            <a [routerLink]="['currency_list' | appRouter]"> Currency List</a>
+        </li>
+
+       <!--  <li *ngIf="!isGetSingleDataLoading">
+            <ng-container [ngSwitch]="editObj._id">
+                <ng-container *ngSwitchCase="'new'">New Ip </ng-container>
+                <ng-container *ngSwitchDefault>
+                    Ip -
+                    {{ editObj.user_ip }}
+                </ng-container>
+            </ng-container>
+        </li> -->
+    </ul>
+
+    <div class="group-button" *ngIf="!isGetSingleDataLoading">
+        <button type="submit" [disabled]="isDataPassing" mat-button
+            [color]="editObj._id != 'new' ? 'primary' : 'accent'" (click)="formSubmit()">
+            <mat-icon *ngIf="!isDataPassing">
+                {{ editObj._id == "new" ? "add" : "fact_check" }}
+            </mat-icon>
+
+            <ng-container *ngIf="!isDataPassing">
+                {{   editObj._id == 'new' ? ' Add Currency' :  'Update Currency Details'  }}
+            </ng-container>
+
+            <ng-container *ngIf="isDataPassing">
+                Please Wait <span> ... </span>
+            </ng-container>
+        </button>
+    </div>
+</div>
+
+
+<mat-card class="table-container" *ngIf="!isGetSingleDataLoading">
+
+
+
+    <ng-container>
+        <form #editForm="ngForm">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Currency Name</mat-label>
+                        <!-- [pattern]="general.ipPattern" -->
+                        <input matInput name="currencyName" autocomplete="off"
+                            [(ngModel)]="editObj.currencyName" #currencyName="ngModel" readonly/>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Currency Name</mat-label>
+                        <!-- [pattern]="general.ipPattern" -->
+                        <input matInput name="currencySymbol" autocomplete="off"
+                            [(ngModel)]="editObj.currencySymbol" #currencySymbol="ngModel" readonly/>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Currency Decimal</mat-label>
+                        <!-- [pattern]="general.ipPattern" -->
+                        <input matInput placeholder="Ip Address" name="currency_decimal" autocomplete="off"
+                            [(ngModel)]="editObj.currency_decimal" #currency_decimal="ngModel" required
+                            (keypress)="general.removingSpace($event)"/>
+
+                        <mat-error *ngIf="currency_decimal.errors">
+                            {{ general.checkError(currency_decimal, "Currency Decimal" , 'decimal') }}
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Status - {{editObj.status}}</mat-label>
+                        <mat-select [(ngModel)]="editObj.status" name="status" required #blogtype="ngModel">
+                            <mat-option *ngFor="let statusObj of statuses;let statusObjIndex = index" [value]="statusObjIndex">
+                                {{ statusObj }}
+                            </mat-option>
+                        </mat-select>
+
+                    </mat-form-field>
+
+                </div>
+                <!-- <div class="col-md-6">
+                        <app-image-upload [in]="editObj.file" (allOut)="editFile = $event"
+                            (out)="editObj.file = $event" name="file">
+                        </app-image-upload>
+                    </div> -->
+
+            </div>
+
+
+
+
+
+        </form>
+    </ng-container>
+</mat-card>
+
+
+<ng-container *ngIf="isGetSingleDataLoading ">
+    <div class="d-flex justify-content-center padding">
+        <mat-spinner [diameter]="20" color="primary"></mat-spinner>
+    </div>
+</ng-container>

@@ -1,0 +1,101 @@
+<mat-card class="table-container" *ngIf="!isGetSingleDataLoading">
+
+  <div class="d-flex align-items-center mb-4 page-header">
+
+    <span>
+      Password Settings
+    </span>
+
+    <div class="spacer"></div>
+
+    <div class="group-button" *ngIf="editObj.tfastatus == 'Deactive'">
+      <button type="submit" [disabled]="isDataPassing" mat-button color="accent" (click)="formSubmit()">
+        <mat-icon *ngIf="!isDataPassing">
+          fact_check
+        </mat-icon>
+
+        <ng-container *ngIf="!isDataPassing">
+          Update TFA
+        </ng-container>
+
+        <ng-container *ngIf="isDataPassing">
+          Please Wait <span> ... </span>
+        </ng-container>
+      </button>
+    </div>
+  </div>
+
+
+  <ng-container *ngIf="editObj.tfastatus == 'Deactive'">
+    <form #editForm="ngForm">
+
+
+      <div class="row">
+        <div class="col-md-4">
+
+          <div class="d-flex flex-column">
+            <label> Secret Code : {{editObj.secret}}</label>
+            <img class="m-auto" [src]="editObj.tfaurl">
+          </div>
+
+
+          <div>
+            <mat-form-field appearance="outline"> 
+              <mat-label>TFA Code</mat-label>
+              <input [pattern]="general.numberPattern" matInput placeholder="TFA Code" name="tfacode"
+              autocomplete="off" [(ngModel)]="editObj.tfacode" #tfacode="ngModel" required
+              (keypress)="general.removingSpaceFirst($event, editObj.tfacode)" />
+
+              <mat-error *ngIf="tfacode.errors">
+                {{ general.checkError(tfacode, "TFA Code", 'number') }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+        </div>
+        <div class="col-md-8">
+
+          <p class="text-right">
+            TFA Status : {{editObj.tfastatus}}
+          </p>
+        </div>
+
+      </div>
+
+
+    </form>
+  </ng-container>
+
+  <ng-container *ngIf="editObj.tfastatus != 'Deactive'">
+    <p class="text-center padding text-success">
+      You are TFA is Enabled
+    </p>
+    <!-- <div>
+      <mat-form-field appearance="outline"> 
+        <mat-label>TFA Code</mat-label>
+        <input [pattern]="general.numberPattern" matInput placeholder="TFA Code" name="tfacode"
+        autocomplete="off" [(ngModel)]="editObj.tfacode" #tfacode="ngModel" required
+        (keypress)="general.removingSpaceFirst($event, editObj.tfacode)" />
+        <mat-error *ngIf="tfacode.errors">
+          {{ general.checkError(tfacode, "TFA Code", 'number') }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="card-footer mt-3">
+      <div *ngIf="!tfaLoader">
+        <button class="btn btn-sm btn-primary" (click)="tfaStatus()"><i class="fa fa-dot-circle-o"></i> Submit</button>
+      </div>
+      <div *ngIf="tfaLoader">
+        <button class="btn btn-sm btn-primary" disabled> <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+        Loading...</button>
+      </div>
+    </div> -->
+  </ng-container>
+</mat-card>
+
+
+<ng-container *ngIf="isGetSingleDataLoading ">
+  <div class="d-flex justify-content-center padding">
+    <mat-spinner [diameter]="20" color="primary"></mat-spinner>
+  </div>
+</ng-container>

@@ -1,0 +1,70 @@
+<div class="d-flex  mb-4 page-header">
+	<ul class="bread-crump_container">
+		<li>
+			<a [routerLink]="['dashboard']"> Home</a>
+		</li>
+		<li>Subscribe</li>
+	</ul>
+</div>
+<div class="card">
+	<div class="card-header">
+		<strong> Send Newsletter</strong>		
+	</div>
+	<form (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate autocomplete="off">
+		<div class="card-body">			
+			<div class="form-group row">
+				<label class="col-md-3 col-form-label"></label>
+				<div class="col-md-6">
+					<span style="margin-left: 10px;">Subscribed Users : <b>{{subusrcnt}}</b></span>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-md-3 col-form-label"> Select User(s) </label>
+				<div class="col-md-6">
+					<input type="text" class="form-control" name="users" value="Subscribed's User(s)" readonly />
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-md-3 col-form-label" for="subject">Mail Subject</label>
+				<div class="col-md-6">
+					<input type="text" class="form-control" name="subject" [(ngModel)]="model.subject" #subject="ngModel" [ngClass]="{ 'is-invalid': f.submitted && subject.invalid }" required />
+ 		<!-- <div *ngIf="f.submitted && subject.invalid" class="invalid-feedback">
+ 			<div *ngIf="subject.errors.required">Subject is required</div>
+ 		</div> -->
+ 	</div>
+ </div>		
+ <div class="form-group row">
+ 	<label class="col-md-3 col-form-label">Mail Content</label>
+ 	<div class="col-md-9">
+ 		<editor [ngClass]="{'isError': f.submitted  && !model.message}"
+ 		[initialValue]="model.message" [(ngModel)]="model.message" name="message"
+ 		apiKey="u3c205e0r3zwqzvtu78fsfllp8u39b47a6h9s4bne531l4jj" [init]="{
+ 			height: 500,
+ 			menubar: true,
+ 			plugins: [
+ 			'advlist autolink lists link image charmap print preview anchor',
+ 			'searchreplace visualblocks code fullscreen',
+ 			'insertdatetime media table paste code help wordcount'
+ 			],
+ 			toolbar:
+ 			'undo redo | formatselect | bold italic forecolor backcolor | \
+ 			alignleft aligncenter alignright alignjustify | \
+ 			bullist numlist outdent indent | removeformat | help'
+ 		}"></editor>
+
+
+ 		<small class="text-warn" *ngIf="f.submitted  && !model.message">Page Content is Required</small>
+ 	</div>
+ </div>
+</div>
+<div class="card-footer">
+	<div *ngIf="postRequest==''">
+		<button class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
+	</div>
+	<div *ngIf="postRequest=='yes'">
+		<button class="btn btn-sm btn-primary" disabled> <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+		Loading...</button>
+	</div>
+</div>
+</form>
+</div>

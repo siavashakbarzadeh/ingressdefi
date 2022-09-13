@@ -1,0 +1,54 @@
+<div class="row no-gutters theme-card">
+    <div class="col-12">
+        <div class="bgPull">
+            <div class="poll-head">
+                Price & pool share
+            </div>
+
+
+            <div class="mb-3">
+                <div class="cur-area d-flex align-items-center">
+                    <div class="pairs">
+                        {{sw_first_currency}} per {{sw_second_currency}}
+                    </div>
+                    <div class="amount-cal ml-auto">
+                        {{pricePoolShare.from_amount | number: dataService.fixNumber}}
+                    </div>
+                </div>
+
+                <div class="cur-area d-flex align-items-center">
+                    <div class="pairs">
+                        {{sw_second_currency}} per {{sw_first_currency}}
+                    </div>
+                    <div class="amount-cal ml-auto">
+                        {{pricePoolShare.to_amount | number: dataService.fixNumber}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="poll-head">
+                Share of pool
+            </div>
+
+            <div class="cur-area">
+                <div class="amount-cal" *ngIf="pricePoolShare.sharePool">
+                    {{pricePoolShare.sharePool | number: '1.2-2'}} %
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- <div class="col-4">
+        <div class="bgPull h-100">
+            <div class="poll-head">
+                Share of pool
+            </div>
+
+            <div class="cur-area">
+                <div class="amount-cal my-2">
+                    {{pricePoolShare.sharePool |number:'1.2-2'}}%
+                </div>
+            </div>
+        </div>
+    </div> -->
+</div>

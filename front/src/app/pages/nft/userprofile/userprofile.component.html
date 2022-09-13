@@ -1,0 +1,147 @@
+<app-header></app-header>
+<div class="userprofile-section">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 mb-5">
+            <h3 class="section-title text-center">Profile</h3>
+        </div>
+        <div class="col-12 user-profile-cnt">
+            <div class="cover-cnt" style="background:url('{{ profile.profilepicture ? profile.profilepicture : 'assets/images/mkt-prof7.png' }}');">
+            </div>
+            <div class="profile-cnt d-flex justify-content-center">
+                <div class="profile-pic-cnt">
+                    <img src="{{profile.profilepicture ? profile.profilepicture : 'assets/images/mkt-prof7.png'}}">
+                     
+                </div>
+            </div>
+            <h3>{{profile.username ? profile.username : 'Unnamed'}}</h3>
+            <p><span class="copy-link">{{profile.address ? profile.address : '0xd3a0...6833'}}</span></p>
+            <!-- <p>{{profile.address ? profile.address : '0xd3a0...6833'}}</p> -->
+        </div>
+        <div class="col-12 user-cnt">
+            <tabset>
+                <tab id="tab1">
+                    <ng-template tabHeading>
+                        Collected
+                    </ng-template>
+                    <div class="row">
+                        <div class="col-md-12 col-lg-6 col-sm-12 col-xl-4" *ngFor="let item of userCollected;let i = index">
+                            <div class="act-cnt">
+                                <div class="act-head d-flex align-items-center justify-content-between px-2 mb-3">
+                                    <a (click)="getUserFunc(item.userId)">
+                                        <div class="d-flex">
+                                            <div class="prof-pic-cnt mr-3"><img src="{{ (item.profilepicture) ? item.profilepicture : 'assets/images/user-icon.png' }}"></div>
+                                            <div>
+                                                <h3 class="mb-0">{{item.username}}</h3>
+                                                <p class="mb-0">Artist</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a (click)="getUserFunc(item.ownerId)">
+                                        <div class="d-flex">
+                                            <div class="mr-3">
+                                                <h3 class="mb-0">{{item.ownername}}</h3>
+                                                <p class="mb-0">Artist</p>
+                                            </div>
+                                            <div class="prof-pic-cnt "><img src="{{ (item.ownerpicture) ? item.ownerpicture : 'assets/images/prof1.png' }}"></div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <a (click)="myFunc(item._id)">
+                                    <img src="{{item.image}}" class="img-fluid w-100">
+                                </a>
+                                <div class="act-head">
+                                    <h3>{{item.name}}</h3>
+                                    <div class="border-bottom"></div>
+                                    <div class="row mt-2">
+                                        <div class="col-sm-6 col-md-6 text-center col-lg-6 col-xl-4 border-right">
+                                            <h3 class="mb-0">{{item.price}} {{item.currency}}</h3>
+                                            <p class="mb-2">Price</p>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 text-center col-lg-6 col-xl-4 border-right">
+                                            <h3 class="mb-0">{{item.supply}}</h3>
+                                            <p class="mb-2">Suppply</p>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 text-center col-lg-6 col-xl-4">
+                                            <img src="assets/images/heart.png" (click)="addLike(item)" *ngIf="item.fav">
+                                            <img src="assets/images/heart-icon.png" (click)="addLike(item)" *ngIf="!item.fav">
+                                            <p class="mb-2">{{item.likeCount}} Favorites</p>
+                                        </div>
+                                        <div *ngIf="item.canbuy" class="text-xl-center text-sm-center mb-2">
+                                            <button (click)="myFunc(item._id)" class="btn default-btn type-btn">buy now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="userCollected.length==0">
+                        No items collected
+                    </div>
+                </tab>
+                <tab id="tab2">
+                    <ng-template tabHeading>
+                        On Sale
+                    </ng-template>
+                     <div class="row" >
+                        <div class="col-md-12 col-lg-6 col-sm-12 col-xl-4" *ngFor="let item of onSale;let i = index" >
+                            <div class="act-cnt">
+                                <div class="act-head d-flex align-items-center justify-content-between px-2 mb-3">
+                                    <a (click)="getUserFunc(item.userId)">
+                                        <div class="d-flex">
+                                            <div class="prof-pic-cnt mr-3"><img src="{{ (item.profilepicture) ? item.profilepicture : 'assets/images/user-icon.png' }}"></div>
+                                            <div>
+                                                <h3 class="mb-0">{{item.username}}</h3>
+                                                <p class="mb-0">Artist</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a (click)="getUserFunc(item.ownerId)">
+                                        <div class="d-flex">
+                                            <div class="mr-3">
+                                                <h3 class="mb-0">{{item.ownername}}</h3>
+                                                <p class="mb-0">Artist</p>
+                                            </div>
+                                            <div class="prof-pic-cnt "><img src="{{ (item.ownerpicture) ? item.ownerpicture : 'assets/images/prof1.png' }}"></div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <a (click)="myFunc(item._id)">
+                                    <img src="{{item.image}}" class="img-fluid w-100">
+                                </a>
+                                <div class="act-head">
+                                    <h3>{{item.name}}</h3>
+                                    <div class="border-bottom"></div>
+                                    <div class="row mt-2">
+                                        <div class="col-sm-6 col-md-6 text-center col-lg-6 col-xl-4 border-right">
+                                            <h3 class="mb-0">{{item.price}} {{item.currency}}</h3>
+                                            <p class="mb-2">Price</p>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 text-center col-lg-6 col-xl-4 border-right">
+                                            <h3 class="mb-0">{{item.supply}}</h3>
+                                            <p class="mb-2">Suppply</p>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 text-center col-lg-6 col-xl-4">
+                                            <img src="assets/images/heart.png" (click)="addLike(item)" *ngIf="item.fav">
+                                            <img src="assets/images/heart-icon.png" (click)="addLike(item)" *ngIf="!item.fav">
+                                            <p class="mb-2">{{item.likeCount}} Favorites</p>
+                                        </div>
+                                        <div *ngIf="item.canbuy" class="text-xl-center text-sm-center mb-2">
+                                            <button (click)="myFunc(item._id)" class="btn default-btn type-btn">buy now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="onSale.length==0" >
+                        No items found
+                    </div> 
+                </tab>
+            </tabset>
+        </div>
+    </div>
+</div>
+</div>
+
+<app-footer></app-footer>

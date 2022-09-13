@@ -1,0 +1,60 @@
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var config   = require("../uZmln/config");
+const AutoIncrement = require('mongoose-sequence')(mongoose);
+
+var iobjectSchema = new Schema({
+	"collectionId":{ type:mongoose.Schema.Types.ObjectId, ref:'IN_noitcelloc', index:true },
+    "userId":{ type:mongoose.Schema.Types.ObjectId, ref:'IN_MNlkses', index:true },
+    "ownerId":{ type:mongoose.Schema.Types.ObjectId, ref:'IN_MNlkses', index:true },
+    "image":{type:String,default:"", index:1},
+    "spec_id":{type:Number,default:"", index:1},
+    "item_id":{type:String,default:"", index:1},
+    "name":{type:String,default:"", index:1},
+    "external_link":{type:String,default:"", index:1},
+    "description":{type:String,default:"", index:1},
+    "content":{type:String,default:"", index:1}, 
+    "supply":{type:String,default:"", index:1}, 
+    "bid":{type:Number,default:"", index:1}, 
+    "network":{type:String,default:"", index:1},
+    "currency":{type:String,default:"", index:1},
+    "tocurrency":{type:String,default:"", index:1},
+    "sellnftaddr":{type:String,default:"", index:1},
+    "sellnftid":{type:String,default:"", index:1},
+    "sellastype":{type:String,default:"", index:1},
+    "buytokenid":{type:String,default:"", index:1},
+    "buytokenadr":{type:String,default:"", index:1},
+    "buyastype":{type:String,default:"", index:1},
+    "toprivate":{type:String,default:"", index:1}, 
+    "saletype":{type:String,default:"", index:1}, 
+    "properties":{type:JSON,default:{}, index:1}, 
+    "stats":{type:JSON,default:{}, index:1}, 
+    "price":{type:String,default:"", index:1}, 
+    "objtype":{type:String,default:"", index:1}, 
+    "metadata":{type:String,default:"", index:1}, 
+    "salestatus":{type:Number,default:0, index:1},
+    "status":{type:String,default:"", index:1},
+    "imported":{type:Number,default:0, index:1},
+    "likeCount":{type:Number,default:0, index:1},
+    "viewCount":{type:Number,default:0, index:1},
+    "favUsers":{type:Array,default:"", index:1},
+    "start_date":{type:String,default:"", index:1},
+    "import_contract":{type:String,default:"", index:1},
+    "import_contractId":{type:String,default:"", index:1},
+    "end_date":{type:String,default:"", index:1},
+    "start_time":{type:String,default:"", index:1},
+    "end_time":{type:String,default:"", index:1},
+    "type":{type:String,default:""},
+    "creater_address":{type:String,default:""},
+    "admin_mint":{type:Number,default:0},
+    "token_id":{type:String,default:""},
+    "selltokenid":{type:String,default:0},
+    "sold":{type:String,default:"0"},
+    "sellorder":{type:Array,default:[], index:1}, 
+    "mint_response":{type:JSON,default:{}, index:1}, 
+    "createddate": { type: Date, default: Date.now },
+    "modifieddate":{ type: Date, default: Date.now }
+});
+
+iobjectSchema.plugin(AutoIncrement, {inc_field: 'spec_id'});
+module.exports = mongoose.model('items', iobjectSchema, config.DB_prefix+'meti')

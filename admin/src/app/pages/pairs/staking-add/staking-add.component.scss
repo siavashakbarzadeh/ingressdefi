@@ -1,0 +1,45 @@
+@import "/src/assets/scss/theme-colors.scss";
+
+::ng-deep .theme_card {
+  .mat-dialog-container {
+    box-shadow: -8px 3px 15px 0px;
+    border-radius: 6px;
+    padding: 0 0 15px 0;
+  }
+
+  .form-dark {
+    @extend .form-dark;
+  }
+}
+
+::ng-deep re-captcha {
+  div {
+    margin: auto !important;
+  }
+}
+
+.login-title {
+  padding: 10px;
+  background: $primary-dark;
+}
+
+::ng-deep ngx-recaptcha2 {
+  div {
+    margin: auto !important;
+  }
+}
+
+.alert-text {
+  text-align: center;
+  line-height: 2;
+}
+
+.logo-box {
+  width: 30px;
+
+  img {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(2px 4px 6px black);
+  }
+}

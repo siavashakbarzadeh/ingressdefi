@@ -1,0 +1,30 @@
+.stackingboxinner {
+  padding: 15px;
+  height: calc(100% - 40px);
+}
+.stackboxTit {
+  color: #7a766a;
+  font-size: 22px;
+  font-weight: 700;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.rightsideVal {
+  margin-top: 5px;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.err-msg {
+  font-size: 10px;
+  color: red;
+}

@@ -1,0 +1,79 @@
+<div class="d-flex mb-4 page-header container-fluid">
+    <ul class="bread-crump_container">
+        <li>
+            <a [routerLink]="['dasboard' | appRouter]"> Home</a>
+        </li>
+        <li>
+            <a [routerLink]="['fee_list' | appRouter]"> Fee List</a>
+        </li>
+    </ul>
+
+    <div class="group-button" *ngIf="!isGetSingleDataLoading">
+        <button type="submit" [disabled]="isDataPassing" mat-button
+        [color]="editObj._id != 'new' ? 'primary' : 'accent'" (click)="formSubmit()">
+        <mat-icon *ngIf="!isDataPassing">
+            {{ editObj._id == "new" ? "add" : "fact_check" }}
+        </mat-icon>
+
+        <ng-container *ngIf="!isDataPassing">
+            {{   editObj._id == 'new' ? ' Add Fee' :  'Update Fee Details'  }}
+        </ng-container>
+
+        <ng-container *ngIf="isDataPassing">
+            Please Wait <span> ... </span>
+        </ng-container>
+    </button>
+</div>
+</div>
+
+
+<mat-card class="table-container" *ngIf="!isGetSingleDataLoading">
+    <ng-container>
+        <form #editForm="ngForm">
+            <div class="row">
+                <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Fee Type</mat-label>
+                        <!-- [pattern]="general.ipPattern" -->
+                        <input matInput name="fee_type" autocomplete="off"
+                        [(ngModel)]="editObj.fee_type" #fee_type="ngModel" readonly required/>
+
+                        <mat-error *ngIf="address.errors">
+                            {{ general.checkError(fee_type, "Fee Type" , 'decimal') }}
+                        </mat-error>
+                    </mat-form-field>
+                    
+                    <mat-form-field appearance="outline">
+                        <mat-label>Address</mat-label>
+                        <!-- [pattern]="general.ipPattern" -->
+                        <input matInput placeholder="Ip Address" name="address" autocomplete="off"
+                        [(ngModel)]="editObj.address" #address="ngModel" required
+                        (keypress)="general.removingSpace($event)"/>
+
+                        <mat-error *ngIf="address.errors">
+                            {{ general.checkError(address, "Address" , 'decimal') }}
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Fees</mat-label>
+                        <!-- [pattern]="general.ipPattern" -->
+                        <input matInput name="fee" autocomplete="off"
+                        [(ngModel)]="editObj.fee" #fee="ngModel" required/>
+
+                        <mat-error *ngIf="fee.errors">
+                            {{ general.checkError(fee, "Fees" , 'decimal') }}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        </form>
+    </ng-container>
+</mat-card>
+
+
+<ng-container *ngIf="isGetSingleDataLoading ">
+    <div class="d-flex justify-content-center padding">
+        <mat-spinner [diameter]="20" color="primary"></mat-spinner>
+    </div>
+</ng-container>

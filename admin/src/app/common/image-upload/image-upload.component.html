@@ -1,0 +1,46 @@
+<mat-form-field appearance="outline">
+    <mat-label>Image</mat-label>
+    <input matInput placeholder="Image" name="image" autocomplete="off" [(ngModel)]="editObj.imgName"
+        #imageInput="ngModel" required readonly />
+
+
+    <button *ngIf="editObj.img" matPrefix mat-icon-button mat-button color="primary" type="button"
+        (click)="fileInput.click()">
+        <img class="input-img" [src]="editObj.img" />
+    </button>
+
+
+
+    <button *ngIf="editObj.img" matSuffix mat-icon-button mat-button color="accent" type="button" (click)="
+general.openNewWindow(editObj.img, 'img')
+" [matTooltip]="'Preview'">
+        <mat-icon>preview</mat-icon>
+    </button>
+
+    <button matSuffix mat-icon-button mat-button color="primary" type="button" (click)="fileInput.click()"
+        [matTooltip]="'Upload'">
+        <mat-icon>upload</mat-icon>
+    </button>
+
+    <button *ngIf="editObj.img" matSuffix mat-icon-button mat-button color="warn" type="button" (click)="closeImg()"
+        [matTooltip]="'Clear'">
+        <mat-icon>highlight_off</mat-icon>
+    </button>
+
+    <mat-error *ngIf="imageInput.errors">
+        {{ general.checkError(imageInput, "Image") }}
+    </mat-error>
+</mat-form-field>
+
+
+<ng-container>
+    <div class="avatar-upload">
+        <div class="avatar-edit">
+            <input hidden type="file" id="imageUpload" accept=".png, .jpg, .jpeg" #fileInput id="fileInput"
+                (change)="uploadFile(fileInput.files, $event)" />
+        </div>
+        <!-- <div class="avatar-preview">
+            <div id="imagePreview" [style.backgroundImage]="'url(' + imageUrl + ')'"></div>
+        </div> -->
+    </div>
+</ng-container>

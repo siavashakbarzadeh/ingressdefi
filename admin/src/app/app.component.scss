@@ -1,0 +1,33 @@
+@import "src/assets/scss/theme-colors";
+
+.overlayFull {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+  background: $primary-backdrop;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s linear;
+  transform: translateY(-100%);
+}
+
+.overlayFull.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.overlay-msg {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  color: #fffefb;
+  align-items: center;
+  background: $primary-backdrop-msg;
+  padding: 10px;
+}

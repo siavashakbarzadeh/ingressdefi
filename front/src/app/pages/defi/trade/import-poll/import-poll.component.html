@@ -1,0 +1,202 @@
+<div class="row justify-content-center align-items-center h-100">
+    <div class="col-lg-6 col-md-10 col-sm-12 col-12">
+        <div class="card mycard text-left">
+            <div class="card-header">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex">
+                        <div class="mr-2">
+                            <button type="button" (click)="toggleAddLiquidity()"
+                                class="text-decoration-none acircleLink"> <img src="assets/images/right-arrow.png"
+                                    style="transform: rotate(180deg);">
+                            </button>
+                        </div>
+                        <div>
+                            <div class="cardTit">Import Pool</div>
+                            <div class="cardSubTit">Import an existing pool
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="card-body formbg">
+                <div class="form-group ">
+                    <div class="d-flex">
+                        <div class="spacer"></div>
+                        <!-- <label class="col-form-label font-weight-bold text-primary"
+                            *ngIf="fromCurrencyMainBalance">Balance :
+                            {{fromCurrencyMainBalance}}</label> -->
+
+                    </div>
+                    <div class="input-group  w-100">
+                        <div class="input-group-append ml-2  w-100">
+                            <div class="d-flex align-items-center flex-wrap align-content-end  w-100">
+                                <button
+                                    class="d-flex align-items-center btn btn-select w-100 text-left bg-primary-shadow min-h-50"
+                                    type="button" (click)="selecttokenModal.show();selectionType('from')">
+
+                                    <ng-container *ngIf="!addLiquidityFromCurrency._id">
+                                        <span class="text-muted">
+                                            Select Token
+                                        </span>
+                                    </ng-container>
+
+
+                                    <ng-container *ngIf="addLiquidityFromCurrency._id">
+                                        <span><img class="w-18 "
+                                                [src]="addLiquidityFromCurrency.currency_image">
+                                            <span class="px-1"> {{addLiquidityFromCurrency._id}}</span>
+                                        </span>
+
+
+                                    </ng-container>
+                                    <div class="spacer"></div>
+
+                                    <i class="px-4 fas fa-angle-down"></i>
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="text-center mb-3">
+                    <a href="#" class="text-decoration-none acircleLink"> <img src="assets/images/right-arrow.png"
+                            style="transform: rotate(90deg);">
+                    </a>
+                </div> -->
+                <div class="form-group ">
+
+
+                    <div class="input-group w-100">
+                        <div class="input-group-append ml-2 w-100">
+                            <div class="d-flex align-items-center flex-wrap align-content-end w-100">
+                                <button [disabled]="!addLiquidityFromCurrency._id " type="button"
+                                    class="btn btn-select w-100 bg-primary-shadow d-flex align-items-center min-h-50"
+                                    (click)="selecttokenModal.show();selectionType('to')">
+
+                                    <ng-container *ngIf="!addLiquidityToCurrency._id">
+                                        <span class="text-muted">
+                                            Select Token
+                                        </span>
+                                        <i class="bi bi-question-circle px-2" *ngIf="!addLiquidityFromCurrency._id"
+                                            tooltip="You Need To Select From" placement="top"
+                                            containerClass="customTooltipClass"></i>
+                                    </ng-container>
+
+                                    <ng-container *ngIf="addLiquidityToCurrency._id">
+                                        <span><img class="w-18" [src]="addLiquidityToCurrency.currency_image">
+                                            <span class="px-1"> {{addLiquidityToCurrency._id}} </span>
+                                        </span>
+
+                                    </ng-container>
+
+                                    <div class="spacer"></div>
+
+                                    <i class="px-4 fas fa-angle-down"></i>
+
+
+
+                                </button>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 py-2 ">
+                    <button [disabled]="!isFormValid && dataService.metaDeatails.isMetaLogin" (click)="addPair()"
+                        class="btn default-btn btn-block" type="button">
+
+                        <ng-container *ngIf="!dataService.metaDeatails.isMetaLogin">
+                            Unlock Wallet
+                        </ng-container>
+
+                        <ng-container *ngIf="dataService.metaDeatails.isMetaLogin">
+                            Import
+                        </ng-container>
+                       
+
+
+
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade mymodal" bsModal #selecttokenModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1"
+    role="dialog" aria-labelledby="dialog-static-name">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0 pb-0 pt-4 px-4">
+                <h4 id="dialog-static-name" class="modal-title pull-left mymodaltitle">Select a token</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="selecttokenModal.hide()">
+                    <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                </button>
+            </div>
+            <div class="modal-body px-4">
+                <div class="form-group myformstyle">
+                    <input class="form-control form-control-lg" [(ngModel)]="searchCtrl" name="searchCtrl" type="text"
+                        placeholder="Search name or paste address">
+                </div>
+
+                <!-- <ng-container>
+                    <div class="fs-18 fw-500 mb-3">Common bases</div>
+                    <div class="d-flex flex-wrap justify-content-between mb-3">
+
+                        <ng-container
+                            *ngFor="let liquidityCurrenciesObj of liquidityCurrencies | slice : 0 : 4 ">
+                            <a (click)="selectToken(liquidityCurrenciesObj);selecttokenModal.hide()" role="button"
+                                class="btn btncommon"
+                                [ngClass]="{'active': liquidityCurrenciesObj._id == addLiquidityFromCurrency._id}"><img
+                                    src="assets/images/icon1.png">&nbsp;{{liquidityCurrenciesObj._id}}</a>
+                        </ng-container>
+
+                    </div>
+                </ng-container> -->
+
+
+                <div class="CoinList scroller mb-3">
+
+                    <p class="text-center padding" *ngIf="isGetBaseCurrencyLoading">
+                        Loading ...
+                    </p>
+
+                    <ul class="list-unstyled mb-0 mr-3" *ngIf="!isGetBaseCurrencyLoading">
+
+
+                        <li *ngFor="let liquidityCurrenciesObj of liquidityCurrencies$ | async | searchFilter: searchCtrl:filterData : '_id' : 'contract_address' : emitFun"
+                            class="pointer" (click)="selectToken(liquidityCurrenciesObj);selecttokenModal.hide()">
+                            <div class="d-flex"
+                                [ngClass]="{'active': liquidityCurrenciesObj._id == addLiquidityFromCurrency._id}">
+                                <div class="mr-2 coinimg"><img class="w-18" [src]="liquidityCurrenciesObj.currency_image">
+                                </div>
+                                <div class="">  
+                                    <div class="coinname">{{liquidityCurrenciesObj._id}}</div>
+                                    <div class="cointype">{{liquidityCurrenciesObj._id}}</div>
+                                </div>
+                                <div class="ml-auto tickIcon">
+                                    <img class="w-18" src="assets/images/tick.png">
+                                </div>
+                            </div>
+                        </li>
+
+                        <p class="text-muted" *ngIf="isNoAddress && searchCtrl">
+                            No data matching the filter "{{searchCtrl}}"
+                        </p>
+
+                    </ul>
+                </div>
+                <!-- <div class="text-center">
+                    <button class="btn btn-primary roundedbtn px-4 py-2" type="button">
+                        Manage
+                    </button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>

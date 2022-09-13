@@ -1,0 +1,164 @@
+<div class="tabpages-cnt">
+  <div class="row">
+    <div class="col-lg-12">
+      <h3 class="section-title">Your Artworks Collected</h3>
+    </div>
+    <div class="col-md-12 col-lg-12">
+      <div class="card grey-cnt">
+        <div class="card-body ">
+          <div class="row">
+            <div class="col-md-6 col-sm-12 col-xl-4 col-lg-4">
+              <p>Filter By :</p>
+              <label class="collect-block fontweight-400 font-16 text-color1">Has List
+                Price
+                <input type="checkbox" checked="checked">
+                <span class="checkmark"></span>
+              </label>
+              <label class=" collect-block">Has Open Offer
+                <input type="checkbox">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+
+            <div class="col-md-6 col-sm-12 col-xl-5 col-lg-4">
+              <p>Sort By :</p>
+              <div class="input-group mb-2">
+                <div class="input-group-append w-75 h-43">
+                  <form>
+                  <select class="rounded w-100 form-control">
+                    <option>Recently Active</option>
+                    <option>Recently Active 1</option>
+                    <option>Recently Active 2</option>
+                  </select>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12 col-xl-3 col-lg-4" *ngIf="service.metaDeatails?.accountShort">
+              <p>Create New Collection</p>
+              <button class="btn default-btn create_btn w-100" data-toggle="modal" (click)="openModal(Createcollection)">Create</button>
+            </div>
+
+            <div class="col-md-6 col-sm-12 col-xl-3 col-lg-4" *ngIf="service.metaDeatails?.accountShort">
+              <button routerLink="/import" class="btn default-btn" data-toggle="modal">Import NFT's</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row collection-block" *ngIf="collections.length > 0">
+    <div class="col-md-12 col-lg-6 col-sm-12 col-xl-4" *ngFor="let collect of collections;">
+      <div class="act-cnt">
+        <div class="act-head d-flex align-items-center justify-content-between px-2">
+          <div class="d-flex">
+            <!-- <div class="prof-pic-cnt mr-3"><img src="assets/images/prof.png"></div> -->
+            <div>
+              <h3 class="mb-0">{{collect.name}}</h3>
+              <p class="mb-0">{{collect.description}}</p>
+            </div>
+          </div>
+          <!-- <div class="d-flex">
+            <div class="mr-3">
+              <h3 class="mb-0">Tilljanz</h3>
+              <p class="mb-0">Artist</p>
+            </div>
+            <div class="prof-pic-cnt "><img src="assets/images/prof1.png"></div>
+          </div> -->
+        </div>
+        <a (click)="myFunc(collect.collectionId)"><img src="{{collect.logo ? collect.logo : 'assets/images/act1.png' }}" class="img-fluid w-100"></a>
+        <!-- <div class="act-head">
+          <h3>Portrait Nr.6</h3>
+          <div class="border-bottom"></div>
+          <div class="row mt-2">
+            <div class="col-sm-6 col-md-6 col-lg-6 text-center col-xl-6 border-right">
+              <h3 class="mb-0">0.004Ξ ($10)</h3>
+              <p class="mb-2">List price</p>
+            </div>
+            <div class="col-sm-6 col-md-6 text-center col-lg-6 col-xl-6">
+              <h3 class="mb-0">0.004Ξ ($10)</h3>
+              <p class="mb-2">List price</p>
+            </div>
+          </div>
+
+        </div> -->
+      </div>
+    </div>
+  </div>
+    <button class="btn default-btn mt-4" (click)="loadmore(skip)"  *ngIf="collections.length > 5">Load more</button>
+  <div class="row collection-block" *ngIf="collections.length == 0">
+    <div class="col-md-12 col-lg-6 col-sm-12 col-xl-12 text-center">No Collections Created</div>
+  </div>
+</div>
+
+<ng-template #Createcollection>
+  <div class="modalPrimary md creat-collection">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-bottom-0 d-block">
+          <button type="button" class="close" data-dismiss="modal" (click)="modalRef?.hide()">&times;</button>
+          <h3 class="modal-title section-title mb-0 w-100 text-center"> Create a Your Collection </h3>
+          <h5 class="font-20 text-center font-weight-bold text-black">{{user.username}}</h5>
+        </div>
+        <div class="modal-body">
+         <div class="text-center p-3">
+          <img src="assets/images/collect5.png" class="w-100">
+          <button class="btn default-btn mt-4" data-toggle="modal" (click)="openModal2(Createcollection1)">Add
+          Item</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</ng-template>
+
+<ng-template #Createcollection1>
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <form  #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()">
+       <div class="modal-header border-bottom-0 d-block">
+        <button type="button" class="close" data-dismiss="modal" (click)="modalRef2?.hide()">&times;</button>
+        <h3 class="modal-title section-title mb-0 w-100 text-center"> Create a Your Collection </h3>
+        <h5 class="font-14 text-center fontweight-400 text-black mt-3">You can change these values later,along with configuring external URL’s payment optionand trading fees</h5>
+      </div>
+      <div class="modal-body px-5">
+        <div class="form-group">
+          <label class="mb-0 pb-0 font-18 font-weight-bold text-black" for="logo">Logo *</label>
+          <div class="mt-2">
+            <label for="file-upload" class="custom-file-upload d-xl-flex d-lg-flex align-items-center w-100">
+              <img src="{{ cobj.image ? cobj.image: 'assets/images/img-upload.png' }}" alt="customFile" class="cursor-pointer" style="height: 150px; width: 150px"/> <p
+              class=" font-18 fontweight-400 mt-3 p-xl-4 p-lg-4 text-black">(350 x 350 Recommended)</p>
+            </label>
+            <input id="file-upload" accept=".jpg,.jpeg,.png" (change)="onChanged($event)" [ngClass]="{ 'is-invalid': f.submitted && collection_img.invalid }" name='collection_img' type="file" style="display:none;" [(ngModel)]="cobj.collection_img" #collection_img="ngModel" required>
+            <div *ngIf="f.submitted && collection_img.invalid" class="invalid-feedback">
+              <div *ngIf="collection_img.errors.required">Collection Logo is required</div>
+            </div>
+            <div *ngIf="fileerr" class="text-danger">Please Upload Valid File.</div>
+          </div>
+        </div>
+        <div class="form-group mt-3 ">
+          <label class="mb-0 pb-0 font-16 fontweight-400 mb-2" for="name">Name *</label>
+          <input [ngClass]="{ 'is-invalid': f.submitted && name.invalid }" type="text" class="form-control input-sec font-16 fontweight-400" placeholder="Example : Treasures of the sea" id="name" name="name" [(ngModel)]="cobj.name" #name="ngModel" required>
+          <div *ngIf="f.submitted && name.invalid" class="invalid-feedback">
+            <div *ngIf="name.errors.required">Collection Name is required</div>
+          </div>
+        </div>
+
+        <div class="form-group mt-3 ">
+          <label class="mb-0 pb-0 font-16 fontweight-400 mb-2" for="description">Description</label>
+          <input [ngClass]="{ 'is-invalid': f.submitted && description.invalid }" type="text" class="form-control input-sec font-16 fontweight-400" placeholder="Example : Treasures of the sea" id="description" name="description" [(ngModel)]="cobj.description" #description="ngModel" required>
+          <div *ngIf="f.submitted && description.invalid" class="invalid-feedback">
+            <div *ngIf="description.errors.required">Collection Description is required</div>
+          </div>
+        </div>
+        <div class="text-center">
+          <button *ngIf="!submitted" class="btn default-btn mt-4" type="submit">Create</button>
+          <label class="btn default-btn mt-4" *ngIf="submitted">Loading...</label>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>
+</ng-template>

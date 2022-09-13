@@ -1,0 +1,366 @@
+<div class="row">
+	<div class="col-lg-12 mb-5">
+		<h3 class="section-title text-center">Profile</h3>
+	</div>
+	<div class="col-12 user-profile-cnt">
+		<div class="cover-cnt" style="background:url('{{ profile.profilepicture ? profile.profilepicture : 'assets/images/mkt-prof7.png' }}');">
+		</div>
+		<div class="profile-cnt d-flex justify-content-center">
+			<div class="profile-pic-cnt">
+				<img src="{{profile.profilepicture ? profile.profilepicture : 'assets/images/mkt-prof7.png'}}">
+				<div [routerLink]="'/edit-profile'" class="edit cursor"><i class="fa fa-pencil"></i></div>
+			</div>
+		</div>
+		<h3>{{profile.username ? profile.username : 'Unnamed'}}</h3>
+		<p><span class="copy-link">{{profile.address ? profile.address : '0xd3a0...6833'}}</span></p>
+		<!-- <p>{{profile.address ? profile.address : '0xd3a0...6833'}}</p> -->
+	</div>
+	<div class="col-12 user-cnt">
+		<tabset>
+			<tab id="tab1">
+				<ng-template tabHeading>
+					Collected 
+				</ng-template>
+				<div class="row" *ngIf="owned.length">
+					<div class="col-md-12 col-lg-6 col-sm-12 col-xl-4" *ngFor="let item of owned;">
+						<div class="act-cnt">
+							<div class="act-head d-flex align-items-center justify-content-between px-2 mb-3">
+								<div class="d-flex">
+									<div class="prof-pic-cnt mr-3">
+										<img *ngIf="item.profilepicture !='' " src="{{ (item.profilepicture) ? item.profilepicture : 'assets/images/prof.png' }}">
+										 <img *ngIf="item.profilepicture =='' " src="assets/images/prof.png"> 
+									</div>
+									<div>
+										<h3 class="mb-0">{{item.username}}</h3>
+										<p class="mb-0">Artist</p>
+									</div>
+								</div>
+								<div class="d-flex">
+									<div class="mr-3">
+										<h3 class="mb-0">{{item.ownername}}</h3>
+										<p class="mb-0">Artist</p>
+									</div>
+									<div class="prof-pic-cnt ">
+										<img *ngIf="item.ownerpicture !=''" src="{{ (item.ownerpicture) ? item.ownerpicture : 'assets/images/prof1.png' }}">
+										<img *ngIf="item.ownerpicture ==''" src="assets/images/prof1.png">
+									</div>
+								</div>
+							</div>
+
+							<div *ngIf="item.type =='add'">
+								<a (click)="myFunc1(item.itemId)" class="cursor">
+								 <img  *ngIf="item.image !=''" src="{{item.image}}" class="img-fluid w-100">
+								<img  *ngIf="item.image ==''" src="assets/images/market1.png" class="img-fluid w-100"> 
+							</a>
+							</div>
+
+							<div *ngIf="item.type !='add'">
+								<a (click)="myFunc1(item.itemId)" class="cursor">
+								 <!-- <img  *ngIf="item.image !=''" src="{{item.image}}" class="img-fluid w-100"> -->
+								<img src="assets/images/market1.png" class="img-fluid w-100"> 
+							</a>
+							</div>
+
+
+							
+							<div class="act-head">
+								<h3>{{item.name}}</h3>
+								<div class="border-bottom"></div>
+								<div class="row mt-2">
+									<div class="col-sm-6 col-md-6 col-lg-6 text-center col-xl-6 border-right">
+										<h3 class="mb-0">{{item.price}} {{item.tocurrency}}</h3>
+										<p class="mb-2">Price</p>
+									</div>
+									<div class="col-sm-6 col-md-6 text-center col-lg-6 col-xl-6">
+										<!-- <h3 class="mb-0">{{item.supply}}</h3>
+										<p class="mb-2">Suppply</p> -->
+
+
+										<button (click)="saleItemnew(item)" class="btn default-btn type-btn">sale now</button>
+
+										<!-- <button *ngIf="!item.salestatus" (click)="saleItemnew(item.itemId)" class="btn default-btn type-btn">sale now</button> -->
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row" *ngIf="!owned.length">
+					No items collected
+				</div>
+			</tab>
+			<tab id="tab2">
+				<ng-template tabHeading>
+					On Sale
+				</ng-template>
+				<div class="row" *ngIf="created.length">
+					<div class="col-md-12 col-lg-6 col-sm-12 col-xl-4" *ngFor="let item of created;">
+						<div class="act-cnt">
+							<div class="act-head d-flex align-items-center justify-content-between px-2 mb-3">
+								<div class="d-flex">
+									<div class="prof-pic-cnt mr-3">
+										<img *ngIf="item.profilepicture !='' " src="{{ (item.profilepicture) ? item.profilepicture : 'assets/images/prof.png' }}">
+										 <img *ngIf="item.profilepicture =='' " src="assets/images/prof.png">
+									</div>
+									<div>
+										<h3 class="mb-0">{{item.username}}</h3>
+										<p class="mb-0">Artist</p>
+									</div>
+								</div>
+								<div class="d-flex">
+									<div class="mr-3">
+										<h3 class="mb-0">{{item.ownername}}</h3>
+										<p class="mb-0">Artist</p>
+									</div>
+									<div class="prof-pic-cnt ">
+										<img *ngIf="item.ownerpicture !=''" src="{{ (item.ownerpicture) ? item.ownerpicture : 'assets/images/prof1.png' }}">
+										<img *ngIf="item.ownerpicture ==''" src="assets/images/prof1.png">
+									</div>
+								</div>
+							</div>
+							<a (click)="myFunc1(item.itemId)" class="cursor">
+								<!-- <img src="{{item.image}}" class="img-fluid w-100"> -->
+								<img  src="assets/images/market1.png" class="img-fluid w-100">
+
+								<!-- <img  src="assets/images/market-detail1.png" class="img-fluid w-100"> -->
+							</a>
+							<div class="act-head">
+								<h3>{{item.name}}</h3>
+								<div class="border-bottom"></div>
+								<div class="row mt-2">
+									<div class="col-sm-6 col-md-6 col-lg-6 text-center col-xl-6 border-right">
+										<h3 class="mb-0">{{item.price}} {{item.currency}}</h3>
+										<p class="mb-2">Price</p>
+									</div>
+									<div class="col-sm-6 col-md-6 text-center col-lg-6 col-xl-6">
+										<h3 class="mb-0">{{item.supply}}</h3>
+										<p class="mb-2">Suppply</p>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row" *ngIf="!created.length">
+					No items found
+				</div>
+			</tab>
+			<tab id="tab3">
+				<ng-template tabHeading>
+					Favourite
+				</ng-template>
+				<div class="row" *ngIf="favorites.length">
+					<div class="col-md-12 col-lg-6 col-sm-12 col-xl-4" *ngFor="let fav of favorites;">
+						<div class="act-cnt">
+							<div class="act-head d-flex align-items-center justify-content-between px-2 mb-3">
+								<div class="d-flex">
+									<img src="assets/images/heart.png" class="heart-icon">
+									<div class="prof-pic-cnt mr-3">
+
+										<img *ngIf="fav.creator_img !='' " src="{{ (fav.creator_img) ? item.profilepicture : 'assets/images/prof.png' }}">
+ 										<img *ngIf="fav.creator_img =='' " src="assets/images/prof.png">
+
+										
+
+									</div>
+									<div>
+										<h3 class="mb-0">{{fav.creator_name}}</h3>
+										<p class="mb-0">Artist</p>
+									</div>
+								</div>
+								<div class="d-flex">
+									<div class="mr-3">
+										<h3 class="mb-0">{{fav.owner_name}}</h3>
+										<p class="mb-0">Artist</p>
+									</div>
+									<div class="prof-pic-cnt "><img src="assets/images/prof1.png"></div>
+								</div>
+							</div>
+							<img src="{{fav.image}}" class="img-fluid w-100">
+							<div class="act-head">
+								<h3>{{fav.name}}</h3>
+								
+								<!-- <div class="border-bottom"></div>
+								<div class="row mt-2">
+									<div class="col-sm-6 col-md-6 col-lg-6 text-center col-xl-6 border-right">
+										<h3 class="mb-0">{{fav.price}}</h3>
+										<p class="mb-2">List price</p>
+									</div>
+									<div class="col-sm-6 col-md-6 text-center col-lg-6 col-xl-6">
+										<h3 class="mb-0">{{fav.price}}</h3>
+										<p class="mb-2">List price</p>
+									</div>
+								</div> -->
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row" *ngIf="!favorites.length">
+					No favorites found
+				</div>
+			</tab>
+			<!-- <tab id="tab4">
+				<ng-template tabHeading>
+					Buy Private
+				</ng-template>
+				<div class="row" *ngIf="privateitems.length">
+					<div class="col-md-12 col-lg-6 col-sm-12 col-xl-4" *ngFor="let pitem of privateitems;">
+						<div class="act-cnt">
+							<div class="act-head d-flex align-items-center justify-content-between px-2 mb-3">
+								<div class="d-flex">
+									<div class="prof-pic-cnt mr-3">
+
+
+										<img *ngIf="pitem.profilepicture !='' " src="{{ (pitem.profilepicture) ? pitem.profilepicture : 'assets/images/prof.png' }}">
+ 									   <img *ngIf="pitem.profilepicture =='' " src="assets/images/prof.png">
+
+										
+									</div>
+									<div>
+										<h3 class="mb-0">{{pitem.username}}</h3>
+										<p class="mb-0">Artist</p>
+									</div>
+								</div>
+								<div class="d-flex">
+									<div class="mr-3">
+										<h3 class="mb-0">{{pitem.ownername}}</h3>
+										<p class="mb-0">Artist</p>
+									</div>
+									<div class="prof-pic-cnt ">
+									
+										 <img *ngIf="pitem.ownerpicture !=''" src="{{ (pitem.ownerpicture) ? pitem.ownerpicture : 'assets/images/prof1.png' }}">
+										 <img *ngIf="pitem.ownerpicture ==''" src="assets/images/prof1.png">
+
+
+									</div>
+								</div>
+							</div>
+							<a (click)="myFunc1(pitem.itemId)" class="cursor">
+								 <img src="{{pitem.image}}" class="img-fluid w-100"> 
+								
+<img  src="assets/images/market-detail1.png" class="img-fluid w-100">
+							</a>
+							<div class="act-head">
+								<h3>{{pitem.name}}</h3>
+								<div class="border-bottom"></div>
+								<div class="row mt-2">
+									<div class="col-sm-6 col-md-6 col-lg-6 text-center col-xl-6 border-right">
+										<h3 class="mb-0">{{pitem.price}} {{pitem.currency}}</h3>
+										<p class="mb-2">Price</p>
+									</div>
+									<div class="col-sm-6 col-md-6 text-center col-lg-6 col-xl-6">
+										<h3 class="mb-0">{{pitem.supply}}</h3>
+										<p class="mb-2">Suppply</p>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row" *ngIf="!favorites.length">
+					No private sale found
+				</div>
+			</tab> -->
+		</tabset>
+	</div>
+</div>
+
+<!-- Createcollection  Modal -->
+<ng-template #Createcollection>
+    <div class="modalPrimary md creat-collection" id="Bidapp">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0 d-block">
+                    <button type="button" class="close" data-dismiss="modal" (click)="modalRef?.hide()">&times;</button>
+                    <h3 class="modal-title section-title mb-0 w-100 text-center"> Sale Your NFT </h3>
+                </div>
+                <div class="modal-body">
+                    <form  #f1="ngForm" (ngSubmit)="f1.form.valid && onModalSubmit(f1.value)">
+                        <div class="row justify-content-center align-items-start">
+                            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                                <div class="blog-sec-cnt">
+                                    <div class="form-group mt-3 ">
+                                        <label class="pb-0 font-16 text-black fontweight-400 mb-2" for="saletype1">Choose Type of Sale <span class="text-danger">*</span></label><br>
+                                        <select class="form-control" (change)="saleType($event.target.value)" #saletype1 name="saletype1" required>
+                                            <option value="fixed">Reserved Price</option>
+                                            <option value="private">Private Sale</option>
+                                            <option value="auction">Auction Bid</option>
+                                        </select>
+                                        <div *ngIf="f1.submitted && saletype1.invalid" class="invalid-feedback">
+                                            <div *ngIf="saletype1.errors.required">Type of Sale is required</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group mt-3 " *ngIf="saletype == 'private'">
+                                        <label class="pb-0 font-16 text-black fontweight-400 mb-2" for="address">To User Address <span class="text-danger">*</span></label><br>
+                                        <input type="text" class="form-control input-sec font-16 fontweight-400"
+                                        placeholder="Address" name="address" [ngClass]="{ 'is-invalid': f1.submitted && address.invalid }" [(ngModel)]="sItemObj.address" #address="ngModel" required>
+                                        <div *ngIf="f1.submitted && address.invalid" class="invalid-feedback">
+                                            <div *ngIf="address.errors.required">Address is required</div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="form-group mt-3">
+                                        <label class="pb-0 font-16 text-black fontweight-400 mb-2" for="buycurrency">Buy Token</label><br>
+                                        <select name="buycurrency" #buycurrency [(ngModel)]="sItemObj.tocurrency" (change)="changeBuyCurr($event.target.value)" [ngClass]="{ 'is-invalid': submitted && buycurrency.errors }" required>
+                                            <option selected>Select Currency</option>
+                                            <option *ngFor="let curr of currencies" value="{{curr.currencyName}}">{{curr.currencyName}}</option>
+                                        </select>
+                                        <div *ngIf="f1.submitted && buycurrency.invalid" class="invalid-feedback">
+                                            <div *ngIf="buycurrency.errors.required">Choose Buy Token Type</div>
+                                        </div>
+                                    </div> -->
+                                    <div class="form-group mt-3 ">
+                                        <label *ngIf="saletype != 'fixed'" class="pb-0 font-16 text-black fontweight-400 mb-2" for="yourName">Buy Price <span class="text-danger">*</span></label><br>
+                                        <label *ngIf="saletype == 'fixed'" class="pb-0 font-16 text-black fontweight-400 mb-2" for="yourName">Reserved Price</label><br>
+                                        <input type="text" class="form-control input-sec font-16 fontweight-400"
+                                        placeholder="Price" name="price" [ngClass]="{ 'is-invalid': f1.submitted && price.invalid }" [(ngModel)]="sItemObj.price" #price="ngModel" required>
+                                        <div *ngIf="f1.submitted && price.invalid" class="invalid-feedback">
+                                            <div *ngIf="price.errors.required">Price is required</div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="form-group mt-3 " *ngIf="saletype == 'auction'">
+                                        <label class="pb-0 font-16 text-black fontweight-400 mb-2" for="sdate">Start Date <span class="text-danger">*</span></label><br>
+                                        <input type="text" (ngModelChange)="selectDate($event, 'from')" bsDatepicker class="form-control input-sec font-16 fontweight-400" placeholder="DD-MM-YYYY" name="sdate" [ngClass]="{ 'is-invalid': f1.submitted && sdate.invalid }" #sdate="ngModel" [minDate]="startminDate" [maxDate]="startmaxDate" required [(ngModel)]="selectedFromDate"><timepicker name="starttime" [(ngModel)]="starttime"></timepicker>
+                                    </div>
+                                    <div class="form-group mt-3 ">
+                                        <label class="pb-0 font-16 text-black fontweight-400 mb-2" for="endate">Expiry Date <span class="text-danger">*</span></label><br>
+                                        <input type="text" (ngModelChange)="selectDate($event, 'end')" bsDatepicker [minDate]="endminDate" [ngClass]="{ 'is-invalid': f1.submitted && endate.invalid }" [maxDate]="endmaxDate"  [bsConfig]="{ isAnimated: true, dateInputFormat: 'YYYY-MM-DD' }" class="form-control" placeholder="DD-MM-YYYY" name="endate" #endate="ngModel" required [(ngModel)]="selectedEndDate"><timepicker name="endtime" [(ngModel)]="endtime"></timepicker>
+                                    </div> -->
+                                    <!-- <div class="form-group mt-3 ">
+                                        <label class="pb-0 font-16 text-black fontweight-400 mb-2" for="yourName">Supply <span class="text-danger">*</span></label><br>
+                                        <label class="mb-3 pb-0 font-16  fontweight-400 mb-2">The number of copies that can be minted.
+                                            No gas cost to you! Quantities above one coming soon.
+                                        </label>
+                                        <input type="text" class="form-control input-sec font-16 fontweight-400" placeholder="1" name="supply"  [ngClass]="{ 'is-invalid': f1.submitted && supply.invalid }" [(ngModel)]="sItemObj.supply" #supply="ngModel" required readonly>
+                                        <div *ngIf="f1.submitted && supply.invalid" class="invalid-feedback">
+                                            <div *ngIf="supply.errors.required">Supply is required</div>
+                                        </div>
+                                    </div> -->
+                                    <!-- <div class="form-group mt-3" *ngIf="saletype == 'auction'">
+                                        <div class="d-flex justify-content-between bid-block">
+                                            <label class="mb-0 pb-0 font-18 font-weight-bold text-black mb-2" for="yourName">You must bid at least <span class="text-danger">*</span></label>
+                                            <label class="mb-0 pb-0 font-18 font-weight-bold text-black mb-2" for="yourName">0.11 BNB (~$266) </label>
+                                        </div>
+                                        <input type="text" class="form-control input-sec font-16 fontweight-400" placeholder="Place your Bid" name="bid" [ngClass]="{ 'is-invalid': f1.submitted && bid.invalid }" [(ngModel)]="sItemObj.bid" #bid="ngModel">
+                                        <div *ngIf="f1.submitted && bid.invalid" class="invalid-feedback">
+                                            <div *ngIf="bid.errors.required">Supply is required</div>
+                                        </div>
+                                    </div> -->
+
+                                    <div class="text-center">
+                                        <!-- <button class="btn  mt-4 mr-3">Never Mind</button> -->
+                                        <button *ngIf="!msubmitted" class="btn fontweight-500 default-btn mt-4">Submit</button>
+                                        <label class="btn default-btn mt-4" *ngIf="msubmitted">Loading...</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

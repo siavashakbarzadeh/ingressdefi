@@ -1,0 +1,98 @@
+
+    <div class="row">
+      <div class="col-md-6 col-lg-4">
+        <div class="card grey-cnt">
+          <div class="card-body">
+            <p>Farms & Staking</p>
+            <div class="cardcontent">
+                <div class="cardcakevalue"> {{dataService.projectDetails.tokenName}} to Harvest :
+                    {{Homepagevariable.governanceTokenHarvset | number: dataService.fixNumber}}</div>
+                <div class="LockedTxt"> <i class="fas fa-lock-alt"></i>&nbsp;Locked </div>
+            </div>
+            <div class="cardcontent">
+                <div class="cardcakevalue"> {{dataService.projectDetails.tokenName}} in Wallet :
+                    {{governanceTokenBalance | number: dataService.fixNumber}}</div>
+                <div class="LockedTxt"> <i class="fas fa-lock-alt"></i>&nbsp;Locked </div>
+            </div>
+            <div class="row justify-content-center mt-4">
+                <div class="col-lg-10 col-md-12 col-12">
+                    <button (click)="goto('staking')" class="btn default-btn btn-block"
+                        type="button">
+                        <ng-container *ngIf="!dataService.metaDeatails.isMetaLogin">
+                            Unlock Wallet
+                        </ng-container>
+
+                        <ng-container *ngIf="dataService.metaDeatails.isMetaLogin">
+                            Approve
+                        </ng-container>
+                    </button>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col-md-6 col-lg-4">
+        <div class="card grey-cnt">
+          <div class="card-body">
+            <p>Your Lottery Winnings</p>
+            <div class="cardcontent">
+                <div class="cardcakevalue"> {{dataService.projectDetails.tokenName}} in Wallet</div>
+                <div class="cakeno">{{governanceTokenBalance | number: dataService.fixNumber}}
+                    {{dataService.projectDetails.tokenName}}</div>
+                <div class="LockedTxt"> <i class="fas fa-lock-alt"></i>&nbsp;Locked </div>
+            </div>
+            <div class="row justify-content-center mt-4">
+                <div class="col-lg-10 col-md-12 col-12">
+                    <button (click)="goto('lottery')" class="btn default-btn btn-block"
+                        type="button">
+                        <ng-container *ngIf="!dataService.metaDeatails.isMetaLogin">
+                            Unlock Wallet
+                        </ng-container>
+
+                        <ng-container *ngIf="dataService.metaDeatails.isMetaLogin">
+                            <span [routerLink]="['/lottery']">Collect Lottery</span>
+                        </ng-container>
+                    </button>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card grey-cnt">
+          <div class="card-body">
+            <div class="cardtit">
+              {{dataService.projectDetails.tokenName}} Stats
+          </div>
+          <div class="row align-items-center">
+              <div class="col-sm"><span class="lefttxt">Total {{dataService.projectDetails.tokenName}} Supply</span></div>
+              <div class="col-sm text-right">
+                  <span class="rgttxt">{{governanceTokenSupply | number: dataService.fixNumber}}</span>
+              </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      
+
+      <div [routerLink]="'/user'" class="col-md-6 col-lg-4 cursor">
+        <div class="card grey-cnt">
+          <div class="card-body">
+            <p>Total Collected</p>
+            <h3 class="heading text-right">{{profile.count}}</h3>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col-md-6 col-lg-4 d-flex justify-content-center align-items-center">
+        <div class="d-flex justify-content-around w-100"> <a href="" class="d-flex flex-column justify-content-center align-items-center"> <img src="assets/images/send-icon.png">
+          <p class="text-center mt-2">Send</p>
+          </a> <a href="" class="d-flex flex-column justify-content-center align-items-center"> <img src="assets/images/receive-icon.png">
+          <p class="text-center mt-2">Receive</p>
+          </a> </div>
+      </div> -->
+      <!-- <div class="col-lg-12">
+        <h3 class="section-title">Offers</h3>
+      </div> -->
+    </div>
+    
+

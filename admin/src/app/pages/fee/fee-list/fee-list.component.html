@@ -1,0 +1,17 @@
+<div class="d-flex  mb-4 page-header">
+    <ul class="bread-crump_container">
+        <li>
+            <a [routerLink]="['dashboard' | appRouter]"> Home</a>
+        </li>
+        <li>Fees List</li>
+    </ul>
+
+    <!-- <div class="group-button">
+        <a mat-button color="primary" [routerLink]="['ip_block_edit' | appRouter, 'new']">
+            <mat-icon>add</mat-icon>
+            Add Block IP
+        </a>
+    </div> -->
+</div>
+
+<app-list-table [tableData]="tableData"></app-list-table>

@@ -1,0 +1,39 @@
+<div class="login-title">
+  <div class="all-center">
+    <div class="all-center">
+      <div class="logo-box">
+        <img width="600" height="400" [src]="dataService.projectDetails.logo" alt="logo" />
+      </div>
+
+
+      <span class="title px-3 text-white">
+        {{title}}
+      </span>
+
+
+
+    </div>
+    <div class="spacer"></div>
+    <button type="button" (click)="closeBox(false)" mat-button mat-icon-button color="warn">
+      <mat-icon class="text-light">close</mat-icon>
+    </button>
+  </div>
+</div>
+
+<div class="container-fluid mt-4">
+  <p class="text-dark alert-text">
+    {{ message }}
+  </p>
+</div>
+<mat-divider></mat-divider>
+
+<div class="container-fluid mt-4">
+  <div class="d-flex justify-content-end">
+    <button (click)="closeBox(true)" type="button" mat-stroked-button mat-button color="primary">
+      Okay , Proceed
+    </button>
+    <button (click)="closeBox(false)" type="button" mat-stroked-button mat-button color="warn">
+      Cancel
+    </button>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<h3 class="section-title">Staking</h3>
+<p class="text-center">Stake token to earn new tokens. You can claim and unstake at any time. Rewards are calculated per block.</p>
+<div class="row" *ngIf="!isSingleStake">
+    <ng-container *ngIf="stakingPairs.length != 0 && !isgetPolledPairsLoading">
+        <div class="col-lg-4" *ngFor="let stakingPairObj of stakingPairs">
+            <div class="card grey-cnt stake-cnt">
+                <div class="card-body">
+                    <div class="d-sm-flex justify-content-between mb-4">
+                        <p>{{stakingPairObj.fromCurrency}}-{{stakingPairObj.toCurrency}}</p>
+                        <div class="d-flex align-items-start">
+                            <img src="assets/images/eth-icon.png" class="img-fluid mr-2">
+                            <img src="assets/images/bnb-icon.png" class="img-fluid">
+                        </div>`
+                    </div>
+                    <p class="text-center">Total Staking</p>
+                    <h3 class="text-center">{{stakingPairObj.staked_amount| number: dataService.fixNumber}}</h3>
+                    <div class="w-100 mt-3">
+                        <button class="btn default-btn btn-block" (click)="stake(stakingPairObj)">
+                            <ng-container *ngIf="!dataService.metaDeatails.isMetaLogin">
+                                Unlock Wallet
+                            </ng-container>
+
+                            <ng-container *ngIf="dataService.metaDeatails.isMetaLogin">
+                                Stake
+                            </ng-container>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="stakingPairs.length == 0 && !isgetPolledPairsLoading">
+        <div class="mx-auto">
+            Not yet Pool Id Created to stake
+        </div>
+    </ng-container>
+</div>
+<div class="row">
+    <app-staking2 *ngIf="isSingleStake" (goBack)="isSingleStake = !isSingleStake" [stakingPair]="stakingPairSingleObj">
+    </app-staking2>
+</div>

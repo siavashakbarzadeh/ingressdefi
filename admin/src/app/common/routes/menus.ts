@@ -1,0 +1,280 @@
+import { environment } from 'src/environments/environment';
+import { AppRoutes } from './app-url';
+
+let adminUrl = '/' + environment.baseUrl + '/';
+
+export const Menus = [
+  {
+    name: 'Menu.DASHBOARD',
+    alias: 'dashboard',
+    state: 'app.dashboard',
+    action: 'list',
+    icon: 'dashboard',
+    url: adminUrl + AppRoutes.dashboard,
+    display: 'Dashboard',
+  },
+  {
+    name: 'Menu.CURRENCY',
+    alias: 'currency',
+    state: 'app.currency',
+    action: 'list',
+    icon: 'monetization_on',
+    url: adminUrl + AppRoutes.currency_list,
+    display: 'Currency List',
+  },
+  {
+    name: 'Menu.Network',
+    alias: 'network',
+    state: 'app.network',
+    action: 'list',
+    icon: 'network_wifi',
+    url: adminUrl + AppRoutes.network_list,
+    display: 'Network List',
+  },
+  {
+    name: 'Menu.NFT History',
+    alias: 'history',
+    state: 'app.history',
+    action: 'list',
+    icon: 'swap_horizontal_circle',
+    url: adminUrl + AppRoutes.history_list,
+    display: 'Transaction History List',
+  },
+  {
+    name: 'Menu.FEES',
+    alias: 'fees',
+    state: 'app.fees',
+    action: 'list',
+    icon: 'list',
+    url: adminUrl + AppRoutes.fee_list,
+    display: 'Fees List',
+  },
+  {
+    name: 'Menu.IP',
+    alias: 'ip_block',
+    state: 'app.ip_block',
+    action: 'list',
+    icon: 'dashboard',
+    url: adminUrl + AppRoutes.ip_block_list,
+    display: 'IP Block List',
+  },
+  {
+    name: 'Menu.LIQUIDITY',
+    action: 'liquidity',
+    state: 'app.liquidity',
+    url: adminUrl + AppRoutes.stake_list,
+    display: 'Liquidity',
+    icon: 'savings',
+
+    childs: [
+      {
+        name: 'Menu.LIQUIDITY_ADD',
+        action: 'list',
+        url: adminUrl + AppRoutes.liquidity_add_list,
+        display: 'Add Liquidity List',
+      },
+      {
+        name: 'Menu.LIQUIDITY_REMOVE',
+        action: 'all',
+        url: adminUrl + AppRoutes.liquidity_remove_list,
+        display: 'Remove Liquidity List',
+      },
+    ],
+  },
+
+  {
+    name: 'Menu.SWAP',
+    alias: 'swap',
+    state: 'app.swap',
+    action: 'list',
+    icon: 'swipe',
+    url: adminUrl + AppRoutes.swap_list,
+    display: 'Swap List',
+  },
+  {
+    name: 'Menu.PAIRS',
+    alias: 'pairs',
+    state: 'app.pairs',
+    action: 'list',
+    icon: 'swap_horizontal_circle',
+    url: adminUrl + AppRoutes.pairs_list,
+    display: 'Pairs List',
+  },
+
+  {
+    name: 'Menu.TOKEN',
+    alias: 'token',
+    state: 'app.token',
+    action: 'list',
+    icon: 'swap_horizontal_circle',
+    url: adminUrl + AppRoutes.token_list,
+    display: 'Token List',
+  },
+
+  {
+    name: 'Menu.STAKE',
+    action: 'stake',
+    state: 'app.stake',
+    url: adminUrl + AppRoutes.stake_list,
+    display: 'Stake',
+    icon: 'swap_horizontal_circle',
+
+    childs: [
+      {
+        name: 'Menu.STAKE',
+        action: 'list',
+        url: adminUrl + AppRoutes.stake_list,
+        display: 'Stake List',
+      },
+      {
+        name: 'Menu.STAKE',
+        action: 'all',
+        url: adminUrl + AppRoutes.unstake_list,
+        display: 'Unstake List',
+      },
+      {
+        name: 'Menu.CLIAM',
+        action: 'list',
+        url: adminUrl + AppRoutes.stake_claim,
+        display: 'Claim List',
+      },
+    ],
+  },
+
+  // {
+  //   name: 'Menu.LENDING',
+  //   action: 'all',
+  //   state: 'app.lending',
+  //   url: adminUrl + AppRoutes.stake_list,
+  //   display: 'Lending',
+  //   icon: 'swap_horizontal_circle',
+
+  //   childs: [
+  //     {
+  //       name: 'Menu.DEPOSIT',
+  //       action: 'list',
+  //       url: adminUrl + AppRoutes.lending_deposit_list,
+  //       display: 'Deposit List',
+  //     },
+  //     {
+  //       name: 'Menu.WITHDRAW',
+  //       action: 'list',
+  //       url: adminUrl + AppRoutes.lending_withdraw_list,
+  //       display: 'Withdraw List',
+  //     },
+  //     {
+  //       name: 'Menu.BORROW',
+  //       action: 'list',
+  //       url: adminUrl + AppRoutes.lending_borrow_list,
+  //       display: 'Borrow List',
+  //     },
+  //   ],
+  // },
+
+  // {
+  //   name: 'Menu.LOTTERY',
+  //   alias: 'lottery',
+  //   state: 'app.lottery',
+  //   action: 'list',
+  //   icon: 'confirmation_number',
+  //   url: adminUrl + AppRoutes.lottery_contest_list,
+  //   display: 'Lottery Contest List',
+  // },
+
+  // {
+  //   name: 'Menu.VOTE',
+  //   alias: 'vote',
+  //   state: 'app.vote',
+  //   action: 'list',
+  //   icon: 'swap_horizontal_circle',
+  //   url: adminUrl + AppRoutes.vote_list,
+  //   display: 'Vote List',
+  // },
+  {
+    name: 'Menu.REFERAL',
+    alias: 'referal',
+    state: 'app.referal',
+    action: 'list',
+    icon: 'group_add',
+    url: adminUrl + AppRoutes.referal_list,
+    display: 'Referral List',
+  },
+  // {
+  //   name: 'Menu.SETTINGS',
+  //   alias: 'vote',
+  //   state: 'app.settings',
+  //   action: 'edit',
+  //   icon: 'settings',
+  //   url: adminUrl + AppRoutes.settings,
+  //   display: 'Settings',
+  // },
+
+  // {
+  //   name: 'Menu.USERS',
+  //   action: 'all',
+  //   icon: 'group',
+  //   url: adminUrl + AppRoutes.sub_admin_list,
+  //   display: 'Users',
+
+  //   childs: [
+  //     {
+  //       name: 'SubMenu.USERS_LIST',
+  //       action: 'all',
+  //       url: adminUrl + AppRoutes.users_list,
+  //       display: 'Users List',
+  //     },
+  //     {
+  //       name: 'SubMenu.USERS_LOGS',
+  //       action: 'all',
+  //       url: adminUrl + AppRoutes.users_logs,
+  //       display: 'Users Logs',
+  //     },
+  //   ],
+  // },
+
+    {
+    name: 'Menu.Items',
+    alias: 'items',
+    state: 'app.items',
+    action: 'list',
+    icon: 'dashboard',
+    url: adminUrl + AppRoutes.itemlist,
+    display: 'Items',
+  },
+   {
+    name: 'Menu.Blog',
+    alias: 'blog',
+    state: 'app.blog.list',
+    action: 'list',
+    icon: 'phonelink_setup',
+    url: adminUrl + AppRoutes.blogs_list,
+    display: 'Blog',
+  },
+  {
+    name: 'Menu.Features',
+    alias: 'features',
+    state: 'app.features.list',
+    action: 'list',
+    icon: 'phonelink_setup',
+    url: adminUrl + AppRoutes.features_list,
+    display: 'Features',
+  },
+  {
+    name: 'Menu.CMS',
+    alias: 'cms',
+    state: 'app.cms.list',
+    action: 'list',
+    icon: 'phonelink_setup',
+    url: adminUrl + AppRoutes.cms_list,
+    display: 'CMS',
+  },
+  {
+    name: 'Menu.Subscribe',
+    alias: 'subscribe',
+    state: 'app.subscribe',
+    action: 'list',
+    icon: 'group_add',
+    url: adminUrl + AppRoutes.subscribe_list,
+    display: 'Subscribe List',
+  },
+];

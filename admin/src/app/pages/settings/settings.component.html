@@ -1,0 +1,51 @@
+<div class="d-flex mb-4 page-header">
+    <ul class="bread-crump_container">
+        <li>
+            <a [routerLink]="['dasboard' | appRouter]"> Home</a>
+        </li>
+        <li>
+            <a [routerLink]="['settings' | appRouter]"> Settings </a>
+
+        </li>
+
+        <li>
+            {{navigationName}}
+        </li>
+
+
+    </ul>
+
+
+</div>
+
+
+
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-md-3">
+            <ul class="settings-menu">
+                <li [routerLink]="['settings' | appRouter, menuObj.id, menuObj.name]" routerLinkActive="active"
+                    *ngFor="let menuObj of menus" (click)="showForm(menuObj)">
+
+                    <div class="d-flex">
+                        <div> {{menuObj.displayName}}</div>
+                        <div class="spacer"></div>
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                    </div>
+
+
+
+                </li>
+
+            </ul>
+        </div>
+
+        <div class="col-md-9">
+
+            <router-outlet></router-outlet>
+
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+{
+    "Menu": {
+        "DASHBOARD": "Dashboard",
+        "BLOGS": "Blogs",
+        "USERS": "Users"
+    },
+    "SubMenu": {
+        "USERS_LIST": "Users List",
+        "USERS_ADD": "Users Add",
+        "BLOGS_LIST": "Blogs List",
+        "BLOGS_ADD": "Blogs Add"
+    }
+}

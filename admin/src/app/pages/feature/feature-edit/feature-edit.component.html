@@ -1,0 +1,112 @@
+<div class="d-flex mb-4 page-header">
+  <ul class="bread-crump_container">
+    <li>
+      <a [routerLink]="['dasboard' | appRouter]"> Home</a>
+    </li>
+    <li>
+      <a [routerLink]="['features_list' | appRouter]"> Features List</a>
+    </li>
+
+    <li>
+      <ng-container [ngSwitch]="editObj.pagekey">
+        <ng-container *ngSwitchCase="'new'">New Features </ng-container>
+        <ng-container *ngSwitchDefault>
+          Title -
+          {{ editObj.title }}
+        </ng-container>
+      </ng-container>
+    </li>
+  </ul>
+
+ <!--  <div class="group-button" *ngIf="!isGetBlogLoading">
+    <button type="submit" [disabled]="isDataPassing" mat-button [color]="editObj.pagekey == 'new' ? 'primary' : 'accent'">
+    <mat-icon *ngIf="!isDataPassing">
+      {{ editObj.pagekey == "new" ? "add" : "fact_check" }}
+    </mat-icon>
+
+    <ng-container *ngIf="!isDataPassing">
+    {{ editObj.pagekey == "new" ? "Add" : "Update" }} Blog</ng-container>
+
+    <ng-container *ngIf="isDataPassing">
+      Please Wait <span> ... </span>
+    </ng-container>
+  </button>
+</div> -->
+
+</div>
+<mat-card class="table-container" *ngIf="!isGetBlogLoading">
+  <ng-container>
+    <form (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+      <div class="card-body">
+        <div class="form-group row" *ngIf="editObj.pagekey == 'new'">
+          <label class="col-md-3 col-form-label">Title</label>
+          <div class="col-md-6">
+            <input matInput placeholder="Title" name="title" autocomplete="off" class="form-control" [(ngModel)]="editObj.title"
+            name="title" #title="ngModel" required (keypress)="general.removingSpaceFirst($event, editObj.title)" />
+            <mat-error *ngIf="title.errors">{{ general.checkError(title, "Title") }}
+            </mat-error>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label">Content</label>
+          <div class="col-md-9">
+            <editor [ngClass]="{'isError': isFormSubmitted && !editObj.pagecontent}"
+            [initialValue]="editObj.pagecontent" [(ngModel)]="editObj.pagecontent" name="pagecontent"
+            apiKey="u3c205e0r3zwqzvtu78fsfllp8u39b47a6h9s4bne531l4jj" [init]="{
+              height: 500,
+              menubar: true,
+              plugins: [
+              'advlist autolink lists link image charmap print preview anchor',
+              'searchreplace visualblocks code fullscreen',
+              'insertdatetime media table paste code help wordcount'
+              ],
+              toolbar:
+              'undo redo | formatselect | bold italic forecolor backcolor | \
+              alignleft aligncenter alignright alignjustify | \
+              bullist numlist outdent indent | removeformat | help'
+            }"></editor>
+            <small class="text-warn" *ngIf="isFormSubmitted && !editObj.pagecontent">Page Content is Required</small>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label">Image</label>
+          <div class="col-md-6">
+            <input type="file" (change)="onFileChanged($event)" class="form-control" name="features_img" [(ngModel)]="editObj.features_img" #features_img="ngModel" [ngClass]="{ 'is-invalid': f.submitted && features_img.invalid }" accept=".jpeg,.jpg,.png">
+            <small class="text-warn" *ngIf="isFormSubmitted && !editObj.features_img">Image is Required</small>
+          </div>
+        </div>
+
+        <div class="form-group row" *ngIf="editObj.image!=''">
+          <label for="example-text-input" class="col-3 col-form-label"></label>
+          <div class="upload_det col-md-6">
+            <img src="{{editObj.image}}" class="img-fluid" style="height: 150px; width: 150px">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label">Status</label>
+          <div class="col-md-6">
+            <select name="status" [(ngModel)]="editObj.status" #status="ngModel" class="form-control">
+              <option [ngValue]=1>Active</option>
+              <option [ngValue]=0>Deactive</option>
+
+            </select>
+          </div>
+        </div>
+
+      </div>
+      <div class="card-footer">
+        <div *ngIf="postRequest==''">
+          <button class="btn btn-sm btn-primary" [disabled]="!f.form.valid"><i class="fa fa-dot-circle-o"></i> Submit</button>
+          <button type="button" class="btn btn-sm btn-danger" (click)="cancelToEdit()"><i class="fa fa-ban"></i> Cancel</button>
+        </div>
+        <div *ngIf="postRequest=='yes'">
+          <button class="btn btn-sm btn-primary" disabled> <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+          Loading...</button>
+        </div>
+      </div>
+    </form>
+  </ng-container>
+</mat-card>

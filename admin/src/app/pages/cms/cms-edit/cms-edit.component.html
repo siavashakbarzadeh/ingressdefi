@@ -1,0 +1,95 @@
+<div class="d-flex mb-4 page-header">
+    <ul class="bread-crump_container">
+      <li>
+        <a [routerLink]="['dasboard' | appRouter]"> Home</a>
+      </li>
+      <li>
+        <a [routerLink]="['blogs_list' | appRouter]"> Blogs</a>
+      </li>
+  
+      <li>
+        <ng-container [ngSwitch]="editObj.id">
+          <ng-container *ngSwitchCase="'new'">New Blog </ng-container>
+          <ng-container *ngSwitchDefault>
+            Title -
+            {{ editObj.title }}
+          </ng-container>
+        </ng-container>
+      </li>
+    </ul>
+  
+    <div class="group-button" *ngIf="!isGetDataLoading">
+      <button type="submit" [disabled]="isDataPassing" mat-button [color]="editObj.id == 'new' ? 'primary' : 'accent'"
+        (click)="onSubmit()">
+        <mat-icon *ngIf="!isDataPassing">
+          {{ editObj.pagekey == "new" ? "add" : "fact_check" }}
+        </mat-icon>
+  
+        <ng-container *ngIf="!isDataPassing">
+          {{ editObj.pagekey == "new" ? "Add" : "Update" }} {{ editObj.title }}</ng-container>
+  
+        <ng-container *ngIf="isDataPassing">
+          Please Wait <span> ... </span>
+        </ng-container>
+      </button>
+    </div>
+  </div>
+  
+  <mat-card class="table-container" *ngIf="!isGetDataLoading">
+    <ng-container>
+      <form #editForm="ngForm" class="form-dark">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-4" *ngIf="editObj.pagekey == 'new'">
+              <mat-form-field appearance="outline" >
+                <mat-label>Title</mat-label>
+                <input matInput placeholder="Title" name="title" autocomplete="off" [(ngModel)]="editObj.title"
+                  name="title" #title="ngModel" required (keypress)="general.removingSpaceFirst($event, editObj.title)" />
+  
+                <mat-error *ngIf="title.errors">{{ general.checkError(title, "Title") }}
+                </mat-error>
+              </mat-form-field>
+  
+<!--   
+              <mat-form-field appearance="outline">
+                <mat-label>Status </mat-label>
+                <mat-select [(ngModel)]="editObj.status" name="status" required #status="ngModel">
+                  <mat-option *ngFor="let statusObj of statuses; let statusIndex = index" [value]="statusIndex">
+                    {{ statusObj }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field> -->
+            </div>
+  
+            <div class="col-md-8">
+              <editor [ngClass]="{'isError': isFormSubmitted && !editObj.pagecontent}"
+                [initialValue]="editObj.pagecontent" [(ngModel)]="editObj.pagecontent" name="pagecontent"
+                apiKey="u3c205e0r3zwqzvtu78fsfllp8u39b47a6h9s4bne531l4jj" [init]="{
+                  height: 500,
+                  menubar: true,
+                  plugins: [
+                    'advlist autolink lists link image charmap print preview anchor',
+                    'searchreplace visualblocks code fullscreen',
+                    'insertdatetime media table paste code help wordcount'
+                  ],
+                  toolbar:
+                    'undo redo | formatselect | bold italic forecolor backcolor | \
+                        alignleft aligncenter alignright alignjustify | \
+                        bullist numlist outdent indent | removeformat | help'
+                }"></editor>
+  
+  
+              <small class="text-warn" *ngIf="isFormSubmitted && !editObj.pagecontent">Page Content is Required</small>
+  
+            </div>
+          </div>
+        </div>
+      </form>
+    </ng-container>
+  </mat-card>
+  
+  <ng-container *ngIf="isGetDataLoading">
+    <div class="d-flex justify-content-center padding">
+      <mat-spinner [diameter]="20" color="primary"></mat-spinner>
+    </div>
+  </ng-container>

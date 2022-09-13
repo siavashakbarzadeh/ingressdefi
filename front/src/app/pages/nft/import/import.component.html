@@ -1,0 +1,41 @@
+<div class="digital-art-sec">
+    <div class="middle-section">
+        <div class="container tabpages-cnt">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="section-title text-left">Create New Item</h3>
+                </div>
+                <form [formGroup]="co_form" (ngSubmit)="onSubmit()">
+                    <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                      <div class="form-group mt-4">
+                        <label class="pb-0 font-16 text-black fontweight-400 mb-2" for="network">Choose Type of Network <span class="text-danger">*</span></label><br>
+                        <select class="form-control" formControlName="network" *ngFor="let net of network;" (change)="onChangeNetwork(net.currencyName)" [(ngModel)]="itemObj.network" [ngClass]="{ 'is-invalid': submitted && f.network.errors }" required>
+                            <option value="">select network type</option>
+                            <option value="{{net.networkName}}">{{net.networkName}}</option>
+                        </select>
+                        <div *ngIf="f.network.errors" class="invalid-feedback">
+                            <div *ngIf="f.network.errors.required">Network Type is required</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-4">
+                        <label class="pb-0 font-16 text-black fontweight-400 mb-2" for="name">Contract Address <span class="text-danger">*</span></label>
+                        <input type="text" formControlName="contractaddr" [(ngModel)]="itemObj.contractaddr" [ngClass]="{ 'is-invalid': submitted && f.contractaddr.errors }" class="form-control input-sec font-16 fontweight-400"
+                        placeholder="0x...sdf3" required>
+                        <div *ngIf="f.contractaddr.errors" class="invalid-feedback">
+                            <div *ngIf="f.contractaddr.errors.required">Contract Address is required</div>
+                        </div>
+                    </div>
+                    <div class="text-left">
+                        <button class="btn default-btn mt-4" *ngIf="!msubmitted" data-toggle="modal">
+                        Create</button>
+                        <label class="btn default-btn mt-4" *ngIf="msubmitted">Loading...</label>
+                    </div>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+</div>
+
+

@@ -1,0 +1,161 @@
+<div class="login-gird" [hidden]="!isLoginShow">
+  <div class="image-container">
+    <div>
+      <img src="/assets/images/logo.png" alt="Logo" />
+    </div>
+  </div>
+
+
+  <div class="login-container">
+    <div class="row">
+      <div class="col-md-12">
+        <mat-card>
+          <mat-card-title class="justify-content-center text-center">
+            <ng-container *ngIf="!isForget">Login</ng-container>
+            <ng-container *ngIf="isForget">Forget Password </ng-container>
+          </mat-card-title>
+
+          <mat-card-content *ngIf="!isOtpSection && !isTfaSection">
+            <form #l="ngForm" (ngSubmit)="onSubmit(l)">
+
+
+
+              <p *ngIf="isForget">
+                <mat-form-field appearance="outline">
+                  <mat-label>E-Mail</mat-label>
+                  <input matInput type="email" placeholder="E-Mail" [(ngModel)]="user.emailid" name="emailid"
+                    autocomplete="off" #emailid="ngModel" required email="true" autofocus />
+                  <mat-icon matSuffix>email</mat-icon>
+                  <mat-error *ngIf="emailid.errors">
+                    {{ general.checkError(emailid, "E-Mail", "") }}
+                  </mat-error>
+                </mat-form-field>
+              </p>
+              <p *ngIf="!isForget">
+                <mat-form-field appearance="outline">
+                  <mat-label>E-Mail</mat-label>
+                  <input matInput type="email" placeholder="E-Mail" [(ngModel)]="user.emailid" name="emailid"
+                    autocomplete="off" #emailid="ngModel" required autofocus email="true" />
+                  <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                  <mat-error *ngIf="emailid.errors">
+                    {{ general.checkError(emailid, "E-Mail", "") }}
+                  </mat-error>
+                </mat-form-field>
+              </p>
+
+              <p *ngIf="!isForget">
+                <mat-form-field appearance="outline">
+                  <mat-label>Password</mat-label>
+                  <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" [(ngModel)]="user.password"
+                    name="password" #password="ngModel" required autocomplete="off" />
+                  <a mat-icon-button matSuffix (click)="hide = !hide" color="primary" class="decoration-none">
+                    <mat-icon>{{
+                      hide ? "visibility_off" : "visibility"
+                    }}</mat-icon>
+                  </a>
+                  <mat-error *ngIf="password.errors">
+                    {{ general.checkError(password, "Password", "") }}
+                  </mat-error>
+                </mat-form-field>
+              </p>
+
+              <div class="padding m-4" [ngClass]="{'d-none': isForget}">
+                <div id="patternContainer">
+                </div>
+                <input type="hidden" name="patterncode" id="patterncode">
+              </div>
+
+              <div class="row" *ngIf="!isForget">
+                <div class="col-md-6">
+                  <a (click)="isForget = !isForget" [routerLink]="['./']" routerLinkActive="router-link-active">
+                    Forget Password ?</a>
+                </div>
+                <div class="col-md-6 text-right">
+                  <div class="button">
+                    <button mat-button mat-raised-button color="primary" [disabled]="btnClicked">
+                      Submit
+                      <mat-icon *ngIf="!btnClicked">input</mat-icon>
+                      <mat-icon *ngIf="btnClicked">
+                        <mat-spinner [diameter]="20" color="accent"></mat-spinner>
+                      </mat-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row" *ngIf="isForget">
+                <div class="col-md-6">
+                  <a (click)="isForget = !isForget" mat-button>
+                    <mat-icon>keyboard_backspace</mat-icon>
+                    Back To Login
+                  </a>
+                </div>
+                <div class="col-md-6 text-right">
+                  <div class="button">
+                    <button mat-button mat-raised-button color="primary" [disabled]="btnClicked">
+                      Forget Password
+                      <mat-icon *ngIf="!btnClicked">input</mat-icon>
+                      <mat-icon *ngIf="btnClicked">
+                        <mat-spinner [diameter]="20" color="accent"></mat-spinner>
+                      </mat-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </mat-card-content>
+
+
+          <mat-card-content *ngIf="isOtpSection || isTfaSection">
+            <form #otpForm="ngForm" (ngSubmit)="submitOtp()">
+
+              <p>
+                <mat-form-field appearance="outline">
+                  <mat-label>Enter
+                    <ng-container *ngIf="isOtpSection">OTP</ng-container>
+                    <ng-container *ngIf="isTfaSection">TFA Code</ng-container>
+                  </mat-label>
+                  <input matInput [placeholder]="isOtpSection ?  'Enter OTP' : 'Enter TFA Code'" [(ngModel)]="user.otp"
+                    name="otp" autocomplete="off" #otp="ngModel" required />
+                  <mat-icon matSuffix>otp</mat-icon>
+                  <mat-error *ngIf="otp.errors">
+                    {{ general.checkError(otp, isOtpSection ?  'OTP' : 'TFA Code', "") }}
+                  </mat-error>
+                </mat-form-field>
+              </p>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <button *ngIf="!isTfaSection" type="button" (click)="goLogin()" mat-button color="primary"
+                    [disabled]="otpClicked">
+                    Resend OTP
+                    <mat-icon *ngIf="!otpClicked">input</mat-icon>
+                    <mat-icon *ngIf="otpClicked">
+                      <mat-spinner [diameter]="20" color="accent"></mat-spinner>
+                    </mat-icon>
+                  </button>
+
+                </div>
+                <div class="col-md-6 text-right">
+                  <div class="button">
+                    <button mat-button mat-raised-button color="primary" [disabled]="btnClicked">
+                      Login
+                      <mat-icon *ngIf="!btnClicked">input</mat-icon>
+                      <mat-icon *ngIf="btnClicked">
+                        <mat-spinner [diameter]="20" color="accent"></mat-spinner>
+                      </mat-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+            </form>
+          </mat-card-content>
+
+
+
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,140 @@
+@import "./assets/css/bootstrap.css";
+@import "./assets/scss/reponsive.scss";
+@import "./assets/scss/project_theme.scss";
+@import "./assets/scss/theme-colors";
+@import "./assets/scss/flex";
+
+@import "patternlock/dist/patternlock.css";
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/*//  Matrial*/
+
+a,
+button {
+  outline: none !important;
+}
+
+.bg-success {
+  background: green;
+}
+
+.bg-error {
+  background: red;
+}
+/*PROFILE MENU*/
+.mat_menu .mat-menu-panel {
+  min-width: 160px !important;
+  max-width: 150px !important;
+}
+.mat_menu .mat-menu-content {
+  display: grid;
+  min-width: 170px;
+}
+.mat_menu a {
+  padding-left: 10px;
+  height: 35px;
+  color: #000;
+}
+.mat_menu a:hover {
+  text-decoration: none;
+}
+.mat_menu a span {
+  height: 35px;
+  vertical-align: middle;
+  display: inline-block;
+  padding-left: 10px;
+}
+/*//  List View Scss*/
+
+/*//  Width Control Common*/
+.mw-400 {
+  min-width: 400px;
+}
+
+/*//  Bread Crump*/
+.page-header {
+  border-bottom: 1px solid #323333;
+}
+
+.bread-crump_container {
+  display: flex;
+  list-style: none;
+  padding: 10px;
+  margin: 0;
+  flex: 1;
+  min-height: 45px;
+
+  a {
+    padding: 0px 3px;
+
+    text-decoration: none;
+
+    &::after {
+      content: "/";
+      padding: 0px 3px;
+    }
+  }
+}
+
+/*//  Edit View Common*/
+
+.upload-button {
+  background: transparent;
+  color: red;
+  border: 2px dashed #ddd !important;
+}
+
+.upload-view {
+  border-radius: 6px;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+
+  .small-img {
+    max-height: 40px;
+    max-width: 40px;
+
+    img {
+      width: 100%;
+    }
+  }
+}
+
+//  Margin Controls
+.m-b-15 {
+  margin-bottom: 15px !important;
+}
+
+// button
+
+button + button {
+  margin-left: 2px !important;
+}
+
+// padding
+
+.padding {
+  padding: 10px;
+}
+
+//  Text
+
+.text-warn {
+  color: $warn-color;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.decoration-none {
+  text-decoration: none !important;
+}

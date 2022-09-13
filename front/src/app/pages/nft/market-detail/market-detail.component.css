@@ -1,0 +1,10 @@
+.heart-icon {
+	 width: 20px;
+	 height: 18px;
+	 background: url('/assets/images/heart-icon.png') no-repeat center center;
+	 background-size: contain;
+}
+ .heart-icon.active, .heart-icon:hover {
+	 background: url('/assets/images/heart.png') no-repeat center center;
+	 cursor: pointer;
+}

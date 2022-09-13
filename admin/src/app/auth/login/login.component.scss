@@ -1,0 +1,43 @@
+@import "/src/assets/scss/theme-colors.scss";
+
+.login-gird {
+  display: flex;
+  gap: 1ch;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .image-container {
+    min-width: 500px;
+    text-align: center;
+    padding: 30px;
+  }
+
+  .login-container {
+    min-width: 500px;
+  }
+}
+
+mat-form-field {
+  width: 100% !important;
+  font-size: 13px;
+}
+
+::ng-deep #patternContainer {
+  background: white;
+  border-radius: 6px;
+  margin: auto;
+  box-shadow: 3px 5px 9px #9c9c9cc7;
+  .patt-dots {
+    background: $primary-dark;
+  }
+
+  .patt-circ.hovered {
+    border-color: $primary-dark !important;
+  }
+
+  .patt-lines {
+    background: rgba(68, 129, 235,  27%);
+  }
+}

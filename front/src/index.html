@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ingressdefi</title>
+<base href="/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Favicons -->
+<link href="assets/images/symbol-logo.png" rel="icon">
+
+  <!-- Google Fonts aida -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <!-- !Google Fonts aida-->
+
+  <!--  link css aida-->
+  <!-- Styles -->
+  <link type="text/css" rel="stylesheet" href="assets/css/plugins.css?ver=3.1" />
+  <link type="text/css" rel="stylesheet" href="assets/css/style.css?ver=3.1" />
+  <!--[if lt IE 9]> <script type="text/javascript" src="assets/js/js1/modernizr.custom.js?ver=3.1"></script> <![endif]-->
+  <!-- !Styles -->
+<!--<link rel="preconnect" href="https://fonts.googleapis.com">-->
+<!--<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>-->
+<!--<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">-->
+<!--<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">-->
+<!--<link rel="stylesheet" href="https://unpkg.com/ngx-bootstrap/datepicker/bs-datepicker.css">-->
+
+<!-- Js Links aida -->
+
+
+<!--<script src="https://cdn.jsdelivr.net/npm/web3@1.3.5/dist/web3.min.js"></script>-->
+<!-- <script src="assets/js/walletconnect.js"></script> &lt;!&ndash; Trust Wallet &ndash;&gt;-->
+<!--<script src="assets/js/jquery.min.js"></script>-->
+<!--<script src="assets/js/popper.min.js"></script>-->
+<!--<script src="assets/js/bootstrap.min.js"></script>-->
+<!--<script src="assets/js/custom.js"></script>-->
+<!--  -->
+<!-- <script type="text/javascript" src="assets/js/disable.js"></script>  -->
+<!--  -->
+
+</head>
+<body>
+  <app-root></app-root>
+  <!-- Scripts -->
+  <script type="text/javascript" src="assets/js/js1/jquery.js?ver=3.1"></script>
+  <script type="text/javascript" src="assets/js/js1/plugins.js?ver=3.1"></script>
+  <!--[if lt IE 10]> <script type="assets/js/js1/text/javascript" src="js/ie8.js?ver=3.1"></script> <![endif]-->
+  <script type="text/javascript" src="assets/js/js1/init.js?ver=3.1"></script>
+  <!-- !Scripts -->
+  <script type="text/javascript" src="assets/js/web3.min.js"></script>
+  <script src="https://unpkg.com/@metamask/detect-provider/dist/detect-provider.min.js"></script>
+</body>
+</html>
+<script>
+  $(".icon__menu__open").click(function() {
+	$(this).css("display", "none");
+	$(".logo").css("opacity", "0.5");
+	$(".icon__menu__close").css("display", "block");
+	$(".nav__appear").css("transform", "translateX(0)");
+});
+$(".icon__menu__close").click(function() {
+	$(this).css("display", "none");
+	$(".logo").css("opacity", "1");
+	$(".icon__menu__open").css("display", "block");
+	$(".nav__appear").css("transform", "translateX(-240px)");
+});
+</script>
+

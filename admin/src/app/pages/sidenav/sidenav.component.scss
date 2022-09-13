@@ -1,0 +1,76 @@
+@import "/src/assets/scss/theme-colors.scss";
+
+.side-menu_ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    flex-direction: column;
+
+    &:hover {
+      .main-a {
+        background: $primary-dark;
+        cursor: pointer;
+        color: white;
+      }
+    }
+  }
+
+  a {
+    width: 100%;
+    padding: 10px;
+    margin: 5px;
+    color: #252424;
+  }
+}
+
+.menu-expend {
+  transition: all 1.8s;
+}
+
+.text-decoration_none {
+  text-decoration: none;
+}
+
+.sub-menu-container {
+  padding: 0;
+  height: 0;
+  opacity: 0;
+  position: absolute;
+  top: -20px;
+  z-index: -1;
+}
+
+.cursor-hover {
+  cursor: pointer;
+}
+
+.isShow {
+  position: relative;
+  height: auto;
+  opacity: 1;
+  transform: translateY(20px);
+  transition: all 190ms ease-in-out 4ms;
+  z-index: 1;
+  width: 100%;
+  background: #4481eb1a;
+}
+
+.router-link-active {
+  background-color: $primary-dark;
+  color: white !important;
+}
+
+.isOpenMenu {
+  background-color: $primary-dark;
+  height: 60px;
+
+  a,
+  mat-icon {
+    color: white;
+  }
+}

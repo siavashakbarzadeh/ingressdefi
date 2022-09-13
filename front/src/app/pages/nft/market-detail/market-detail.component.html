@@ -1,0 +1,323 @@
+Offers<app-inner-header></app-inner-header>
+<div class="digital-art-sec">
+    <div class="middle-section">
+        <div class="container tabpages-cnt">
+           <!--  <img src="{{items.image}}" class="w-100 mb-4"> -->
+           <div *ngIf="items.type == 'add'">
+             <img *ngIf="items.image != ''" src="{{items.image}}" class="img-fluid w-100">
+           </div>
+           <div *ngIf="items.type != 'add'">
+                 <img  src="assets/images/market1.png" class="img-fluid w-100">
+            </div>
+       
+
+
+            <div class="row mt-3">
+                <div class="col-md-6 col-sm-7 col-lg-6 col-xl-4">
+                    <h3 class="section-title mb-0 text-left">{{items.name}}   </h3>
+                    <!-- <p class="section-title text-black font-20 fontweight-400 text-left">Edition 1 of {{items.supply}}</p> -->
+                </div>
+                <div class="col-md-6 col-sm-5 col-lg-6 col-xl-2">
+                    <h3 class="section-title mb-0 text-left">{{items.price}} {{items.tocurrency}}</h3>
+                    <p class="section-title text-black font-20 fontweight-400 text-left">List Price</p>
+                </div>
+                <div class="col-md-12 col-sm-12 col-lg-12 col-xl-6">
+                    <div class="box-shadow1 act-cnt d-xl-flex d-sm-flex align-items-center justify-content-between p-2">
+                        <div class="d-flex act-head p-2 mb-2">
+                            <div class="prof-pic-cnt mr-3">
+
+                                <img *ngIf="items.profilepicture !='' " src="{{ (items.profilepicture) ? items.profilepicture : 'assets/images/prof.png' }}">
+                                <img *ngIf="items.profilepicture =='' " src="assets/images/prof.png">
+
+                                <!-- <img src="{{items.profilepicture ? items.profilepicture : 'assets/images/prof.png'}}"> -->
+                            </div>
+                            <div>
+                                <h3 class="mb-0">{{items.username ? items.username : ''}}</h3>
+                                <p class="mb-0">Artist</p>
+                            </div>
+                        </div>
+                        <div class="d-flex act-head p-2 mb-2">
+                            <div class="mr-3">
+                                <h3 class="mb-0">{{items.ownername ? items.ownername : ''}}</h3>
+                                <p class="mb-0">Artist</p>
+                            </div>
+                            <div class="prof-pic-cnt ">
+                               <!--  <img src="{{items.ownerpicture ? items.ownerpicture : 'assets/images/prof1.png'}}"> -->
+
+                                <img *ngIf="items.ownerpicture !=''" src="{{ (items.ownerpicture) ? items.ownerpicture : 'assets/images/prof1.png' }}">
+<img *ngIf="items.ownerpicture ==''" src="assets/images/prof1.png">
+
+
+                            </div>
+                        </div>
+                        <div class="text-xl-center text-sm-center mb-2">
+                            <img src="assets/images/heart.png" class="mb-2">
+                            <p class="font-14 mb-0 fontweight-400">{{items.likeCount}} Favorites</p>
+                        </div>
+                        <div class="text-xl-center text-sm-center mb-2">
+                            <img src="assets/images/eye.png" class="mb-2">
+                            <p class="font-14 mb-0 fontweight-400">{{items.viewCount}} Views</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <p class="pb-0 font-14 text-black fontweight-400 mb-2">{{items.description}}</p>
+
+                </div>
+            </div>
+            <div class="text-center mt-4" *ngIf="items.canbuy && items.show">
+                <button  class="btn default-btn min-width-auto px-5 mr-1 py-2 mt-1" data-toggle="modal" data-target="#Createcollection" *ngIf="items.saletype !='fixed' && items.saletype != 'auction'">Buy Now</button>
+                <button *ngIf="items.offer" class="btn border-btn min-width-auto px-4  py-2 mt-1" data-toggle="modal" data-target="#Createcollection2">Make An Offer</button>
+
+                 <button *ngIf="items.saletype == 'auction'" class="btn border-btn min-width-auto px-4  py-2 mt-1" data-toggle="modal" data-target="#Bidapp">Join Bidding</button>
+
+            </div>
+           <!--  <h3 class="section-title text-left mt-5">Offers</h3> -->
+            <div class="row mb-5">
+                <div class="col-md-12 col-sm-12 col-lg-6 col-xl-6" *ngIf="itemsOffers.length">
+                    <div class="mt-3" *ngFor="let offers of itemsOffers">
+                        <p class="font-20 fontweight-400 text-black mb-2"> @{{ offers.username }} <span class="text-black1"> {{ offers.type }} at {{ offers.price }} {{ offers.currency }} </span> </p>
+                        <p class="text-black1 font-14 fontweight-400 mb-2">{{ offers.date | date: minimum }}</p>
+                        <button *ngIf="items.owner && (offers.type == 'Offered')" data-toggle="modal" data-target="#Createcollection3" class="btn default-btn min-width-auto px-5 mr-1 py-2 mt-1" (click)="beforConfirmOffer(offers, offers.type)">Approve</button>
+
+                        <button *ngIf="items.owner && (offers.type == 'Bid') && (offers.price == lastbid)" data-toggle="modal" data-target="#Createcollection3" class="btn default-btn min-width-auto px-5 mr-1 py-2 mt-1" (click)="beforConfirmOffer(offers, offers.type)">Approve</button>
+                        <!-- <button *ngIf="items.owner" data-toggle="modal" data-target="#Createcollection3" class="btn default-btn min-width-auto px-5 mr-1 py-2 mt-1" (click)="approveOffer(offers, offers.type)">Approve</button> -->
+                    </div>
+                    <!-- <div class="mt-3" *ngIf="itemsHis.length">
+                        <p class="font-20 fontweight-400 text-black mb-2" *ngFor="let his of itemsHis"> <b>@{{ his.username }}</b> <span class="text-black1">  <b>@{{ his.type }}</b>  on</span> <b>{{his.itemname}}</b> <span *ngIf="his.type == 'auction'" class="text-black1">with a bid of 1.1Ξ, auction</span> </p>
+                        <p class="text-black1 font-20 fontweight-400 mb-2"> {{ his.date }}</p>
+                    </div> -->
+                    <!-- <div class="mt-3">
+                        <p class="font-20 fontweight-400 text-black mb-2"> @shorttesla <span class="text-black1"> transferred to </span> @pixelvault_ </p>
+                        <p class="text-black1 font-14 fontweight-400 mb-2">A MONTH AGO[view tx]</p>
+                    </div>
+                    <div class="mt-3">
+                        <p class="font-20 fontweight-400 text-black mb-2"> @shorttesla <span class="text-black1">  outbid@a  </span> rtecsteam <span class="text-black1">with a bid of 1.1Ξ, auction</span> </p>
+                        <p class="text-black1 font-20 fontweight-400 mb-2"> time extended</p>
+                        <p class="text-black1 font-14  fontweight-400"> A MONTH AGO[view tx]</p>
+                    </div> -->
+                </div>
+              <!--   <div class="col-md-12 col-sm-12 col-lg-6 col-xl-6" *ngIf="!itemsOffers.length">No Offers found</div> -->
+            </div>
+            <!-- <h3 class="section-title text-left mt-5">History</h3>
+            <div class="row mb-5">
+                <div class="col-md-12 col-sm-12 col-lg-6 col-xl-6">
+                    <div class="mt-3">
+                        <p class="font-20 fontweight-400 text-black mb-2"> @shorttesla <span class="text-black1"> transferred to </span> @pixelvault_ </p>
+                        <p class="text-black1 font-14 fontweight-400 mb-2">A MONTH AGO[view tx]</p>
+                    </div> -->
+                    <!-- <div class="mt-3" *ngIf="itemsHis.length">
+                        <p class="font-20 fontweight-400 text-black mb-2" *ngFor="let his of itemsHis"> <b>@{{ his.username }}</b> <span class="text-black1">  <b>@{{ his.type }}</b>  on</span> <b>{{his.itemname}}</b> <span *ngIf="his.type == 'auction'" class="text-black1">with a bid of 1.1Ξ, auction</span> </p>
+                        <p class="text-black1 font-20 fontweight-400 mb-2"> {{ his.date }}</p>
+                    </div> -->
+                    <!-- <div class="mt-3">
+                        <p class="font-20 fontweight-400 text-black mb-2"> @shorttesla <span class="text-black1"> transferred to </span> @pixelvault_ </p>
+                        <p class="text-black1 font-14 fontweight-400 mb-2">A MONTH AGO[view tx]</p>
+                    </div>
+                    <div class="mt-3">
+                        <p class="font-20 fontweight-400 text-black mb-2"> @shorttesla <span class="text-black1">  outbid@a  </span> rtecsteam <span class="text-black1">with a bid of 1.1Ξ, auction</span> </p>
+                        <p class="text-black1 font-20 fontweight-400 mb-2"> time extended</p>
+                        <p class="text-black1 font-14  fontweight-400"> A MONTH AGO[view tx]</p>
+                    </div> -->
+                <!-- </div>
+            </div> -->
+            <div *ngIf="moreitems.length">
+                <h3 class="section-title text-left">More Work {{items.username ? items.username : ''}}</h3>
+                <div class="row mt-5">
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3" *ngFor="let moreitem of moreitems">
+                        <a (click)="myFunc(moreitem.itemId)">
+                            <!-- <img src="{{(moreitem.image) ? moreitem.image : 'assets/images/market-detail1.png'}}" class="mb-2 w-100"> -->
+
+
+
+ <img *ngIf="moreitem.image !=''" src="{{ (moreitem.image) ? moreitem.image : 'assets/images/market-detail1.png' }}">
+<img *ngIf="moreitem.image ==''" src="assets/images/market-detail1.png">
+
+                            
+
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-inner-footer></app-inner-footer>
+
+<!-- Createcollection  Modal -->
+<div class="modal fade modalPrimary md creat-collection" id="Bidapp">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0 d-block">
+                <button type="button" #closebutton class="close" data-dismiss="modal">&times;</button>
+                <!-- <h3 class="modal-title section-title mb-0 w-100 text-center"> Create a Your Collection </h3>
+                    <h5 class="font-20 text-center font-weight-bold text-black">@peter123</h5> -->
+            </div>
+            <div class="modal-body">
+                 <form name="bidsForm" id="bidsForm" #bf="ngForm" (ngSubmit)="bf.form.valid && onbitSubmit(items, bf.value)">
+                <div class="row justify-content-center align-items-start">
+                    <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                        <div class="blog-sec-cnt">
+                            <div class="d-lg-flex align-items-center">
+                                <img src="{{items.image}}" class="img-fluid mr-3">
+                                <div class="text-left">
+                                    <p class="font-16 fontweight-500 text-black mt-2 mb-4">Bids placed during an auction cannot be withdrawn. By placing a bid you indicate that you have read and agree to the Auction Terms of Use</p>
+                                    <p class="font-16 fontweight-500 text-black mb-2">Lowest Bid</p>
+                                    <p class="font-28 font-weight-bold text-black mb-0">{{ items.price }} {{ items.tocurrency }}</p>
+                                </div>
+                            </div>
+                            <h5 class="font-16 fontweight-500 mt-4 text-black mb-2">{{ items.name }}</h5>
+                            <div class="row tabpages-cnt p-0 w-auto">
+                                <div class="col-md-6 col-sm-6 col-xl-4 col-lg-6 mt-3">
+                                    <div class="card grey-cnt text-center">
+                                        <div class="card-body">
+                                            <p>Highest Bid Amount</p>
+                                            <h3 class="font-16 fontweight-500">{{ (lastbid != 0) ? lastbid : items.price }} {{ items.tocurrency }}</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xl-4 col-lg-6 mt-3">
+                                    <div class="card grey-cnt text-center">
+                                        <div class="card-body">
+                                            <p>Your Balance</p>
+                                            <h3 class="font-16 fontweight-500" *ngIf="bnbBalance">{{ bnbBalance }} {{ items.tocurrency }}</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mt-3 ">
+                                <div class="d-flex justify-content-between bid-block">
+                                    <label class="mb-0 pb-0 font-18 font-weight-bold text-black mb-2" for="yourName">You must bid more than</label>
+                                    <label class="mb-0 pb-0 font-18 font-weight-bold text-black mb-2" for="yourName">{{ (lastbid != 0) ? lastbid : items.price }} {{ items.tocurrency }}</label>
+                                </div>
+                                <input type="text" placeholder="1" name="bidsprice" [ngClass]="{ 'is-invalid': bf.submitted && bidsprice.invalid }" [(ngModel)]="bidsObj.bidsprice" #bidsprice="ngModel" required>
+                                <div *ngIf="bf.submitted && bidsprice.invalid" class="invalid-feedback">
+                                    <div *ngIf="bidsprice.errors.required">Bid Amount is required</div>
+                                </div>
+
+                               <!--  <input type="text" class="form-control input-sec font-16 fontweight-400" placeholder="Place your Bid" [(ngModel)]="bidsObj.bidsprice" #bidsprice="ngModel"> -->
+                            </div>
+
+                            <div class="text-center">
+                                <button class="btn  mt-4 mr-3" data-dismiss="modal">
+                                Never Mind</button>
+
+                                <button class="btn default-btn mt-4">Submit Bid</button>
+
+                                <!-- <button class="btn fontweight-500 default-btn mt-4" (click)="makebids(items, bidsObj.bidsprice)">
+                                Submit Bid</button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade modalPrimary md creat-collection-1" id="Createcollection">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0 d-flex">
+                <div class="card shadow-card font-18 text-black font-weight-bold padd-bot-20">Confirm purchase of #{{ items.name }}</div>
+                <button type="button" #closebutton1 class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body px-5">
+                <div class="form-group">
+
+                    <div class="mt-2">
+                        <label for="file-upload" class="custom-file-upload d-xl-flex d-lg-flex w-100">
+                            <div class="width100"><img src="{{ items.image }}"></div>
+                            <div class="width100">
+                                <p class="font-18 fontweight-400 p-lg-42 text-black"><b> #{{ items.name }} </b></p>
+                                <p class="font-18 fontweight-400 p-lg-42 text-black">Price : <b>{{ items.price }} {{ items.tocurrency }}</b></p>
+                                <p class="font-18 fontweight-400 p-lg-42 text-black">Your Balance : <b>{{ bnbBalance }} {{ items.tocurrency }}</b></p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="text-right">
+                    <button class="btn default-btn2 mt-4" data-dismiss="modal">Never Mind</button>&nbsp;&nbsp;
+                    <button class="btn default-btn mt-4" (click)="buyCalled(items, 'buy')">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade modalPrimary md creat-collection-1" id="Createcollection2">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0 d-flex">
+                <div class="card shadow-card font-18 text-black font-weight-bold padd-bot-20">Make an Offer on #{{ items.name }}</div>
+                <button type="button" #closebutton2 class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body px-5">
+                <form name="offerForm" id="offerForm" #f="ngForm" (ngSubmit)="f.form.valid && onSubmit(items, f.value)">
+                    <div class="form-group">
+
+                        <div class="mt-2">
+                            <label for="file-upload" class="custom-file-upload d-xl-flex d-lg-flex w-100">
+                                <div class="width100"><img src="{{ items.image }}"></div>
+                                <div class="width100">
+                                    <p class="font-14 fontweight-400 p-lg-42 text-black">Seller Price <b>{{ items.price }} {{ items.tocurrency }} </b> <a href="#"></a></p>
+                                    <p class="font-18 fontweight-400 p-lg-42 text-black">Your Offer: <b class="dash-under"><input type="text" placeholder="1" name="offprice" [ngClass]="{ 'is-invalid': f.submitted && offprice.invalid }" [(ngModel)]="offObj.offprice" #offprice="ngModel" required></b> {{ items.tocurrency }}
+                                        <span *ngIf="f.submitted && offprice.invalid" class="text-danger">
+                                            <span *ngIf="offprice.errors.required">Offer price is required</span>
+                                        </span>
+                                    </p>
+                                    
+                                    <p class="font-14 fontweight-400 p-lg-42 text-black">Your must offer at least lesser than {{ items.price }} {{ items.tocurrency }} <a href="#"></a></p>
+                                    <p class="font-14 fontweight-400 p-lg-42 text-black" *ngIf="bnbBalance">Your balance is {{ bnbBalance }} {{ items.tocurrency }} </p>
+                                    <p class="font-14 fontweight-400 p-lg-42 text-black">Your ether will be escrowed in the smart contract until your offer is accepted, or you withdraw it.</p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="text-right">
+                        <button class="btn default-btn2 mt-4" data-dismiss="modal">Never Mind</button>&nbsp;&nbsp;
+                        <button class="btn default-btn mt-4">Submit Offer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade modalPrimary md creat-collection-1" id="Createcollection3">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0 d-flex">
+                <div class="card shadow-card font-18 text-black font-weight-bold padd-bot-20">Confirm purchase of #{{ items.name }}</div>
+                <button type="button" #closebutton3 class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body px-5">
+                <div class="form-group">
+
+                    <div class="mt-2">
+                        <label for="file-upload" class="custom-file-upload d-xl-flex d-lg-flex w-100">
+                            <div class="width100"><img src="{{ items.image }}"></div>
+                            <div class="width100">
+                                <p class="font-18 fontweight-400 p-lg-42 text-black"><b> #{{ items.name }} </b></p>
+                                <p class="font-18 fontweight-400 p-lg-42 text-black">Price : <b>{{ toffers.price }} {{ items.tocurrency }}</b></p>
+                                <p class="font-18 fontweight-400 p-lg-42 text-black">Developer fee (%) : <b>{{ showdeveloperfee }} %</b></p>
+                                <p class="font-18 fontweight-400 p-lg-42 text-black">Royalty fee (%) : <b>{{ showroyaltyfee }} %</b></p>
+                                <p class="font-18 fontweight-400 p-lg-42 text-black">Amount you may receive : <b>{{ receivePrice }} {{ items.tocurrency }}</b></p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="text-right">
+                    <button class="btn default-btn2 mt-4" data-dismiss="modal">Never Mind</button>&nbsp;&nbsp;
+                    <button class="btn default-btn mt-4" (click)="approveOffer(toffers, ttype)">Confirm 111</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

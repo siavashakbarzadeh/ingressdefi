@@ -1,0 +1,79 @@
+<div class="d-flex mb-4 page-header">
+  <ul class="bread-crump_container">
+    <li>
+      <a [routerLink]="['dasboard' | appRouter]"> Home</a>
+    </li>
+    <li>
+      <a [routerLink]="['blogs_list' | appRouter]"> Mint </a>
+    </li>
+
+
+   
+  </ul>
+
+ <!--  <div class="group-button" *ngIf="!isGetBlogLoading">
+    <button type="submit" [disabled]="isDataPassing" mat-button [color]="editObj.pagekey == 'new' ? 'primary' : 'accent'">
+    <mat-icon *ngIf="!isDataPassing">
+      {{ editObj.pagekey == "new" ? "add" : "fact_check" }}
+    </mat-icon>
+
+    <ng-container *ngIf="!isDataPassing">
+    {{ editObj.pagekey == "new" ? "Add" : "Update" }} Blog</ng-container>
+
+    <ng-container *ngIf="isDataPassing">
+      Please Wait <span> ... </span>
+    </ng-container>
+  </button>
+</div> -->
+
+</div>
+<mat-card class="table-container" *ngIf="!isGetBlogLoading">
+  <ng-container>
+    <form  #f="ngForm" novalidate>
+      <div class="card-body">
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label">Title</label>
+          <div class="col-md-6">
+            <input matInput placeholder="Title" name="name" autocomplete="off" class="form-control" [(ngModel)]="editObj.name"
+            name="name" #title="ngModel" readonly required (keypress)="general.removingSpaceFirst($event, editObj.title)" />
+            <mat-error *ngIf="title.errors">{{ general.checkError(title, "Title") }}
+            </mat-error>
+          </div>
+        </div>
+
+        <div class="form-group row" *ngIf="editObj.external_link != 'undefined'">
+          <label class="col-md-3 col-form-label">External Link</label>
+          <div class="col-md-6">
+            <input matInput placeholder="Title" name="external_link" autocomplete="off" class="form-control" [(ngModel)]="editObj.external_link"
+            name="External Link" #title="ngModel" required (keypress)="general.removingSpaceFirst($event, editObj.external_link)" />
+            <mat-error *ngIf="title.errors">{{ general.checkError(title, "Title") }}
+            </mat-error>
+          </div>
+        </div>
+
+    
+
+      
+        <div class="form-group row" *ngIf="editObj.image!=''">
+          <label for="example-text-input" class="col-3 col-form-label">Image</label>
+          <div class="upload_det col-md-6">
+            <img src="{{editObj.image}}" class="img-fluid" style="height: 150px; width: 150px">
+          </div>
+        </div>
+
+        
+
+      </div>
+      <div class="card-footer">
+        <div *ngIf="postRequest==''">
+          <button class="btn btn-sm btn-primary"  (click)="mintprocess(editObj)"><i class="fa fa-dot-circle-o"></i> Submit</button>
+          
+        </div>
+        <div *ngIf="postRequest=='yes'">
+          <button class="btn btn-sm btn-primary" disabled> <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+          Loading...</button>
+        </div>
+      </div>
+    </form>
+  </ng-container>
+</mat-card>

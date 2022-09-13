@@ -1,0 +1,101 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="section-title">Edit Profile</h3>
+    </div>
+    <div class="col-md-12 col-lg-12">
+        <div class="card-body ">
+            <form  #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()">
+                <div class="row align-items-center">
+                    <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6 text-center">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="edit-bar">
+                                    <div class="form-group text-left">
+                                        First Name & Last Name
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control input-sec h-43 font-16 fontweight-400" placeholder="" name="name" [ngClass]="{ 'is-invalid': f.submitted && name.invalid }" [(ngModel)]="editObj.name" #name="ngModel" required>
+                                        <div *ngIf="f.submitted && name.invalid" class="invalid-feedback">
+                                            <div *ngIf="name.errors.required">First Name & Last Name is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="edit-bar">
+                                    <div class="form-group text-left">
+                                        User Name <span>*</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" disabled class="form-control input-sec h-43 font-16 fontweight-400" placeholder="" name="username" [ngClass]="{ 'is-invalid': f.submitted && username.invalid }" [(ngModel)]="editObj.username" #username="ngModel" required>
+                                        <div *ngIf="f.submitted && username.invalid" class="invalid-feedback">
+                                            <div *ngIf="username.errors.required">User Name is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="edit-bar">
+                                    <div class="form-group text-left">
+                                        Email <span>*</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" disabled class="form-control input-sec h-43 font-16 fontweight-400" placeholder=""name="auth" [ngClass]="{ 'is-invalid': f.submitted && auth.invalid }" [(ngModel)]="editObj.auth" #auth="ngModel" required>
+                                        <div *ngIf="f.submitted && auth.invalid" class="invalid-feedback">
+                                            <div *ngIf="auth.errors.required">Email is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="edit-bar">
+                                    <div class="form-group text-left">
+                                        Location
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control input-sec h-43 font-16 fontweight-400" placeholder=""name="location" [ngClass]="{ 'is-invalid': f.submitted && location.invalid }" [(ngModel)]="editObj.location" #location="ngModel" required>
+                                        <div *ngIf="f.submitted && location.invalid" class="invalid-feedback">
+                                            <div *ngIf="location.errors.required">Location is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="edit-bar">
+                                    <div class="form-group text-left">
+                                        Bio
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea name="bio" id="bio" cols="30" rows="5" class="form-control input-sec h-43 font-16 fontweight-400" [ngClass]="{ 'is-invalid': f.submitted && bio.invalid }" [(ngModel)]="editObj.bio" #bio="ngModel" required></textarea>
+                                        <div *ngIf="f.submitted && bio.invalid" class="invalid-feedback">
+                                            <div *ngIf="bio.errors.required">Bio is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="edit-bar">
+                                    <div class="form-group text-left">
+                                        Image
+                                    </div>
+                                    <label for="file-upload" class="custom-file-upload d-xl-flex d-lg-flex align-items-center ">
+                                        <img src="{{ editObj.profilepicture ? editObj.profilepicture: 'assets/images/user-icon.png'}}" alt="customFile"
+                                        class="cursor-pointer" style="height: 100px;width: 100px;"/>
+                                    </label>
+                                    <input id="file-upload" name='profilepicture' type="file" accept=".jpg,.jpeg,.png" (change)="onChanged($event)" [ngClass]="{ 'is-invalid': f.submitted && profilepicture.invalid }" style="display:none;" [(ngModel)]="editObj.profilepicture" #profilepicture="ngModel" required>
+                                    <div *ngIf="f.submitted && profilepicture.invalid" class="invalid-feedback">
+                                      <div *ngIf="profilepicture.errors.required">Profile Image is required</div>
+                                  </div>
+                                  <div *ngIf="fileerr" class="text-danger">Please Upload Valid File.</div>
+                              </div>
+                          </div>
+                          <div class="col-md-12">
+                            <div class="d-flex ">
+                                <div class="form-group">
+                                    <button *ngIf="!submitted" class="btn default-btn min-width-auto px-5 py-2 mt-1">Save</button>
+                                    <label class="btn default-btn mt-4" *ngIf="submitted">Loading...</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6 text-center">
+                <img src="assets/images/user-icon.png">
+                <p class="text-black font-20 my-2 font-weight-bold">@peter123</p>
+                <button class="btn default-btn min-width-auto py-1" [routerLink]="'/edit-profile'">Edit Profile</button>
+            </div> -->
+        </div>
+    </form>
+</div>
+</div>
+</div>

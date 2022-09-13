@@ -1,0 +1,17 @@
+.d-dlex {
+  display: flex;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.spacer {
+  flex: auto;
+}
+
+.all-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

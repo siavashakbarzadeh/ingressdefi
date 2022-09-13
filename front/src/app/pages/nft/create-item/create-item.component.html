@@ -1,0 +1,203 @@
+<div class="digital-art-sec">
+    <div class="middle-section">
+        <div class="container tabpages-cnt">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="section-title text-left">Create New Item</h3>
+                </div>
+                <div class="text-center">
+                    <ul class="nav nav-tabs tab-cnt">
+                        <!-- <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" (click)="changeTab('single')" href="#swap">Single</a>
+                        </li> -->
+                       <!--  <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" (click)="changeTab('multiple')" href="#liquidity">Multiple</a>
+                        </li> -->
+                    </ul>
+                </div>
+                <form [formGroup]="co_form" (ngSubmit)="onSubmit()">
+                    <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                        <div class="form-group">
+                            <label class="mb-0 pb-0 font-16 text-black fontweight-400 mb-2 text-black"
+                            for="logo">Choose Image <span class="text-danger">*</span></label><br>
+                            <label class="mb-0 pb-0 font-14 mb-4 text-black fontweight-400 text-black" for="logo">File Types
+                            supported JPG,JPEG,PNG,GIF max 100 MB</label>
+                            <div class="mt-2">
+                                <label for="file-upload" class="custom-file-upload d-xl-flex d-lg-flex align-items-center ">
+                                    <img src="{{ itemObj.image ? itemObj.image: 'assets/images/img-upload1.png'}}" alt="customFile"
+                                    class="cursor-pointer w-100-res" />
+                                </label>
+                                <input id="file-upload" formControlName="item_img" name='item_img' type="file" accept=".jpg,.jpeg,.png" (change)="onChanged($event)" [ngClass]="{ 'is-invalid': submitted && f.item_img.errors }" style="display:none;" required>
+                                <div *ngIf="f.item_img.errors" class="invalid-feedback">
+                                  <div *ngIf="f.item_img.errors.required">Item Image is required</div>
+                              </div>
+                              <div *ngIf="fileerr" class="text-danger">Please Upload Valid File.</div>
+                          </div>
+                      </div>
+                      <div class="form-group mt-4">
+                        <label class="pb-0 font-16 text-black fontweight-400 mb-2" for="name">Name <span class="text-danger">*</span></label>
+                        <input type="text" formControlName="item_name" [(ngModel)]="itemObj.item_name" [ngClass]="{ 'is-invalid': submitted && f.item_name.errors }" class="form-control input-sec font-16 fontweight-400"
+                        placeholder="Item Name" required>
+                        <div *ngIf="f.item_name.errors" class="invalid-feedback">
+                            <div *ngIf="f.item_name.errors.required">Item Name is required</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-4">
+                        <label class="mb-2 pb-0 font-16 text-black fontweight-400" for="yourName">External
+                        Link</label><br>
+                        <label class="mb-3 pb-0 font-16  fontweight-400 mb-2">It Will Include a link to this URL on this
+                            item detail page so that user can click ti learn more about it you are welcome to link to
+                            your own webpage with move details
+                        </label>
+                        <input type="text" formControlName="external_link" class="form-control input-sec font-16 fontweight-400"
+                        placeholder="https://yoursite.io/item/123" [(ngModel)]="itemObj.external_link">
+                    </div>
+
+                    <div class="form-group mt-4">
+                        <label class="mb-2 pb-0 font-16 text-black fontweight-400"
+                        for="yourName">Description <span class="text-danger">*</span></label><br>
+                        <label class="mb-3 pb-0 font-16  fontweight-400 mb-2">The description will be included on the
+                            item's detail page underneath its image. Markdown syntax is supported.
+                        </label>
+                        <input type="text" formControlName="description" class="form-control input-sec font-16 fontweight-400"
+                        placeholder="Provide a detailed description of your item." [(ngModel)]="itemObj.description" [ngClass]="{ 'is-invalid': submitted && f.description.errors }" required>
+                        <div *ngIf="f.description.errors" class="invalid-feedback">
+                            <div *ngIf="f.description.errors.required">Item Description is required</div>
+                        </div>
+                        
+                    </div>
+
+
+                     <div class="form-group mt-4">
+                        <label class="mb-2 pb-0 font-16 text-black fontweight-400"
+                        for="yourName">Description <span class="text-danger">*</span></label><br>
+                        <label class="mb-3 pb-0 font-16  fontweight-400 mb-2">Pricce (BNB).<span class="text-danger">*</span>
+                        </label>
+                        <input type="text" formControlName="price" class="form-control input-sec font-16 fontweight-400"
+                        placeholder="Price" [(ngModel)]="itemObj.price" [ngClass]="{ 'is-invalid': submitted && f.price.errors }" required>
+                        <div *ngIf="f.price.errors" class="invalid-feedback">
+                            <div *ngIf="f.price.errors.required">Item Price is required</div>
+                        </div>
+                        
+                    </div>
+
+                    <input type="hidden" formControlName="caddress" class="form-control input-sec font-16 fontweight-400"
+                        value="0" [(ngModel)]="itemObj.caddress"  >
+
+                    <!-- <div class="d-flex align-items-start">
+                        <img src="assets/images/create1.png" class="mr-3">
+                        <div>
+                            <p class="mb-0 pb-0 font-16 text-black fontweight-400">Properties</p>
+                            <p class="mb-3 pb-0 font-14  fontweight-400">Textual traits that show up as rectangles </p>
+                        </div>
+                    </div>
+                    <div>
+                        <table class="table table-bordered" formArrayName="properties">
+                            <tr>  
+                                <th colspan="2">Properties:</th>  
+                                <th width="150px"><button type="button" (click)="addQuantity()" class="btn btn-primary">Add More</button></th>  
+                            </tr>
+                            <tr *ngFor="let quantity of quantities().controls; let i=index" [formGroupName]="i">  
+                                <td>  
+                                    Name :  
+                                    <input type="text" name="property_name_{{ i }}" placeholder="eg : Key" formControlName="name" aria-label="code" aria-describedby="code">
+                                </td>  
+                                <td>  
+                                    Value:  
+                                    <input type="text" formControlName="value" placeholder="eg : Value" name="property_value_{{ i }}" class="form-control" aria-label="code" aria-describedby="code">  
+                                </td>
+                                <td>  
+                                    <button (click)="removeQuantity(i)" class="btn btn-danger">Remove</button>  
+                                </td>
+                            </tr> 
+                        </table>
+                    </div>
+                    <div class="d-flex align-items-start mt-1">
+                        <img src="assets/images/create2.png" class="mr-3">
+                        <div>
+                            <p class="mb-0 pb-0 font-16 text-black fontweight-400">Levels</p>
+                            <p class="mb-3 pb-0 font-14  fontweight-400">Numerical traits that show as a progress bar
+                            </p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-start mt-1">
+                        <img src="assets/images/create3.png" class="mr-3">
+                        <div>
+                            <p class="mb-0 pb-0 font-16 text-black fontweight-400">Stats</p>
+                            <p class="mb-3 pb-0 font-14  fontweight-400">Numerical traits that just show as numbers </p>
+                        </div>
+                    </div>
+                    <div>
+                        <table class="table table-bordered" formArrayName="stats">
+                            <tr>  
+                                <th colspan="2">Stats:</th>  
+                                <th width="150px"><button type="button" (click)="addQuantity1()" class="btn btn-primary">Add More</button></th>  
+                            </tr>
+                            <tr *ngFor="let quantity of quantities1().controls; let i=index" [formGroupName]="i">  
+                                <td>  
+                                    Name :  
+                                    <input type="text" name="stats_name_{{ i }}" placeholder="eg : Key" formControlName="name" aria-label="code" aria-describedby="code">
+                                </td>  
+                                <td>  
+                                    Value:  
+                                    <input type="text" formControlName="value" placeholder="eg : Value" name="stats_value_{{ i }}" class="form-control" aria-label="code" aria-describedby="code">  
+                                </td>
+                                <td>  
+                                    <button (click)="removeQuantity1(i)" class="btn btn-danger">Remove</button>  
+                                </td>
+                            </tr> 
+                        </table>
+                    </div>
+                    <div class="d-flex align-items-start justify-content-between mt-1 settings-block">
+                        <div class="d-flex align-items-start">
+                            <img src="assets/images/create4.png" class="mr-3">
+                            <div>
+                                <p class="mb-0 pb-0 font-16 text-black fontweight-400">Unlockable Content</p>
+                                <p class="mb-3 pb-0 font-14  fontweight-400">Include unlockable content that can only be
+                                revealed by the own</p>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <textarea formControlName="content" class="form-control radius8" rows="7"
+                        placeholder="Enter content (access key, code to redeem, link to a file, etc.)" [(ngModel)]="itemObj.content" required></textarea>
+                    </div>
+
+                    <div class="d-flex align-items-start mt-1">
+                        <img src="assets/images/create5.png" class="mr-3">
+                        <div>
+                            <p class="mb-0 pb-0 font-16 text-black fontweight-400">Explicit & Sensitive Content</p>
+                            <p class="mb-3 pb-0 font-14  fontweight-400">Set this item as explicit and sensitive content
+                            </p>
+                        </div>
+                    </div>
+                  <div class="form-group mt-4">
+                    <label class="pb-0 font-16 text-black fontweight-400 mb-2" for="yourName">Freeze
+                    metadata</label><br>
+                    <label class="mb-3 pb-0 font-16  fontweight-400 mb-2">Freezing your metadata will allow you to
+                        permanently lock and store all of this item's content in decentralized file storage.
+                    </label>
+                    <input type="text" formControlName="metadata" class="form-control input-sec font-16 fontweight-400"
+                    placeholder="To freeze your metadata, you must create your item first." [(ngModel)]="itemObj.metadata" >
+                </div> -->
+                <div class="text-left">
+                    <button class="btn default-btn mt-4" *ngIf="!msubmitted" data-toggle="modal">
+                    Create</button>
+                    <label class="btn default-btn mt-4" *ngIf="msubmitted">Loading...</label>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+</div>
+
+

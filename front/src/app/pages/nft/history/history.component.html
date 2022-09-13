@@ -1,0 +1,63 @@
+<app-inner-header></app-inner-header>
+<section class="dsb-cnt">
+    <div class="container">
+        <div class="row">
+            <div class="sidebar-cnt">
+                <app-sidemenu></app-sidemenu>
+            </div>
+            <div class="tabpages-cnt">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h3 class="section-title">Transaction History</h3>
+                    </div>
+                    <div class="col-md-12 col-lg-12">
+                        <div class="card grey-cnt">
+                            <div class="card-body ">
+                                <div class="transaction-history-table">
+                                    <table class="table">
+                                        <thead>
+                                          <tr>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Image</th>
+                                            <th scope="col">Hash</th>
+                                            <th scope="col">From</th>
+                                            <th scope="col">To</th>
+                                            <th scope="col">Token Name</th>
+                                            <th scope="col">BNBAmount</th>
+                                            <th scope="col">Type</th>
+                                            <th scope="col">Date</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody *ngIf="history.length">
+                                            <tr *ngFor="let his of history">
+                                                <td>{{ his.name }}</td>
+                                                <td>
+                                                   <!--  <img height="50px" width="50px" src="{{ his.image }}"> -->
+                                                   <img height="50px" width="50px" src="assets/images/market-detail1.png">
+                                                </td>
+                                                <td><a target="blank" href="https://bscscan.com/tx/{{his.txid}}">{{ txSubstring(his.txid) }}</a></td>
+                                                <td>{{ his.from }}</td>
+                                                <td>{{ his.to }}</td>
+                                                <td>{{ his.currency }}</td>
+                                                <td>{{ his.price }}</td>
+                                                <td>{{ his.type }}</td>
+                                                <td>{{ his.date | date: 'medium' }}</td>
+                                            </tr>
+                                        </tbody>
+                                        <tbody *ngIf="!history.length">
+                                            <tr>
+                                                <td class="text-center no-records-found" colspan="9">No Record Found</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 
+            </div>
+        </div>
+    </div>
+</section>
+<app-inner-footer></app-inner-footer>

@@ -1,0 +1,119 @@
+<div class="container-fluid">
+  <div class="row align-items-center border-bottom-1">
+    <div class="col-md-3">
+      <p class="no-margin">Profile Upload</p>
+    </div>
+    <div class="col-md-9 text-right">
+      <div class="d-flex justify-content-flex-end">
+        <button
+          *ngIf="imgCrop"
+          (click)="fileInput.click()"
+          mat-button
+          color="accent"
+          aria-label="click to upload image"
+          matTooltip="click to upload image"
+        >
+          <mat-icon>backup</mat-icon>
+          Change Files To Upload
+        </button>
+        <button
+          *ngIf="imgCrop"
+          (click)="onClick(croppedImage)"
+          mat-button
+          color="primary"
+          aria-label="click to upload image"
+          matTooltip="click to upload image"
+        >
+          <mat-icon>save_alt</mat-icon>
+          Submit
+        </button>
+        <button
+          (click)="onClick(false)"
+          mat-button
+          color="warn"
+          aria-label="close upload"
+          matTooltip="close upload"
+        >
+          <mat-icon>close</mat-icon>
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-15">
+    <div class="col-md-12 text-center" [hidden]="imgCrop">
+      <div class=" upload-area">
+        <input
+          type="file"
+          id="imageUpload"
+          accept=".png, .jpg, .jpeg"
+          #fileInput
+          (change)="fileChangeEvent($event)"
+          hidden="true"
+        />
+
+        <button
+          (click)="fileInput.click()"
+          mat-button
+          aria-label="click to upload image"
+          matTooltip="click to upload image"
+        >
+          <mat-icon>backup</mat-icon>
+          Choose Files To Upload
+        </button>
+      </div>
+      <span [ngClass]="{ 'text-red': isimgValid }" *ngIf="isWidth"
+        >Your image size shoud be greater than {{ imgWidth }} *
+        {{ imgHeight }}</span
+      >
+    </div>
+
+    <div class="col-md-6 m-auto">
+      <div class="img-cropper-area">
+        <!-- <image-cropper
+          [imageChangedEvent]="imageChangedEvent"
+          [maintainAspectRatio]="maintainAspectRatio"
+          [aspectRatio]="3 / 3"
+          format="png"
+          (imageCropped)="imageCropped($event)"
+          (imageLoaded)="imageLoaded()"
+          (cropperReady)="cropperReady()"
+          (loadImageFailed)="loadImageFailed()"
+          resizeToHeight="200"
+          alignImage="center"
+          [autoCrop]="'true'"
+        ></image-cropper> -->
+        <image-cropper
+          [imageChangedEvent]="imageChangedEvent"
+          [maintainAspectRatio]="maintainAspectRatio"
+          [resizeToWidth]="resizeToWidth"
+          [resizeToHeight]="resizeToHeight"
+          [cropperMinWidth]="cropperMinWidth"
+          [cropperMinHeight]="cropperMinHeight"
+          format="png"
+          (imageCropped)="imageCropped($event)"
+          (imageLoaded)="imageLoaded()"
+          (cropperReady)="cropperReady()"
+          (loadImageFailed)="loadImageFailed()"
+          alignImage="center"
+          [autoCrop]="true"
+        ></image-cropper>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="crop-img">
+        <img [src]="croppedImage" />
+      </div>
+    </div>
+  </div>
+
+  <p
+    class="text-center"
+    *ngIf="imgCrop && isWidth"
+    [ngClass]="{ 'text-red': isimgValid }"
+  >
+    Your image size shoud be greater than {{ imgWidth }} * {{ imgHeight }}
+  </p>
+</div>

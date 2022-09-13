@@ -1,0 +1,61 @@
+<app-inner-header></app-inner-header>
+<section class="full-pg-cnt">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="section-title text-center">Search</h3>
+            </div>
+            <div class="col-lg-12 my-4">
+                <form>
+                    <input type="text" [(ngModel)]="searchText" name="searchText" (ngModelChange)="getCollections($event)" placeholder="Search for your favourite art" class="mst-search">
+                </form>
+            </div>
+            <div class="col-lg-12">
+                <h3 class="section-title sm-title text-center">Trending Tags</h3>
+            </div>
+            <div class="col-lg-12 mb-4">
+                <!-- <h3 class="section-title sm-title text-left search-title">#animation</h3> -->
+                <div class="row">
+                    <div class="col-lg-4" *ngFor="let nft of nftCollections">
+                        <img src="{{nft.image}}" class="search-banner-img">
+                    </div>
+                    <!-- <div class="col-lg-4">
+                        <img src="assets/images/search-banner2.png" class="search-banner-img">
+                    </div>
+                    <div class="col-lg-4">
+                        <img src="assets/images/search-banner3.png" class="search-banner-img">
+                    </div> -->
+                </div>
+            </div>
+            <!-- <div class="col-lg-12 mb-4">
+                <h3 class="section-title sm-title text-left search-title">#3D image</h3>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <img src="assets/images/search-banner4.png" class="search-banner-img">
+                    </div>
+                    <div class="col-lg-4">
+                        <img src="assets/images/search-banner5.png" class="search-banner-img">
+                    </div>
+                    <div class="col-lg-4">
+                        <img src="assets/images/search-banner6.png" class="search-banner-img">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 mb-4">
+                <h3 class="section-title sm-title text-left search-title">#illustrator</h3>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <img src="assets/images/search-banner7.png" class="search-banner-img">
+                    </div>
+                    <div class="col-lg-4">
+                        <img src="assets/images/search-banner8.png" class="search-banner-img">
+                    </div>
+                    <div class="col-lg-4">
+                        <img src="assets/images/search-banner9.png" class="search-banner-img">
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</section>
+<app-inner-footer></app-inner-footer>

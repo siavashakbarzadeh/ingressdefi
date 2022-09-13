@@ -1,0 +1,24 @@
+var mongoose = require('mongoose'); 
+var Schema = mongoose.Schema;
+var config   = require("../uZmln/config");
+
+var offersSchema = new Schema({ 
+    "objectId":{ type:mongoose.Schema.Types.ObjectId, ref:'IN_meti', index:true },
+    "orderId":{ type:mongoose.Schema.Types.ObjectId, ref:'IN_dehctam', index:true },
+    "buyerId":{ type:mongoose.Schema.Types.ObjectId, ref:'IN_MNlkses', index:true },
+    "buyeradress":{type:String,default:"", index:1},
+    "price":{type:String,default:"", index:1},
+    "buyorder":{type:Array,default:[], index:1},
+    "type":{type:String,default:"", index:1},
+    "currency":{type:String,default:"", index:1},
+    "askedprice":{type:String,default:"", index:1},
+    "is_expired":{type:Number,default:0, index:1},
+    "publish_time":{type:String,default:"", index:1}, 
+    "approve_status":{type:Number,default:0, index:1},
+    "publish_date":{type:String,default:"", index:1}, 
+    "expiry_date":{type:String,default:"", index:1},
+    "createddate": { type: Date, default: Date.now },
+    "modifieddate":{ type: Date, default: Date.now }
+});
+ 
+module.exports = mongoose.model('offers', offersSchema, config.DB_prefix+'sreffo')

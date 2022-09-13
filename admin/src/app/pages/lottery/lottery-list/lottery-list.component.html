@@ -1,0 +1,92 @@
+<div class="d-flex  mb-4 page-header">
+    <ul class="bread-crump_container">
+        <li>
+            <a [routerLink]="['dashboard' | appRouter]"> Home</a>
+        </li>
+        <li>
+            <a [routerLink]="['lottery_contest_list' | appRouter]"> Lottery Contest List</a>
+        </li>
+        <li>Lottery List
+
+            <ng-container *ngIf="contestDetails?.contest_id != 'new'">
+                - {{contestDetails?.contest_id}}
+            </ng-container>
+
+        </li>
+    </ul>
+
+    <div class="spacer"></div>
+
+
+    <div class="group-button" *ngIf="contestDetails">
+        <button *ngIf="contestDetails?.status == 'Active'" (click)="stopBuy()" mat-button color="warn">
+            <mat-icon>pan_tool</mat-icon>
+            Stop Buy
+        </button>
+
+        <button *ngIf="  contestDetails?.status != 'Active' &&  contestDetails?.winning_status != 'Active'"
+            (click)="drawing()" mat-button color="primary">
+            <mat-icon>confirmation_number</mat-icon>
+            Make Winning Tickets
+        </button>
+    </div>
+
+</div>
+
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-12 mb-4">
+
+            <mat-card class=" head-box" *ngIf="contestDetails">
+                <div class="d-flex">
+                    <div class="flex-1 first-obj">
+                        {{contestDetails?.contest_id}}
+                        <span>Contest Id</span>
+                    </div>
+                    <div class="flex-1 box-content ">
+
+                        <span>
+                            {{contestDetails?.start_tx_id | textHide}}
+                            <small>
+
+                                <button mat-button mat-icon-button [matTooltip]="'Copy Transction Id'"
+                                    (click)="dataService.copyText(contestDetails.tx_id)">
+                                    <mat-icon class="small-icon"> content_copy</mat-icon>
+                                </button>
+
+                                <button color="primary" mat-button mat-icon-button [matTooltip]="'See Transction'"
+                                    (click)="dataService.goTo('tx' , contestDetails.tx_id)">
+                                    <mat-icon class="small-icon">north_east</mat-icon>
+                                </button>
+                            </small>
+
+                        </span>
+
+                        <span class="bt-text">Hash Id</span>
+                    </div>
+                    <div class="flex-1 box-content ">
+                        {{contestDetails?.created_date | date}}
+                        <span class="bt-text">Created Date</span>
+                    </div>
+                    <div class="flex-1 box-content ">
+                        {{contestDetails?.expired_date | date}}
+                        <span class="bt-text">Expired Date</span>
+                    </div>
+                    <div class="flex-1 box-content ">
+                        {{contestDetails?.winning_ticket_number}}
+                        <span class="bt-text">Winning Ticket</span>
+                    </div>
+                </div>
+            </mat-card>
+
+
+
+        </div>
+        <div class="col-md-12">
+            <app-list-table *ngIf="showTable" [tableData]="tableData"></app-list-table>
+
+        </div>
+    </div>
+</div>

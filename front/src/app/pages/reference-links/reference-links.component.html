@@ -1,0 +1,43 @@
+
+<div class="tabpages-cnt">
+    <h3 class="section-title mb-5">Reference Links</h3>
+
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card shadow-card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-sm-between align-items-center mb-4">
+                        <p>Total Referrals</p>
+                        <div><img src="assets/images/referal-link-icon.png" class="img-fluid"></div>
+                    </div>
+                    <h3 class="purple-txt text-center">{{refObj?.refCount}}</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card shadow-card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-sm-between align-items-center mb-4">
+                        <p>Total Referral Commissions</p>
+                        <div><img src="assets/images/referral-commission-icon.png" class="img-fluid"></div>
+                    </div>
+                    <h3 class="purple-txt text-center">{{refObj?.reward | number : amountDigits}}</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="card shadow-card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-sm-between align-items-center mb-4">
+                        <p>Your Referral Link</p>
+                        <div><button class="btn default-btn" type="button" (click)="copyReferal()">Copy</button></div>
+                    </div>
+                    <input type="text" value="{{refLink}}" readonly>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -10,7 +10,7 @@
 
   <!-- Google Fonts aida -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" >
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
   <!-- !Google Fonts aida-->
 
@@ -42,17 +42,16 @@
 </head>
 <body>
   <app-root></app-root>
-  <!-- Scripts -->
-  <script type="text/javascript" src="assets/js/js1/jquery.js?ver=3.1"></script>
-  <script type="text/javascript" src="assets/js/js1/plugins.js?ver=3.1"></script>
-  <!--[if lt IE 10]> <script type="assets/js/js1/text/javascript" src="js/ie8.js?ver=3.1"></script> <![endif]-->
-  <script type="text/javascript" src="assets/js/js1/init.js?ver=3.1"></script>
-  <!-- !Scripts -->
+
   <script type="text/javascript" src="assets/js/web3.min.js"></script>
   <script src="https://unpkg.com/@metamask/detect-provider/dist/detect-provider.min.js"></script>
-</body>
-</html>
-<script>
+  <!-- Scripts -->
+  <script type="text/javascript" src="assets/js/js1/jquery.js"></script>
+  <script type="text/javascript" src="assets/js/js1/plugins.js"></script>
+   <script type="assets/js/js1/text/javascript" src="js/ie8.js?ver=3.1"></script> <![endif]
+  <script type="text/javascript" src="assets/js/js1/init.js?ver=3.1"></script>
+  
+  <script>
   $(".icon__menu__open").click(function() {
 	$(this).css("display", "none");
 	$(".logo").css("opacity", "0.5");
@@ -64,6 +63,9 @@ $(".icon__menu__close").click(function() {
 	$(".logo").css("opacity", "1");
 	$(".icon__menu__open").css("display", "block");
 	$(".nav__appear").css("transform", "translateX(-240px)");
-});
-</script>
+}); 
+</script> 
+</body>
+</html>
+
 

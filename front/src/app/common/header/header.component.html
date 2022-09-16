@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg fixed-top home-header"> 
+<!-- <nav class="navbar navbar-expand-lg fixed-top home-header"> 
   <a class="navbar-brand" [routerLink]="'/'"><img src="assets/images/logo.png" class="img-fluid"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation"> 
     <img src="assets/images/toggler-icon.png" class="img-fluid">
@@ -16,11 +16,42 @@
       <li *ngIf="!isLogin" class="nav-item"> <a class="nav-link" href="#" data-toggle="modal" (click)="openModal(template)">Sign In</a> </li>
     </ul>
   </div>
-</nav>
+</nav> -->
+<header id="header">
+  <div class="header">
+    <div class="header_in">
+
+      <div class="trigger_logo">
+        <div class="trigger">
+          <span></span>
+        </div>
+        <div class="logo">
+          aida
+          <!--						<a href="index.html"><img src="img/logo.png" alt=""></a>-->
+        </div>
+      </div>
+
+      <div class="nav">
+        <ul>
+          <li><a class="creative_link" href="#home">Home</a></li>
+          <li><a class="creative_link" href="#about">About</a></li>
+          <li><a class="creative_link" href="#collection">Collection</a></li>
+          <li><a class="creative_link" href="#news">Blog</a></li>
+          <li><a class="creative_link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="wallet">
+        <button href="#" class="metaportal_fn_button wallet_opener"  (click)="modalRef?.hide()"><span>Connect To Wallet</span></button>
+      </div>
+
+    </div>
+  </div>
+</header>
 
 
 
-<ng-template #template>
+<!-- <ng-template #template>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Connect Wallet</h4>
     <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
@@ -65,8 +96,8 @@
       </div>
     </div>
   </div>
-</ng-template>
-
+</ng-template> -->
+<!-- 
 <ng-template #template1>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Connect Wallet</h4>
@@ -140,4 +171,4 @@
     </div>
   </div>
   <ng-template>
-              
+               -->

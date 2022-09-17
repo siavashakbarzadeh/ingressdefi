@@ -10,21 +10,23 @@
 
   <!-- Google Fonts aida -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
   <link rel="preconnect" href="https://fonts.gstatic.com" >
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
   <!-- !Google Fonts aida-->
 
   <!--  link css aida-->
   <!-- Styles -->
-  <link type="text/css" rel="stylesheet" href="assets/css/plugins.css?ver=3.1" />
-  <link type="text/css" rel="stylesheet" href="assets/css/style.css?ver=3.1" />
-  <!--[if lt IE 9]> <script type="text/javascript" src="assets/js/js1/modernizr.custom.js?ver=3.1"></script> <![endif]-->
+
+<!-- <script type="text/javascript" src="assets/js/js1/modernizr.custom.js?ver=3.1"></script>-->
   <!-- !Styles -->
 <!--<link rel="preconnect" href="https://fonts.googleapis.com">-->
 <!--<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>-->
 <!--<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">-->
 <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">-->
-<!--<link rel="stylesheet" href="https://unpkg.com/ngx-bootstrap/datepicker/bs-datepicker.css">-->
+<link rel="stylesheet" href="https://unpkg.com/ngx-bootstrap/datepicker/bs-datepicker.css">
+<link rel="stylesheet" href="https://unpkg.com/ngx-bootstrap/datepicker/bs-datepicker.css">
 
 <!-- Js Links aida -->
 
@@ -33,7 +35,7 @@
 <!-- <script src="assets/js/walletconnect.js"></script> &lt;!&ndash; Trust Wallet &ndash;&gt;-->
 <!--<script src="assets/js/jquery.min.js"></script>-->
 <!--<script src="assets/js/popper.min.js"></script>-->
-<!--<script src="assets/js/bootstrap.min.js"></script>-->
+
 <!--<script src="assets/js/custom.js"></script>-->
 <!--  -->
 <!-- <script type="text/javascript" src="assets/js/disable.js"></script>  -->
@@ -41,30 +43,37 @@
 
 </head>
 <body>
+
   <app-root></app-root>
 
-  <script type="text/javascript" src="assets/js/web3.min.js"></script>
-  <script src="https://unpkg.com/@metamask/detect-provider/dist/detect-provider.min.js"></script>
-  <!-- Scripts -->
-  <script type="text/javascript" src="assets/js/js1/jquery.js"></script>
-  <script type="text/javascript" src="assets/js/js1/plugins.js"></script>
-   <script type="assets/js/js1/text/javascript" src="js/ie8.js?ver=3.1"></script> <![endif]
+
+<!--  &lt;!&ndash; Scripts &ndash;&gt;-->
+
+
+  <script src="https://cdn.jsdelivr.net/npm/walletconnect-web3-provider@0.7.28/dist/walletconnect-web3-provider.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.8.0/web3.min.js" integrity="sha512-bSQ2kf76XufUYS/4XinoHLp5S4lNOyRv0/x5UJACiOMy8ueqTNwRFfUZWmWpwnczjRp9SjiF1jrXbGEim7Y0Xg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!--  <script type="text/javascript" src="assets/js/web3.min.js"></script>-->
+<!--  <script src="https://unpkg.com/@metamask/detect-provider/dist/detect-provider.min.js"></script>-->
+  <script type="text/javascript" src="assets/js/jquery.min.js"></script>
+  <script  src="assets/js/js1/plugins.js"></script>
+  <script type="assets/js/js1/text/javascript" src="js/ie8.js?ver=3.1"></script> <![endif]
   <script type="text/javascript" src="assets/js/js1/init.js?ver=3.1"></script>
-  
-  <script>
-  $(".icon__menu__open").click(function() {
-	$(this).css("display", "none");
-	$(".logo").css("opacity", "0.5");
-	$(".icon__menu__close").css("display", "block");
-	$(".nav__appear").css("transform", "translateX(0)");
-});
-$(".icon__menu__close").click(function() {
-	$(this).css("display", "none");
-	$(".logo").css("opacity", "1");
-	$(".icon__menu__open").css("display", "block");
-	$(".nav__appear").css("transform", "translateX(-240px)");
-}); 
-</script> 
+  <script src="assets/js/bootstrap.min.js"></script>
+
+<!--  <script>-->
+<!--  $(".icon__menu__open").click(function() {-->
+<!--	$(this).css("display", "none");-->
+<!--	$(".logo").css("opacity", "0.5");-->
+<!--	$(".icon__menu__close").css("display", "block");-->
+<!--	$(".nav__appear").css("transform", "translateX(0)");-->
+<!--});-->
+<!--$(".icon__menu__close").click(function() {-->
+<!--	$(this).css("display", "none");-->
+<!--	$(".logo").css("opacity", "1");-->
+<!--	$(".icon__menu__open").css("display", "block");-->
+<!--	$(".nav__appear").css("transform", "translateX(-240px)");-->
+<!--});-->
+<!--</script>-->
 </body>
 </html>
 

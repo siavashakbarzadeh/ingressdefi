@@ -60,7 +60,7 @@ const routes: Routes = [
     {path: 'blog-details', component: BlogdetailsComponent},
     {path: 'userprofile/:userName', component: UserprofileComponent},
 ];
-   
+
 
 /*const routes: Routes = [
   {path: '', component: HomeComponent},

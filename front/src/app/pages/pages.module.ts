@@ -33,7 +33,7 @@ const routes: Routes = [
     path: "dashboard",
     loadChildren: () =>
     import("./defi/dashboard/dashboard.module").then((m) => m.DashboardModule),
-  }, 
+  },
   {
     path: "farm",
     loadChildren: () =>
@@ -103,27 +103,27 @@ const routes: Routes = [
   ],
 },
 {
-  path: 'market', 
+  path: 'market',
   component: MarketComponent
 },
 {
-  path: 'history', 
+  path: 'history',
   component: HistoryComponent
 },
 {
-  path: 'item-details', 
+  path: 'item-details',
   component: MarketDetailComponent
 },
 {
-  path: 'activity', 
+  path: 'activity',
   component: ActivityComponent
 },
 {
-  path: 'features', 
+  path: 'features',
   component: FeatureComponent
 },
 {
-  path: 'search', 
+  path: 'search',
   component: SearchComponent
 },
 
@@ -144,7 +144,7 @@ const routes: Routes = [
   TabsModule.forRoot()
   ],
   exports:[
-  ToasterContainerComponent, 
+  ToasterContainerComponent,
   ToasterComponent,
   ]
 })

@@ -51,7 +51,7 @@ export class HeaderComponent implements OnInit {
   {
     name: "Trust Wallet",
     img: "assets/images/wallet2.png",
-    id: "trustwallet",
+    id: "trustable",
   },
   {
     name: "Math Wallet",
@@ -77,11 +77,11 @@ export class HeaderComponent implements OnInit {
     private metamaskService: MetamaskService,
     private toasterService: ToasterService,
     public dataService: DataService,
-    public commonContractService: CommonContractService, 
+    public commonContractService: CommonContractService,
     private modalService: BsModalService,
     private router: Router,
     private changeDetectorRef:ChangeDetectorRef
-    ) { 
+    ) {
       this.dataService.modelSignup.subscribe((suc:any)=> {
         this.openModal(this.template);
       });
@@ -243,7 +243,7 @@ menuToggle() {
         // this.connector = new WalletConnect({
         //   bridge: "https://bridge.walletconnect.org" // Required
         // });
-        
+
         sessionStorage.setItem("Wallettype", "walletconnect");
         localStorage.setItem("Wallettype", "walletconnect");
         window.web3 = window.web3.currentProvider;
@@ -337,7 +337,7 @@ this.connectModal.hide();
     this.dataService.isMetaReady.emit(true);
     this.accountShort = this.dataService.metaDeatails.accountShort;
      localStorage.setItem("isLoginPermit", "true");
-    
+
           this.dataService.postRequest('users/checksignin', {key: this.dataService.metaDeatails.account}).subscribe(async(res:any) => {
             if (res.status) {
               localStorage.setItem("Game-Token", res.gametoken);
@@ -355,14 +355,14 @@ this.connectModal.hide();
               this.dataService.isOverlay = false;
               this.toasterService.show(false, 'Invalid User Address. Please Signup');
             }
-          })  
+          })
 
   })
 
 }
 
 
-    
+
   }
 
   async onSubmit(val) {
@@ -383,7 +383,7 @@ this.connectModal.hide();
           this.toasterService.show(responseData.status, responseData.message);
         }
       })
-      
+
     }
     else {
       obj = {
@@ -439,7 +439,7 @@ this.connectModal.hide();
         this.cansubmit = false;
       }
     })
-  }  
+  }
 
   async GetEbalance() {
     this.metamaskService
@@ -448,7 +448,7 @@ this.connectModal.hide();
       if (result.status) {
         this.dataService.metaDeatails.balance = result.balance;
         this.router.navigate(["dashboard"]);
-        this.dataService.activeUrl('dashboard');        
+        this.dataService.activeUrl('dashboard');
       } else {
       }
     })
